@@ -10,6 +10,8 @@ public class Builder : MonoBehaviour
     private Earth _earth;
     private PhotonView _photonView;
     private string _currentBuildName;
+    
+    private bool _positionSelected;
 
     private void Start()
     {
@@ -21,6 +23,7 @@ public class Builder : MonoBehaviour
     public void NewBild(Building newBuildingGameObject)
     {
         _inputHandler.PositionSelection = true;
+        _positionSelected = false;
         if (_newBuild != null)
         {
             Destroy(_newBuild.gameObject);
@@ -51,7 +54,7 @@ public class Builder : MonoBehaviour
     {
         if (_newBuild != null)
         {
-            if (_newBuild)
+            if (_newBuild && _positionSelected)
             {
                 _gameMenu.BuildButtonSetState(_newBuild.UnlockBild);
             }
@@ -71,7 +74,7 @@ public class Builder : MonoBehaviour
         {
             return;
         }
-
+        _positionSelected = true;
         _newBuild.transform.position = pos.Position;
         _newBuild.transform.rotation = Quaternion.LookRotation(pos.Normal);
     }
