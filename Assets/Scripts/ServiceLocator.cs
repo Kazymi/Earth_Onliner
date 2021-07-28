@@ -5,11 +5,6 @@ public static class ServiceLocator
 {
     private static Dictionary<Type, object> services = new Dictionary<Type, object>();
 
-    public static void Initialize()
-    {
-        services = new Dictionary<Type, object>();
-    }
-
     public static void Subscribe<T>(object service)
     {
         if (services.ContainsKey(typeof(T)))
@@ -28,7 +23,7 @@ public static class ServiceLocator
     {
         try
         {
-            return (T) services[typeof(T)];
+            return (T)services[typeof(T)];
         }
         catch (Exception e)
         {

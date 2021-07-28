@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using Photon.Pun;
 using UnityEngine;
 
@@ -10,7 +9,7 @@ public class Builder : MonoBehaviour
     private Earth _earth;
     private PhotonView _photonView;
     private string _currentBuildName;
-    
+
     private bool _positionSelected;
 
     private void Start()
@@ -20,22 +19,26 @@ public class Builder : MonoBehaviour
         _earth = ServiceLocator.GetService<Earth>();
     }
 
-    public void NewBild(Building newBuildingGameObject)
+    public void NewBuild(Building newBuildingGameObject)
     {
         _inputHandler.PositionSelection = true;
         _positionSelected = false;
         if (_newBuild != null)
         {
+            // TODO: add pool
             Destroy(_newBuild.gameObject);
         }
 
         _currentBuildName = newBuildingGameObject.name;
+        // TODO: add factory
         _newBuild = Instantiate(newBuildingGameObject.gameObject).GetComponent<Building>();
     }
 
-    public void SetPositionBild()
+    // TODO: subscribe to events in script
+    public void SetPositionBuild()
     {
-        if (_newBuild.UnlockBild == false)
+        // TODO: usually bool's name start with is or has
+        if (_newBuild.UnlockBuild == false)
         {
             return;
         }
@@ -56,7 +59,7 @@ public class Builder : MonoBehaviour
         {
             if (_newBuild && _positionSelected)
             {
-                _gameMenu.BuildButtonSetState(_newBuild.UnlockBild);
+                _gameMenu.BuildButtonSetState(_newBuild.UnlockBuild);
             }
 
             SetPositionNewBuilding();

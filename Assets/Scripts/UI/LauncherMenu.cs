@@ -18,6 +18,7 @@ public class LauncherMenu : MonoBehaviour
     [SerializeField] private Canvas errorMenu;
     [SerializeField] private Canvas roomMenu;
     [SerializeField] private Launcher launcher;
+
     private void Awake()
     {
         launcher.Initialize(this);
@@ -29,7 +30,6 @@ public class LauncherMenu : MonoBehaviour
         leaveRoomButton.onClick.AddListener(launcher.LeaveRoom);
         startGameRoomButton.onClick.AddListener(launcher.StartGame);
     }
-	
 
     private void OnDisable()
     {

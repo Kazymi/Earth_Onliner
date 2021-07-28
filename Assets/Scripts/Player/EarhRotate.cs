@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EarhRotate : MonoBehaviour
@@ -19,13 +16,18 @@ public class EarhRotate : MonoBehaviour
 
     void OnMouseDrag()
     {
-        if (_inputHandler.PositionSelection) return;
+        if (_inputHandler.PositionSelection)
+        {
+            return;
+        }
+
+        // TODO: add inertia to rotation and zoom
         var mouseAxis = _inputHandler.MouseAxis * rotSpeed;
         var position = transform.position;
         var transformCamera = _camera.transform;
         var positionCamera = transformCamera.position;
-        Vector3 right = Vector3.Cross(transformCamera.up, position - positionCamera);
-        Vector3 up = Vector3.Cross(position - positionCamera, right);
+        var right = Vector3.Cross(transformCamera.up, position - positionCamera);
+        var up = Vector3.Cross(position - positionCamera, right);
 
         var rotation = transform.rotation;
         rotation = Quaternion.AngleAxis(-mouseAxis.x, up) * rotation;

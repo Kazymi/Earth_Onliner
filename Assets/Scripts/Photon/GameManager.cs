@@ -30,16 +30,16 @@ public class GameManager : MonoBehaviourPunCallbacks, IOnEventCallback
         {
             return;
         }
-        
+
         var eventCode = photonEvent.Code;
-        
-        if (eventCode != (int) EventType.FinishGame)
+
+        if (eventCode != (int)EventType.FinishGame)
         {
             return;
         }
         PlayerWin();
     }
-    
+
     private void PlayerWin()
     {
         _gameFinished = true;

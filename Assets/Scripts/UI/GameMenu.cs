@@ -1,12 +1,9 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class GameMenu : MonoBehaviour
 {
-    [SerializeField] private Button bildButton;
+    [SerializeField] private Button buildButton;
 
     private void OnEnable()
     {
@@ -20,6 +17,6 @@ public class GameMenu : MonoBehaviour
 
     public void BuildButtonSetState(bool unlocked)
     {
-        bildButton.gameObject.SetActive(unlocked);
+        buildButton.gameObject.SetActive(unlocked);
     }
 }
