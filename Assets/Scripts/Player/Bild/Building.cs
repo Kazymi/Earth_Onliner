@@ -4,16 +4,16 @@ public class Building : MonoBehaviour
 {
     [SerializeField] private float radiusBuilding;
 
-    // TODO: usually bool's name start with is or has
-    private bool _constructionAllowed;
-    // TODO: usually bool's name start with is or has
-    private bool _build;
 
-    public bool UnlockBuild => CheckPosition();
+    private bool _isConstructionAllowed;
+
+    private bool _isBuild;
+
+    public bool IsUnlockBuild => CheckPosition();
 
     public void Initialize()
     {
-        _build = true;
+        _isBuild = true;
     }
 
     private bool CheckPosition()

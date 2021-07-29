@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -437,7 +437,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -800.9663, y: 406.30374}
+  m_AnchoredPosition: {x: -800.9663, y: 208.30373}
   m_SizeDelta: {x: 231.9327, y: 144.0172}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &164734636
@@ -486,11 +486,11 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 97543258}
         m_TargetAssemblyTypeName: Builder, Assembly-CSharp
-        m_MethodName: NewBild
+        m_MethodName: NewBuild
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 8702274564719977238, guid: 5f4e84c1071c97d49b61d8322e729cf8, type: 3}
-          m_ObjectArgumentAssemblyTypeName: Building, Assembly-CSharp
+          m_ObjectArgument: {fileID: 11400000, guid: 19d277578cb57d14da25a951b437e418, type: 2}
+          m_ObjectArgumentAssemblyTypeName: BuildingConfiguration, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -828,6 +828,51 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &768529542
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 768529544}
+  - component: {fileID: 768529543}
+  m_Layer: 0
+  m_Name: Services
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &768529543
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 768529542}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e5d60d0ecfa6ad418d315900c0de219, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  builders:
+  - {fileID: 11400000, guid: 19d277578cb57d14da25a951b437e418, type: 2}
+--- !u!4 &768529544
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 768529542}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 766, y: 384.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &771243537
 GameObject:
   m_ObjectHideFlags: 0
@@ -1126,7 +1171,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 97543258}
         m_TargetAssemblyTypeName: Builder, Assembly-CSharp
-        m_MethodName: SetPositionBild
+        m_MethodName: SetPositionBuild
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1191,7 +1236,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -800.9663, y: 246}
+  m_AnchoredPosition: {x: -800.9663, y: 48}
   m_SizeDelta: {x: 231.9327, y: 144.0172}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1474967638
@@ -1304,4 +1349,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0674ede5ab995c041b3540d4f67f90d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bildButton: {fileID: 1072261366}
+  buildButton: {fileID: 1072261366}
