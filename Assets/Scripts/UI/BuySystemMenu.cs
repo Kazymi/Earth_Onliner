@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using EventBusSystem;
 using TMPro;
 using UnityEngine;
@@ -18,22 +15,22 @@ public class BuySystemMenu : MonoBehaviour, IChangingAmountResources
 
     private BuySystem _buySystem;
     private BuyConfiguration _buyConfiguration;
-    
 
-    public void Initialize(ShopSystemMenu systemMenu,BuyConfiguration buyConfiguration)
+    public void Initialize(ShopSystemMenu systemMenu, BuyConfiguration buyConfiguration)
     {
         _buyConfiguration = buyConfiguration;
-        _buySystem = new BuySystem(_buyConfiguration,systemMenu);
+        // TODO: create in installer and register in locator
+        _buySystem = new BuySystem(_buyConfiguration, systemMenu);
         goldText.text = _buyConfiguration.NeedGold.ToString();
         ironText.text = _buyConfiguration.NeedIron.ToString();
         woodText.text = _buyConfiguration.NeedWood.ToString();
         descriptionText.text = _buyConfiguration.Description;
         image.sprite = _buyConfiguration.Icon;
-        
+
         buyButton.interactable = _buySystem.IsUnlockedBuy();
         buyButton.onClick.AddListener(_buySystem.Buy);
     }
-    
+
     private void OnEnable()
     {
         if (_buySystem != null)

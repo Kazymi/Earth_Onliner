@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 [CreateAssetMenu(fileName = "New building", menuName = "Building Configuration")]
 public class BuildingConfiguration : ScriptableObject

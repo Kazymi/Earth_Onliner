@@ -43,7 +43,7 @@ public class Builder : MonoBehaviour
         _currentBuildName = buildingConfiguration.BuildingGameObject.name;
         _newBuild = _buildingManager.GetBuildingByName(_currentBuildName).GetComponent<Building>();
     }
-    
+
     public void SetPositionBuild()
     {
         if (_newBuild.IsUnlockBuild == false)
@@ -87,6 +87,7 @@ public class Builder : MonoBehaviour
         }
 
         _positionSelected = true;
+        // TODO: smooth out movement
         _newBuild.transform.position = pos.Position;
         _newBuild.transform.rotation = Quaternion.LookRotation(pos.Normal);
     }

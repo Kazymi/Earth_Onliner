@@ -1,7 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
 using EventBusSystem;
-using UnityEngine;
 
 public class PlayerResources
 {
@@ -10,16 +8,16 @@ public class PlayerResources
     public PlayerResources()
     {
         _resources = new Dictionary<TypeResource, int>();
-        _resources.Add(TypeResource.Gold,0);
-        _resources.Add(TypeResource.Iron,0);
-        _resources.Add(TypeResource.Wood,0);
+        _resources.Add(TypeResource.Gold, 0);
+        _resources.Add(TypeResource.Iron, 0);
+        _resources.Add(TypeResource.Wood, 0);
     }
 
     public int GetAmountResource(TypeResource typeResource)
     {
         return _resources[typeResource];
     }
-    
+
     public void AddResource(TypeResource typeResource, int amountResources)
     {
         _resources[typeResource] += amountResources;
@@ -43,7 +41,7 @@ public class PlayerResources
             return false;
         }
     }
-    
+
     public bool CheckAvailability(Resource resource)
     {
         if (_resources[resource.TypeResource] >= resource.Amount)
@@ -55,5 +53,4 @@ public class PlayerResources
             return false;
         }
     }
-
 }

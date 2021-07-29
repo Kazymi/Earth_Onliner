@@ -12,21 +12,21 @@ public class GameMenu : MonoBehaviour, IChangingAmountResources
     [SerializeField] private TMP_Text ironText;
     [SerializeField] private TMP_Text goldText;
 
-    private Dictionary<TypeResource, Action> _changingResourses;
+    private Dictionary<TypeResource, Action> _changingResources;
     private PlayerResources _playerResources;
 
     private void Start()
     {
         _playerResources = ServiceLocator.GetService<PlayerResources>();
-        _changingResourses = new Dictionary<TypeResource, Action>();
+        _changingResources = new Dictionary<TypeResource, Action>();
         
-        _changingResourses.Add(TypeResource.Wood,
+        _changingResources.Add(TypeResource.Wood,
             () => woodText.text = _playerResources.GetAmountResource(TypeResource.Wood).ToString());
         
-        _changingResourses.Add(TypeResource.Iron,
+        _changingResources.Add(TypeResource.Iron,
             () => ironText.text = _playerResources.GetAmountResource(TypeResource.Iron).ToString());
         
-        _changingResourses.Add(TypeResource.Gold,
+        _changingResources.Add(TypeResource.Gold,
             () => goldText.text = _playerResources.GetAmountResource(TypeResource.Gold).ToString());
     }
 
@@ -49,6 +49,6 @@ public class GameMenu : MonoBehaviour, IChangingAmountResources
 
     public void ChangingAmountResources(TypeResource typeResource)
     {
-        _changingResourses[typeResource]?.Invoke();
+        _changingResources[typeResource]?.Invoke();
     }
 }
