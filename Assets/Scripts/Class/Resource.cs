@@ -9,4 +9,10 @@ public class Resource
 
     public TypeResource TypeResource => typeResource;
     public int Amount => amount;
+    
+    public Resource(TypeResource typeResource)
+    {
+        this.typeResource = typeResource;
+        amount = 0;
+    }
 }

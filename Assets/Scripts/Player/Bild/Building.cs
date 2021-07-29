@@ -4,9 +4,7 @@ public class Building : MonoBehaviour
 {
     [SerializeField] private float radiusBuilding;
 
-
     private bool _isConstructionAllowed;
-
     private bool _isBuild;
 
     public bool IsUnlockBuild => CheckPosition();

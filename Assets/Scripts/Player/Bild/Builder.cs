@@ -1,3 +1,4 @@
+using System;
 using Photon.Pun;
 using UnityEngine;
 
@@ -11,6 +12,16 @@ public class Builder : MonoBehaviour
     private string _currentBuildName;
     private BuildingManager _buildingManager;
     private bool _positionSelected;
+
+    private void OnEnable()
+    {
+        ServiceLocator.Subscribe<Builder>(this);
+    }
+
+    private void OnDisable()
+    {
+        ServiceLocator.Unsubscribe<Builder>();
+    }
 
     private void Start()
     {
@@ -32,8 +43,7 @@ public class Builder : MonoBehaviour
         _currentBuildName = buildingConfiguration.BuildingGameObject.name;
         _newBuild = _buildingManager.GetBuildingByName(_currentBuildName).GetComponent<Building>();
     }
-
-    // TODO: subscribe to events in script
+    
     public void SetPositionBuild()
     {
         if (_newBuild.IsUnlockBuild == false)
