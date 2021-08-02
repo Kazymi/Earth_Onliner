@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b22cbe30d06960a418d4fb3a0373e462, type: 3}
-  m_Name: Redhouse
+  m_Name: MainHouse
   m_EditorClassIdentifier: 
   buildingConfiguration: {fileID: 11400000, guid: 19d277578cb57d14da25a951b437e418, type: 2}
   maxAmount: 2

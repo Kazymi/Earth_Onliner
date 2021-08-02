@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: BlueHouse
   m_EditorClassIdentifier: 
   buildingGameObject: {fileID: 3053800224073307662, guid: fca6d8323c2e10e4bab3bc426c840e42, type: 3}
+  maxAmount: 2
   amountInFactory: 0

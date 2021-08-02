@@ -4,7 +4,7 @@
     private Builder _builder;
     private PlayerResources _playerResources;
     private ShopSystemMenu _systemShopMenu;
-
+    
     public BuySystem(BuyConfiguration buyConfiguration, ShopSystemMenu systemMenu)
     {
         _buyConfiguration = buyConfiguration;
@@ -17,7 +17,7 @@
     {
         if (IsUnlockedBuy())
         {
-            _builder.NewBuild(_buyConfiguration.BuildingConfiguration);
+            _builder.NewBuild(_buyConfiguration.BuildingConfiguration,_buyConfiguration);
             _systemShopMenu.CloseShop();
         }
     }
@@ -28,6 +28,13 @@
             _playerResources.CheckAvailability(TypeResource.Iron, _buyConfiguration.NeedIron) == false ||
             _playerResources.CheckAvailability(TypeResource.Wood, _buyConfiguration.NeedWood) == false)
             return false;
-        return true;
+        if (_builder.IsUnlockBuilding(_buyConfiguration.BuildingConfiguration))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 }

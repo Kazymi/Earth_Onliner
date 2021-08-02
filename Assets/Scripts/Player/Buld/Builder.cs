@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Photon.Pun;
 using UnityEngine;
 
@@ -10,8 +11,12 @@ public class Builder : MonoBehaviour
     private Earth _earth;
     private PhotonView _photonView;
     private string _currentBuildName;
+    private BuyConfiguration _buyConfiguration;
     private BuildingManager _buildingManager;
     private bool _positionSelected;
+    private Dictionary<BuildingConfiguration, int> _housesBuilt = new Dictionary<BuildingConfiguration, int>();
+    private PlayerResources _playerResources;
+
 
     private void OnEnable()
     {
@@ -25,14 +30,37 @@ public class Builder : MonoBehaviour
 
     private void Start()
     {
+        _playerResources = ServiceLocator.GetService<PlayerResources>();
         _buildingManager = ServiceLocator.GetService<BuildingManager>();
         _inputHandler = ServiceLocator.GetService<InputHandler>();
         _gameMenu = ServiceLocator.GetService<GameMenu>();
         _earth = ServiceLocator.GetService<Earth>();
     }
 
-    public void NewBuild(BuildingConfiguration buildingConfiguration)
+    public bool IsUnlockBuilding(BuildingConfiguration buildingConfiguration)
     {
+        if (_housesBuilt.ContainsKey(buildingConfiguration) == false)
+        {
+            return true;
+        }
+
+        if (_housesBuilt[buildingConfiguration] >= buildingConfiguration.MaxAmount)
+        {
+            return false;
+        }
+
+        return true;
+    }
+
+    public void NewBuild(BuildingConfiguration buildingConfiguration, BuyConfiguration buyConfiguration)
+    {
+        if (_housesBuilt.ContainsKey(buildingConfiguration) == false)
+        {
+            _housesBuilt.Add(buildingConfiguration, 0);
+        }
+
+        _buyConfiguration = buyConfiguration;
+        _housesBuilt[buildingConfiguration]++;
         _inputHandler.PositionSelection = true;
         _positionSelected = false;
         if (_newBuild != null)
@@ -46,19 +74,24 @@ public class Builder : MonoBehaviour
 
     public void SetPositionBuild()
     {
-        if (_newBuild.IsUnlockBuild == false)
+        if (_newBuild.CheckPosition().UnlockPosition == false)
         {
             return;
         }
 
         _newBuild.GetComponent<Building>().Initialize();
+        _newBuild.CheckPosition().FindIsland?.UnlockIsland();
         _newBuild.transform.parent = _earth.transform;
         var newBuildTransform = _newBuild.transform;
         _earth.GetComponent<PhotonView>().RPC(RPCEvents.BuildNewBuilding.ToString(), RpcTarget.All, _currentBuildName,
             newBuildTransform.localPosition,
             newBuildTransform.localRotation);
         _inputHandler.PositionSelection = false;
+        Destroy(_newBuild);
         _newBuild = null;
+        _playerResources.RemoveResource(TypeResource.Gold, _buyConfiguration.NeedGold);
+        _playerResources.RemoveResource(TypeResource.Iron, _buyConfiguration.NeedIron);
+        _playerResources.RemoveResource(TypeResource.Wood, _buyConfiguration.NeedWood);
     }
 
     private void Update()
@@ -67,7 +100,7 @@ public class Builder : MonoBehaviour
         {
             if (_newBuild && _positionSelected)
             {
-                _gameMenu.BuildButtonSetState(_newBuild.IsUnlockBuild);
+                _gameMenu.BuildButtonSetState(_newBuild.CheckPosition().UnlockPosition);
             }
 
             SetPositionNewBuilding();

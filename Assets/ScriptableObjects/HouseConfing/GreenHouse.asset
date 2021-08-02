@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: GreenHouse
   m_EditorClassIdentifier: 
   buildingGameObject: {fileID: 3053800224073307662, guid: 45decdde244a7c142b76322d13d60b0a, type: 3}
+  maxAmount: 3
   amountInFactory: 0
