@@ -157,7 +157,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   radiusBuilding: 10
   resourcesForBuilding: 0
-  needPrivate: 0
 --- !u!114 &-5273142172150698372
 MonoBehaviour:
   m_ObjectHideFlags: 0

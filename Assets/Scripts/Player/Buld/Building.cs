@@ -1,84 +1,81 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using Photon.Pun;
 using UnityEngine;
+using UnityEngine.AI;
+using UnityEngine.Experimental.AI;
 
 public class Building : MonoBehaviour
 {
     [SerializeField] private float radiusBuilding;
     [SerializeField] private BuildingResource resourcesForBuilding;
-    [SerializeField] private bool needPrivate;
 
     private bool _isConstructionAllowed;
-    private bool _isBuild;
+    private InputHandler _inputHandler;
+
 
     public void Initialize()
     {
-        _isBuild = true;
+        Destroy(gameObject);
     }
 
-    public CheckedPosition CheckPosition()
+    private void OnMouseDrag()
+    {
+        var pos = _inputHandler.GetBuildPosition();
+        if (pos.Position == Vector3.zero)
+        {
+            return;
+        }
+
+        transform.position = pos.Position;
+        transform.rotation = Quaternion.LookRotation(pos.Normal);
+    }
+
+    private void Start()
+    {
+        _inputHandler = ServiceLocator.GetService<InputHandler>();
+    }
+
+    public bool CheckPosition()
     {
         var findIsland = false;
-        var checkedPosition = new CheckedPosition();
-        var allFindGameObject = 
+        var allFindGameObject =
             Physics.OverlapBox(transform.position, new Vector3(radiusBuilding, radiusBuilding, radiusBuilding));
-        
+
         foreach (var findGameObject in allFindGameObject)
         {
             var building = findGameObject.GetComponent<Building>();
             var resource = findGameObject.GetComponent<ResourceForConstruction>();
-            var island = findGameObject.GetComponent<Island>();
 
             if (building)
             {
                 if (building != this)
                 {
-                    checkedPosition.UnlockPosition = false;
-                    break;
+                    return false;
                 }
             }
-
-            // if (island)
-            // {
-            //     checkedPosition.FindIsland = island;
-            //     if (needPrivate)
-            //     {
-            //         if (island.IsUnlockIsland)
-            //         {
-            //             continue;
-            //         }
-            //         else
-            //         {
-            //             checkedPosition.UnlockPosition = false;
-            //             break;
-            //         }
-            //     }
-            // }
 
             if (resource)
             {
                 if (resource.BuildingResources == BuildingResource.Water)
                 {
-                    checkedPosition.UnlockPosition = false;
-                    break;
+                    return false;
                 }
-            
+
                 if (resource.BuildingResources == resourcesForBuilding)
                 {
-                    checkedPosition.UnlockPosition = true;
-                    break;
+                    return true;
                 }
             }
 
             if (resourcesForBuilding == BuildingResource.Nothing)
             {
-                checkedPosition.UnlockPosition = true;
-                break;
+                return true;
             }
         }
 
-        //if (checkedPosition.FindIsland == null) checkedPosition.UnlockPosition = false;
-        return checkedPosition;
+        return false;
     }
 
     private void OnDrawGizmos()

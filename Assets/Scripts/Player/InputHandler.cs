@@ -2,8 +2,10 @@ using UnityEngine;
 
 public class InputHandler : MonoBehaviour
 {
-    private Camera _mainCamera;
+    [SerializeField] private bool mobile;
+    [SerializeField] private Joystick playerJoystick;
 
+    private Camera _mainCamera;
     public bool PositionSelection { set; get; }
     public float ZoomAxis { get; private set; }
     public Vector2 MouseAxis { get; private set; }
@@ -31,17 +33,37 @@ public class InputHandler : MonoBehaviour
 
     public PositionBuilding GetBuildPosition()
     {
-        if (Input.GetMouseButton(0))
+        var ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(ray, out RaycastHit raycastHit))
         {
-            var ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out RaycastHit raycastHit))
+            if (raycastHit.transform.GetComponent<Earth>())
             {
-                if (raycastHit.transform.GetComponent<Earth>())
-                {
-                    return new PositionBuilding(raycastHit.point + new Vector3(0, 2, 0), raycastHit.normal);
-                }
+                return new PositionBuilding(raycastHit.point + new Vector3(0, 2, 0), raycastHit.normal);
             }
         }
+
         return new PositionBuilding(Vector3.zero, Vector3.zero);
+    }
+    
+    public PositionBuilding GetStartBuildPosition()
+    {
+        var ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(ray, out RaycastHit raycastHit))
+        {
+            return new PositionBuilding(raycastHit.point + new Vector3(0, 2, 0), raycastHit.normal);
+        }
+        return new PositionBuilding(Vector3.zero, Vector3.zero);
+    }
+
+    public Vector2 MoveDirection()
+    {
+        if (mobile)
+        {
+            return new Vector2(playerJoystick.Direction.y, -playerJoystick.Direction.x);
+        }
+        else
+        {
+            return new Vector2(Input.GetAxisRaw("Vertical"), -Input.GetAxisRaw("Horizontal"));
+        }
     }
 }

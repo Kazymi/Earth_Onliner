@@ -17,7 +17,6 @@ public class Builder : MonoBehaviour
     private Dictionary<BuildingConfiguration, int> _housesBuilt = new Dictionary<BuildingConfiguration, int>();
     private PlayerResources _playerResources;
 
-
     private void OnEnable()
     {
         ServiceLocator.Subscribe<Builder>(this);
@@ -70,17 +69,18 @@ public class Builder : MonoBehaviour
 
         _currentBuildName = buildingConfiguration.BuildingGameObject.name;
         _newBuild = _buildingManager.GetBuildingByName(_currentBuildName).GetComponent<Building>();
+        _newBuild.transform.position = _inputHandler.GetStartBuildPosition().Position;
+        _positionSelected = true;
     }
 
     public void SetPositionBuild()
     {
-        if (_newBuild.CheckPosition().UnlockPosition == false)
+        if (_newBuild.CheckPosition() == false)
         {
             return;
         }
 
         _newBuild.GetComponent<Building>().Initialize();
-        _newBuild.CheckPosition().FindIsland?.UnlockIsland();
         _newBuild.transform.parent = _earth.transform;
         var newBuildTransform = _newBuild.transform;
         _earth.GetComponent<PhotonView>().RPC(RPCEvents.BuildNewBuilding.ToString(), RpcTarget.All, _currentBuildName,
@@ -100,28 +100,12 @@ public class Builder : MonoBehaviour
         {
             if (_newBuild && _positionSelected)
             {
-                _gameMenu.BuildButtonSetState(_newBuild.CheckPosition().UnlockPosition);
+                _gameMenu.BuildButtonSetState(_newBuild.CheckPosition());
             }
-
-            SetPositionNewBuilding();
         }
         else
         {
             _gameMenu.BuildButtonSetState(false);
         }
-    }
-
-    private void SetPositionNewBuilding()
-    {
-        var pos = _inputHandler.GetBuildPosition();
-        if (pos.Position == Vector3.zero)
-        {
-            return;
-        }
-
-        _positionSelected = true;
-        // TODO: smooth out movement
-        _newBuild.transform.position = pos.Position;
-        _newBuild.transform.rotation = Quaternion.LookRotation(pos.Normal);
     }
 }

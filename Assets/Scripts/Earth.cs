@@ -2,7 +2,6 @@ using System.IO;
 using Photon.Pun;
 using UnityEngine;
 
-[RequireComponent(typeof(InputHandler))]
 public class Earth : MonoBehaviour
 {
     private void OnEnable()

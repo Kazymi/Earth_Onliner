@@ -3,13 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Experimental.AI;
+using UnityEngine.UI;
 
 [Serializable]
 public struct NavMeshChunk
 {
     public Vector3 EulerRotation;
-
-    //---- DRAG HERE YOUR BAKED NAVMESH CHUNK
     public NavMeshData Data;            
     public bool Enabled;
 }
@@ -17,47 +17,20 @@ public struct NavMeshChunk
 
 public class NavMeshSphere : MonoBehaviour
 {
-    //----- HERE ARE YOUR BAKED NAVMESH CHUNKS
     [SerializeField]
     private List<NavMeshChunk> _navMeshChunks;
-
-    [SerializeField]
-    private List<NavMeshDataInstance> _instances = new List<NavMeshDataInstance>();
-
-    [SerializeField]
-    private Transform _pivot;
-
-    public void OnEnable()
+    
+    private void Start()
     {
-        RemoveAllNavMeshLoadedData();
-        LoadNavmeshData();
-    }
-
-    public void RemoveAllNavMeshLoadedData()
-    {
-        NavMesh.RemoveAllNavMeshData();
-    }
-
-    public void LoadNavmeshData()
-    {
-        foreach(var chunk in _navMeshChunks)
+        foreach (var chunk in _navMeshChunks)
         {
-            if (chunk.Enabled)
-            {
-                _instances.Add(
-                    NavMesh.AddNavMeshData(
-                        chunk.Data, 
-                        _pivot.transform.position,
-                        Quaternion.Euler(chunk.EulerRotation)));
-            }
-        }
-    }
-
-    public void OnDisable()
-    {
-        foreach(var instance in _instances)
-        {
-            instance.Remove();
+            var newGameObject = new GameObject();
+            newGameObject.transform.parent = transform;
+            newGameObject.AddComponent(typeof(NavMeshSurface));
+            newGameObject.transform.rotation = Quaternion.Euler(chunk.EulerRotation);
+            var newNav = newGameObject.GetComponent<NavMeshSurface>();
+            newNav.navMeshData = chunk.Data;
+            newNav.AddData();   
         }
     }
 }
