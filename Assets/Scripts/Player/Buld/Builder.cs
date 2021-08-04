@@ -80,6 +80,7 @@ public class Builder : MonoBehaviour
             return;
         }
 
+        // TODO: _newBuild.BuildInitialize();
         _newBuild.GetComponent<Building>().BuildInitialize();
         _newBuild.transform.parent = _earth.transform;
         var newBuildTransform = _newBuild.transform;
@@ -96,6 +97,7 @@ public class Builder : MonoBehaviour
 
     private void Update()
     {
+        // TODO: use events or just call method once
         if (_newBuild != null)
         {
             if (_newBuild && _positionSelected)

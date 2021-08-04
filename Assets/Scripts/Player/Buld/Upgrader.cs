@@ -15,6 +15,7 @@ public class Upgrader : MonoBehaviour
 
     private void OnMouseDrag()
     {
+        // TODO: avoid continues condition checks
         if (_initialized)
             _upgradeSystemMenu.NewUpgrade(upgrades[_currentLvl], generatorResource, this);
     }
