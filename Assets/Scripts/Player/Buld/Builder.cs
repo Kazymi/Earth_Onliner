@@ -80,7 +80,7 @@ public class Builder : MonoBehaviour
             return;
         }
 
-        _newBuild.GetComponent<Building>().Initialize();
+        _newBuild.GetComponent<Building>().BuildInitialize();
         _newBuild.transform.parent = _earth.transform;
         var newBuildTransform = _newBuild.transform;
         _earth.GetComponent<PhotonView>().RPC(RPCEvents.BuildNewBuilding.ToString(), RpcTarget.All, _currentBuildName,

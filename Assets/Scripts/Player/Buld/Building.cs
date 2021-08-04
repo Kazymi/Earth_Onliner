@@ -11,25 +11,32 @@ public class Building : MonoBehaviour
     [SerializeField] private float radiusBuilding;
     [SerializeField] private BuildingResource resourcesForBuilding;
 
-    private bool _isConstructionAllowed;
+    private bool _isСonstructionСompleted;
     private InputHandler _inputHandler;
 
 
-    public void Initialize()
+    public void BuildInitialize()
     {
         Destroy(gameObject);
     }
 
+    public void InstantiateInitialize()
+    {
+        _isСonstructionСompleted = true;
+    }
+
     private void OnMouseDrag()
     {
-        var pos = _inputHandler.GetBuildPosition();
-        if (pos.Position == Vector3.zero)
+        if (_isСonstructionСompleted == false)
         {
-            return;
-        }
+            var pos = _inputHandler.GetBuildPosition();
+            if (pos.Position == Vector3.zero)
+            {
+                return;
+            }
 
-        transform.position = pos.Position;
-        transform.rotation = Quaternion.LookRotation(pos.Normal);
+            transform.position = pos.Position;
+        }
     }
 
     private void Start()
@@ -39,7 +46,7 @@ public class Building : MonoBehaviour
 
     public bool CheckPosition()
     {
-        var findIsland = false;
+        var returnValue = false;
         var allFindGameObject =
             Physics.OverlapBox(transform.position, new Vector3(radiusBuilding, radiusBuilding, radiusBuilding));
 
@@ -52,7 +59,8 @@ public class Building : MonoBehaviour
             {
                 if (building != this)
                 {
-                    return false;
+                    returnValue = false;
+                    break;
                 }
             }
 
@@ -60,22 +68,23 @@ public class Building : MonoBehaviour
             {
                 if (resource.BuildingResources == BuildingResource.Water)
                 {
-                    return false;
+                    returnValue = false;
+                    break;
                 }
 
                 if (resource.BuildingResources == resourcesForBuilding)
                 {
-                    return true;
+                    returnValue = true;
                 }
             }
 
             if (resourcesForBuilding == BuildingResource.Nothing)
             {
-                return true;
+                returnValue = true;
             }
         }
 
-        return false;
+        return returnValue;
     }
 
     private void OnDrawGizmos()

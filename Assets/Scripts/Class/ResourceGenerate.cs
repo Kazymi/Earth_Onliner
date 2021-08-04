@@ -13,6 +13,5 @@ public class ResourceGenerate
     {
         set => generationTime = value;
         get => generationTime;
-
     }
 }

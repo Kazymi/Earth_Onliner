@@ -11,7 +11,8 @@ public class GeneratorResource : MonoBehaviour
     private PlayerResources _playerResources;
     private Dictionary<ResourceGenerate, float> _timerStartTime;
     private PhotonView _photonView;
-    public void Start()
+
+    private void Start()
     {
         _playerResources = ServiceLocator.GetService<PlayerResources>();
         _timerStartTime = new Dictionary<ResourceGenerate, float>();
@@ -19,13 +20,14 @@ public class GeneratorResource : MonoBehaviour
         {
             _timerStartTime.Add(resourceGenerate, resourceGenerate.GenerateTimer);
         }
+
         _photonView = GetComponent<PhotonView>();
     }
 
     private void Update()
     {
         if (_photonView.ViewID == 0) return;
-        if(_photonView.CreatorActorNr != PhotonNetwork.LocalPlayer.ActorNumber) Destroy(this);
+        if (_photonView.CreatorActorNr != PhotonNetwork.LocalPlayer.ActorNumber) Destroy(this);
         foreach (var resourceGenerate in resourceGenerates)
         {
             resourceGenerate.GenerateTimer -= Time.deltaTime;
@@ -36,5 +38,21 @@ public class GeneratorResource : MonoBehaviour
                     resourceGenerate.GenerationResource.Amount);
             }
         }
+    }
+
+    public void AddResource(ResourceGenerate resource)
+    {
+        for (int i = 0; i < resourceGenerates.Count; i++)
+        {
+            if (resourceGenerates[i].GenerationResource.TypeResource == resource.GenerationResource.TypeResource)
+            {
+                _timerStartTime.Remove(resourceGenerates[i]);
+                resourceGenerates[i] = resource;
+                _timerStartTime.Add(resourceGenerates[i], resourceGenerates[i].GenerateTimer);
+                return;
+            }
+        }
+        resourceGenerates.Add(resource);
+        _timerStartTime.Add(resource,resource.GenerateTimer);
     }
 }

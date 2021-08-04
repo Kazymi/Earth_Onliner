@@ -38,7 +38,7 @@ public class InputHandler : MonoBehaviour
         {
             if (raycastHit.transform.GetComponent<Earth>())
             {
-                return new PositionBuilding(raycastHit.point + new Vector3(0, 2, 0), raycastHit.normal);
+                return new PositionBuilding(raycastHit.point, raycastHit.normal);
             }
         }
 
@@ -50,7 +50,7 @@ public class InputHandler : MonoBehaviour
         var ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out RaycastHit raycastHit))
         {
-            return new PositionBuilding(raycastHit.point + new Vector3(0, 2, 0), raycastHit.normal);
+            return new PositionBuilding(raycastHit.point, raycastHit.normal);
         }
         return new PositionBuilding(Vector3.zero, Vector3.zero);
     }

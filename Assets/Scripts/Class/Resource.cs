@@ -8,7 +8,12 @@ public class Resource
     [SerializeField] private int amount;
 
     public TypeResource TypeResource => typeResource;
-    public int Amount => amount;
+
+    public int Amount
+    {
+        get => amount;
+        set => amount = value;
+    }
     
     public Resource(TypeResource typeResource)
     {
