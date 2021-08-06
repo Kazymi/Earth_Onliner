@@ -21,7 +21,5 @@ public class Earth : MonoBehaviour
         newBuild.transform.parent = transform;
         newBuild.transform.localPosition = localPos;
         newBuild.transform.localRotation = rotation;
-        newBuild.GetComponent<Building>().InstantiateInitialize();
-        newBuild.GetComponent<Upgrader>().Initialize();
     }
 }

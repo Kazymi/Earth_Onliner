@@ -1,22 +1,52 @@
+using System;
+using System.Collections.Generic;
+using EventBusSystem;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class InputHandler : MonoBehaviour
+public class InputHandler : MonoBehaviour, IBuildEvent
 {
     [SerializeField] private bool mobile;
-    [SerializeField] private Joystick playerJoystick;
+    [SerializeField] private int edgesPercent;
 
+
+    private bool _isBuild;
     private Camera _mainCamera;
+    private Vector3 _currentPosition;
+    private Vector3 _lastPosition;
+    private Vector3 _moveAxis;
+    private Vector3 _returnValue;
+
+    private event Action _onMouseDownAction;
+    private event Action _onMouseUpAction;
+
+    public event Action OnMouseDownAction
+    {
+        add => _onMouseDownAction += value;
+        remove => _onMouseDownAction -= value;
+    }
+
+    public event Action OnMouseUpAction
+    {
+        add => _onMouseUpAction += value;
+        remove => _onMouseUpAction -= value;
+    }
+
     public bool PositionSelection { set; get; }
     public float ZoomAxis { get; private set; }
-    public Vector2 MouseAxis { get; private set; }
+    public Vector3 MoveVector => _returnValue;
 
     private void OnEnable()
     {
         ServiceLocator.Subscribe<InputHandler>(this);
+        _onMouseUpAction += () => _returnValue = Vector3.zero;
+        EventBus.Subscribe(this);
     }
 
     private void OnDisable()
     {
+        EventBus.Unsubscribe(this);
         ServiceLocator.Unsubscribe<InputHandler>();
     }
 
@@ -28,23 +58,21 @@ public class InputHandler : MonoBehaviour
     private void Update()
     {
         ZoomAxis = Input.GetAxis("Mouse ScrollWheel");
-        MouseAxis = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
+        if (Input.GetMouseButtonUp(0)) _onMouseUpAction?.Invoke();
+        if (Input.GetMouseButtonDown(0)) _onMouseDownAction?.Invoke();
     }
 
-    public PositionBuilding GetBuildPosition()
+    public RaycastHit GetHitPoint(LayerMask layerMask)
     {
         var ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out RaycastHit raycastHit))
+        if (Physics.Raycast(ray, out RaycastHit raycastHit, Mathf.Infinity, layerMask))
         {
-            if (raycastHit.transform.GetComponent<Earth>())
-            {
-                return new PositionBuilding(raycastHit.point, raycastHit.normal);
-            }
+            Debug.Log(raycastHit.collider.name);
+            return raycastHit;
         }
-
-        return new PositionBuilding(Vector3.zero, Vector3.zero);
+        else return new RaycastHit();
     }
-    
+
     public PositionBuilding GetStartBuildPosition()
     {
         var ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
@@ -52,18 +80,92 @@ public class InputHandler : MonoBehaviour
         {
             return new PositionBuilding(raycastHit.point, raycastHit.normal);
         }
+
         return new PositionBuilding(Vector3.zero, Vector3.zero);
     }
 
     public Vector2 MoveDirection()
     {
+        if (IsPointerOverUIObject() && _isBuild)
+        {
+            return new Vector2();
+        }
         if (mobile)
         {
-            return new Vector2(playerJoystick.Direction.y, -playerJoystick.Direction.x);
+            if (Input.GetMouseButton(0))
+            {
+                _currentPosition = Input.mousePosition;
+                var newPos = _currentPosition - _lastPosition;
+                newPos = newPos.normalized;
+                if (_isBuild)
+                {
+                    _returnValue = Vector3.zero;
+                    if (_currentPosition != _lastPosition)
+                    {
+                        _returnValue = new Vector3(newPos.y, -newPos.x, 0);
+                    }
+                }
+                else
+                {
+                    if (CheckEdges(_currentPosition))
+                    {
+                        _returnValue = Vector3.zero;
+                    }
+
+                    if (_currentPosition != _lastPosition)
+                    {
+                        _returnValue = new Vector3(-newPos.y, newPos.x, 0);
+                    }
+                }
+
+                _lastPosition = _currentPosition;
+            }
         }
         else
         {
-            return new Vector2(Input.GetAxisRaw("Vertical"), -Input.GetAxisRaw("Horizontal"));
+            _returnValue = new Vector2(Input.GetAxisRaw("Vertical"), -Input.GetAxisRaw("Horizontal"));
         }
+
+        return _returnValue;
+    }
+
+    public void OnBuild()
+    {
+        _isBuild = true;
+    }
+
+    public void OnUpgrade()
+    {
+        _isBuild = false;
+    }
+
+    private bool CheckEdges(Vector3 mousePosition)
+    {
+        var wight = Screen.width;
+        var height = Screen.height;
+        var percentWightMin = (wight / 100) * edgesPercent;
+        var percentHeightMin = (height / 100) * edgesPercent;
+        var percentWightMax = wight - percentWightMin;
+        var percentHeightMax = height - percentHeightMin;
+
+
+        if (percentHeightMax > mousePosition.y
+            && percentHeightMin < mousePosition.y
+            && percentWightMax > mousePosition.x &&
+            percentWightMin < mousePosition.x)
+        {
+            return true;
+        }
+
+        return false;
+    }
+    
+    private bool IsPointerOverUIObject()
+    {
+        PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
+        eventDataCurrentPosition.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+        List<RaycastResult> results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
+        return results.Count > 0;
     }
 }

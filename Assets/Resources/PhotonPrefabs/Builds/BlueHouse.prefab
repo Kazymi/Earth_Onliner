@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: -5273142172150698372}
   - component: {fileID: -6900986559703710043}
   - component: {fileID: 3357297114981919963}
-  - component: {fileID: 4307763838470702612}
-  m_Layer: 0
+  - component: {fileID: 2564654863356547497}
+  m_Layer: 6
   m_Name: BlueHouse
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -51,9 +51,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b4d00ab3b6d52f44952fe6236910881, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  earthMask:
+    serializedVersion: 2
+    m_Bits: 128
   radiusBuilding: 40.69
   resourcesForBuilding: 2
-  upgrader: {fileID: 4307763838470702612}
 --- !u!114 &-5273142172150698372
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -106,7 +108,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 5.2313414, y: 1, z: 4.916996}
   m_Center: {x: -0.062868595, y: 0, z: 0.142476}
---- !u!114 &4307763838470702612
+--- !u!114 &2564654863356547497
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -115,18 +117,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 3053800224073307662}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 121382906c2c399478e686daba95d1d9, type: 3}
+  m_Script: {fileID: 11500000, guid: 4f3f8d751a0c43109b4d851fec235abd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  upgrades:
-  - needGold: 15
+  _generatorResource: {fileID: -6900986559703710043}
+  _upgrades:
+  - needGold: 20
     needWood: 200
-    needIron: 25
+    needIron: 10
     newGold:
       generatingResource:
         typeResource: 2
         amount: 1
-      generationTime: 4
+      generationTime: 5
     newWood:
       generatingResource:
         typeResource: 0
@@ -137,7 +140,6 @@ MonoBehaviour:
         typeResource: 1
         amount: 2
       generationTime: 1
-  generatorResource: {fileID: -6900986559703710043}
 --- !u!1001 &3457372117507924333
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -151,7 +153,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 8066ce8eaec3bd44a97df2754f1bd665, type: 3}
       propertyPath: m_Layer
-      value: 0
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 8066ce8eaec3bd44a97df2754f1bd665, type: 3}
       propertyPath: m_RootOrder
@@ -217,7 +219,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 08fb4c051dce2314d96f59a5f557c330, type: 3}
       propertyPath: m_Layer
-      value: 0
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 08fb4c051dce2314d96f59a5f557c330, type: 3}
       propertyPath: m_RootOrder
@@ -283,7 +285,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 08fb4c051dce2314d96f59a5f557c330, type: 3}
       propertyPath: m_Layer
-      value: 0
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 08fb4c051dce2314d96f59a5f557c330, type: 3}
       propertyPath: m_RootOrder
@@ -349,7 +351,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 08fb4c051dce2314d96f59a5f557c330, type: 3}
       propertyPath: m_Layer
-      value: 0
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 08fb4c051dce2314d96f59a5f557c330, type: 3}
       propertyPath: m_RootOrder
