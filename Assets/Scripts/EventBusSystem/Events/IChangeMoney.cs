@@ -2,5 +2,5 @@ using EventBusSystem;
 
 public interface IChangingAmountResources : IGlobalSubscriber
 {
-    void ChangingAmountResources(TypeResource typeResource);
+    void ChangingAmountResources(TypeResource typeResource,int amountResource);
 }

@@ -22,12 +22,15 @@ public class GeneratorResource : MonoBehaviour
         }
 
         _photonView = GetComponent<PhotonView>();
+        if (GetComponent<BuildingContractor>().IsMine == false)
+        {
+            Destroy(this);
+        }
     }
 
     private void Update()
     {
         if (_photonView.ViewID == 0) return;
-        if (_photonView.CreatorActorNr != PhotonNetwork.LocalPlayer.ActorNumber) Destroy(this);
         foreach (var resourceGenerate in resourceGenerates)
         {
             resourceGenerate.GenerateTimer -= Time.deltaTime;
@@ -47,12 +50,14 @@ public class GeneratorResource : MonoBehaviour
             if (resourceGenerates[i].GenerationResource.TypeResource == resource.GenerationResource.TypeResource)
             {
                 _timerStartTime.Remove(resourceGenerates[i]);
-                resourceGenerates[i] = resource;
+                var newResourceGenerate = new ResourceGenerate(resource);
+                resourceGenerates[i] = newResourceGenerate;
                 _timerStartTime.Add(resourceGenerates[i], resourceGenerates[i].GenerateTimer);
                 return;
             }
         }
+
         resourceGenerates.Add(resource);
-        _timerStartTime.Add(resource,resource.GenerateTimer);
+        _timerStartTime.Add(resource, resource.GenerateTimer);
     }
 }

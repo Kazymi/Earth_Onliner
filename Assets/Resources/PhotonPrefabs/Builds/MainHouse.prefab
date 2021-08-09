@@ -13,7 +13,8 @@ GameObject:
   - component: {fileID: 8702274564719977238}
   - component: {fileID: -5273142172150698372}
   - component: {fileID: -6900986559703710043}
-  - component: {fileID: 608933823309238784}
+  - component: {fileID: 7053219011028846661}
+  - component: {fileID: 6360420400753905513}
   m_Layer: 6
   m_Name: MainHouse
   m_TagString: Untagged
@@ -61,9 +62,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b4d00ab3b6d52f44952fe6236910881, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  earthMask:
-    serializedVersion: 2
-    m_Bits: 128
   radiusBuilding: 49.54
   resourcesForBuilding: 0
 --- !u!114 &-5273142172150698372
@@ -105,7 +103,7 @@ MonoBehaviour:
       typeResource: 2
       amount: 1
     generationTime: 2
---- !u!114 &608933823309238784
+--- !u!114 &7053219011028846661
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -114,19 +112,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 3053800224073307662}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f3f8d751a0c43109b4d851fec235abd, type: 3}
+  m_Script: {fileID: 11500000, guid: 5d75b36cfbb95264eb35b2e89eba5446, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _generatorResource: {fileID: -6900986559703710043}
-  _upgrades:
-  - needGold: 100
-    needWood: 500
-    needIron: 80
-    newGold:
+  generatorResource: {fileID: -6900986559703710043}
+  resourceGenerateUpgrade:
+  - newGold:
       generatingResource:
         typeResource: 2
-        amount: 6
-      generationTime: 2
+        amount: 1
+      generationTime: 1
     newWood:
       generatingResource:
         typeResource: 0
@@ -137,6 +132,38 @@ MonoBehaviour:
         typeResource: 1
         amount: 0
       generationTime: 0
+  - newGold:
+      generatingResource:
+        typeResource: 2
+        amount: 2
+      generationTime: 1
+    newWood:
+      generatingResource:
+        typeResource: 0
+        amount: 0
+      generationTime: 0
+    newIron:
+      generatingResource:
+        typeResource: 1
+        amount: 0
+      generationTime: 0
+  priceConfiguration: {fileID: 11400000, guid: 4c2557a4bd7b3cf468f445dea4770198, type: 2}
+--- !u!208 &6360420400753905513
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3053800224073307662}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 3.055, y: 0.5, z: 3.31}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0.03}
+  m_TimeToStationary: 0.5
 --- !u!1001 &3220000542609218204
 PrefabInstance:
   m_ObjectHideFlags: 0

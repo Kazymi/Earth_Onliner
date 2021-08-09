@@ -52,12 +52,14 @@ public class ShopSystemMenu : MonoBehaviour
     public void CloseShop()
     {
         shopCanvas.enabled = false;
+        _buySystemCanvases[_currentIdCanvas].enabled = false;
         openShopButton.interactable = true;
     }
     
     private void OpenShop()
     {
         shopCanvas.enabled = true;
+        _buySystemCanvases[_currentIdCanvas].enabled = true;
         openShopButton.interactable = false;
     }
 

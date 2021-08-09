@@ -19,5 +19,10 @@ public class Resource
     {
         this.typeResource = typeResource;
         amount = 0;
+    } 
+    public Resource(Resource resource)
+    {
+        typeResource = resource.typeResource;
+        amount = resource.amount;
     }
 }

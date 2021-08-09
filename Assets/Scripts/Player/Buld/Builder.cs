@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Photon.Pun;
 using UnityEngine;
@@ -13,7 +12,6 @@ public class Builder : MonoBehaviour
     private string _currentBuildName;
     private BuyConfiguration _buyConfiguration;
     private BuildingManager _buildingManager;
-    private bool _positionSelected;
     private Dictionary<BuildingConfiguration, int> _housesBuilt = new Dictionary<BuildingConfiguration, int>();
     private PlayerResources _playerResources;
     private PlayerSystem _playerSystem;
@@ -63,7 +61,6 @@ public class Builder : MonoBehaviour
         _buyConfiguration = buyConfiguration;
         _housesBuilt[buildingConfiguration]++;
         _inputHandler.PositionSelection = true;
-        _positionSelected = false;
         if (_newBuild != null)
         {
             _buildingManager.GetFactoryByName(_currentBuildName).Destroy(_newBuild.gameObject);
@@ -72,7 +69,6 @@ public class Builder : MonoBehaviour
         _currentBuildName = buildingConfiguration.BuildingGameObject.name;
         _newBuild = _buildingManager.GetBuildingByName(_currentBuildName).GetComponent<BuildingContractor>();
         _newBuild.transform.position = _inputHandler.GetStartBuildPosition().Position;
-        _positionSelected = true;
         _playerSystem.StartBuild(_newBuild);
     }
 
@@ -87,7 +83,8 @@ public class Builder : MonoBehaviour
         var newBuildTransform = _newBuild.transform;
         _earth.GetComponent<PhotonView>().RPC(RPCEvents.BuildNewBuilding.ToString(), RpcTarget.All, _currentBuildName,
             newBuildTransform.localPosition,
-            newBuildTransform.localRotation);
+            newBuildTransform.localRotation,
+            PhotonNetwork.LocalPlayer.UserId);
         _inputHandler.PositionSelection = false;
         Destroy(_newBuild.gameObject);
         _newBuild = null;
@@ -99,13 +96,9 @@ public class Builder : MonoBehaviour
 
     private void Update()
     {
-        // TODO: use events or just call method once
         if (_newBuild != null)
         {
-            if (_newBuild && _positionSelected)
-            {
-                _gameMenu.BuildButtonSetState(CheckPosition());
-            }
+            _gameMenu.BuildButtonSetState(CheckPosition());
         }
         else
         {
@@ -153,7 +146,7 @@ public class Builder : MonoBehaviour
                 returnValue = true;
             }
         }
-        
+
         return returnValue;
     }
 }

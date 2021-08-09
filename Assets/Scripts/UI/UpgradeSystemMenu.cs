@@ -12,33 +12,28 @@ public class UpgradeSystemMenu : MonoBehaviour, IChangingAmountResources
     [SerializeField] private TMP_Text priceWood;
     [SerializeField] private TMP_Text priceIron;
     [SerializeField] private TMP_Text priceGold;
-    [SerializeField] private TMP_Text addWood;
-    [SerializeField] private TMP_Text addIron;
-    [SerializeField] private TMP_Text addGold;
+    [SerializeField] private TMP_Text descriptionUpgrade;
     [SerializeField] private Button upgradeButton;
     [SerializeField] private Button closeCanvasButton;
 
     private UpgradeSystem _upgradeSystem;
 
-    public void NewUpgrade(Upgrade upgrade, GeneratorResource generatorResource, Upgrader upgrader)
+    public void NewUpgrade(UpgradePrice upgrade, Upgrader upgrader,string description)
     {
         if (_upgradeSystem != null)
             upgradeButton.onClick.RemoveListener(_upgradeSystem.Upgrade);
         upgradeCanvas.enabled = true;
-        _upgradeSystem = new UpgradeSystem(upgrade, generatorResource, upgrader);
-        UpdateState(upgrade);
+        _upgradeSystem = new UpgradeSystem(upgrade, upgrader);
+        UpdateState(upgrade,description);
         upgradeButton.onClick.AddListener(_upgradeSystem.Upgrade);
     }
 
-    private void UpdateState(Upgrade upgrade)
+    private void UpdateState(UpgradePrice upgrade,string description)
     {
         priceWood.text = upgrade.NeedWood.ToString();
         priceGold.text = upgrade.NeedGold.ToString();
         priceIron.text = upgrade.NeedIron.ToString();
-
-        addWood.text = upgrade.NewWood.GenerationResource.Amount.ToString();
-        addIron.text = upgrade.NewIron.GenerationResource.Amount.ToString();
-        addGold.text = upgrade.NewGold.GenerationResource.Amount.ToString();
+        descriptionUpgrade.text = description;
     }
 
     private void OnEnable()
@@ -59,7 +54,12 @@ public class UpgradeSystemMenu : MonoBehaviour, IChangingAmountResources
         EventBus.Unsubscribe(this);
     }
 
-    public void ChangingAmountResources(TypeResource typeResource)
+    public void CloseCanvas()
+    {
+        upgradeCanvas.enabled = false;
+    }
+    
+    public void ChangingAmountResources(TypeResource typeResource,int amount)
     {
         if (_upgradeSystem != null)
         {

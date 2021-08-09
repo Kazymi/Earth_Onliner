@@ -12,22 +12,22 @@ public class GameMenu : MonoBehaviour, IChangingAmountResources
     [SerializeField] private TMP_Text ironText;
     [SerializeField] private TMP_Text goldText;
 
-    private Dictionary<TypeResource, Action> _changingResources;
+    private Dictionary<TypeResource, TMP_Text> _changingResources;
     private PlayerResources _playerResources;
 
     private void Start()
     {
         _playerResources = ServiceLocator.GetService<PlayerResources>();
-        _changingResources = new Dictionary<TypeResource, Action>();
+        _changingResources = new Dictionary<TypeResource, TMP_Text>();
         
         _changingResources.Add(TypeResource.Wood,
-            () => woodText.text = _playerResources.GetAmountResource(TypeResource.Wood).ToString());
+            woodText);
         
         _changingResources.Add(TypeResource.Iron,
-            () => ironText.text = _playerResources.GetAmountResource(TypeResource.Iron).ToString());
+            ironText);
         
         _changingResources.Add(TypeResource.Gold,
-            () => goldText.text = _playerResources.GetAmountResource(TypeResource.Gold).ToString());
+            goldText);
     }
 
     private void OnEnable()
@@ -46,10 +46,9 @@ public class GameMenu : MonoBehaviour, IChangingAmountResources
     {
         buildButton.gameObject.SetActive(unlocked);
     }
-
-    // TODO: can simplify by passing the amount of resources to add
-    public void ChangingAmountResources(TypeResource typeResource)
+    
+    public void ChangingAmountResources(TypeResource typeResource,int amount)
     {
-        _changingResources[typeResource]?.Invoke();
+        _changingResources[typeResource].text = amount.ToString();
     }
 }

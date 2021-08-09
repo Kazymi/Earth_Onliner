@@ -8,10 +8,6 @@ public abstract class State
     public virtual void Tick()
     {
     }
-
-    public virtual void MouseDrag()
-    {
-    }
     
     public virtual void FixedTick()
     {

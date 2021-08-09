@@ -1,0 +1,8 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Radar : MonoBehaviour
+{
+    [SerializeField] private float radius;
+}

@@ -21,13 +21,14 @@ public class PlayerResources
     public void AddResource(TypeResource typeResource, int amountResources)
     {
         _resources[typeResource] += amountResources;
-        EventBus.RaiseEvent<IChangingAmountResources>(h => h.ChangingAmountResources(typeResource));
+        EventBus.RaiseEvent<IChangingAmountResources>(h => h.ChangingAmountResources(typeResource,_resources[typeResource]));
     }
 
     public void RemoveResource(TypeResource typeResource, int amountResources)
     {
         _resources[typeResource] -= amountResources;
-        EventBus.RaiseEvent<IChangingAmountResources>(h => h.ChangingAmountResources(typeResource));
+        EventBus.RaiseEvent<IChangingAmountResources>(h => h.ChangingAmountResources(typeResource,_resources[typeResource]));
+
     }
 
     public bool CheckAvailability(TypeResource typeResource, int comparedValue)

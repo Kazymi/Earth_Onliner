@@ -18,11 +18,6 @@ public class StateMachine
         Debug.Log(_currentState);
     }
 
-    public void MouseDrag()
-    {
-        _currentState.MouseDrag();
-    }
-
     public void FixedTick()
     {
         _currentState.FixedTick();
@@ -43,7 +38,7 @@ public class StateMachine
         return -1;
     }
 
-    private void SetState(State state)
+    public void SetState(State state)
     {
         _currentState?.OnStateExit();
         _currentState = state;

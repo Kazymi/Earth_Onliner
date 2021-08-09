@@ -8,18 +8,19 @@ using UnityEngine.Experimental.AI;
 
 public class BuildingContractor : MonoBehaviour
 {
-    [SerializeField] private LayerMask earthMask;
     [SerializeField] private float radiusBuilding;
     [SerializeField] private BuildingResource resourcesForBuilding;
+    
+    private bool _isMine;
 
-    private InputHandler _inputHandler;
+    public bool IsMine => _isMine;
+    public void BuildComplete(bool isMine)
+    {
+        _isMine = isMine;
+        ServiceLocator.GetService<Builders>().NewBuilding(gameObject,isMine);
+    }
     public BuildingResource Resource => resourcesForBuilding;
     public float RadiusBuilding => radiusBuilding;
-    
-    private void Start()
-    {
-        _inputHandler = ServiceLocator.GetService<InputHandler>();
-    }
 
     private void OnDrawGizmos()
     {

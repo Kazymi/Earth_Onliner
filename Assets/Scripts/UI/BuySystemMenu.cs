@@ -46,7 +46,7 @@ public class BuySystemMenu : MonoBehaviour, IChangingAmountResources
         EventBus.Subscribe(this);
     }
 
-    public void ChangingAmountResources(TypeResource typeResource)
+    public void ChangingAmountResources(TypeResource typeResource, int amount)
     {
         buyButton.interactable = _buySystem.IsUnlockedBuy();
     }

@@ -9,8 +9,15 @@
 
         public override void OnStateEnter()
         {
-            base.OnStateEnter();
             EventBus.RaiseEvent<IBuildEvent>(h => h.OnUpgrade());
+            Debug.Log("Subscribe");
+            _inputHandler.OnMouseDownAction += OnMouseDown;
+        }
+
+        public override void OnStateExit()
+        {
+            Debug.Log("unsubscribe");
+            _inputHandler.OnMouseDownAction -= OnMouseDown;
         }
 
         public UpgradeState(InputHandler inputHandler, LayerMask layerMask)
@@ -18,15 +25,15 @@
             _idLayer = layerMask;
             _inputHandler = inputHandler;
         }
-        public override void MouseDrag()
+        private void OnMouseDown()
         {
             var hit = _inputHandler.GetHitPoint(_idLayer);
             if(hit.collider == null || _inputHandler.MoveVector != Vector3.zero) return;
             var upgrader = hit.collider.GetComponent<Upgrader>();
-            if (upgrader == false)
+            if (upgrader == null)
             {
                 return;
             }
-            upgrader.MouseDrag();
+            upgrader.OnMouseDownAction();
         }
     }

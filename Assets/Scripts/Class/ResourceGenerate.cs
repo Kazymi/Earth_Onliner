@@ -14,4 +14,15 @@ public class ResourceGenerate
         set => generationTime = value;
         get => generationTime;
     }
+
+    public ResourceGenerate(ResourceGenerate resourceGenerate)
+    {
+        generatingResource = new Resource(resourceGenerate.GenerationResource);
+        generationTime = resourceGenerate.generationTime;
+    }
+
+    public ResourceGenerate()
+    {
+        
+    }
 }

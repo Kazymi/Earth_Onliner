@@ -20,11 +20,18 @@ public class InputHandler : MonoBehaviour, IBuildEvent
 
     private event Action _onMouseDownAction;
     private event Action _onMouseUpAction;
+    private event Action _onMouseAction;
 
     public event Action OnMouseDownAction
     {
         add => _onMouseDownAction += value;
         remove => _onMouseDownAction -= value;
+    }
+    
+    public event Action OnMouseAction
+    {
+        add => _onMouseAction += value;
+        remove => _onMouseAction -= value;
     }
 
     public event Action OnMouseUpAction
@@ -67,7 +74,6 @@ public class InputHandler : MonoBehaviour, IBuildEvent
         var ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out RaycastHit raycastHit, Mathf.Infinity, layerMask))
         {
-            Debug.Log(raycastHit.collider.name);
             return raycastHit;
         }
         else return new RaycastHit();
@@ -86,7 +92,7 @@ public class InputHandler : MonoBehaviour, IBuildEvent
 
     public Vector2 MoveDirection()
     {
-        if (IsPointerOverUIObject() && _isBuild)
+        if (IsPointerOverUIObject())
         {
             return new Vector2();
         }
@@ -162,9 +168,9 @@ public class InputHandler : MonoBehaviour, IBuildEvent
     
     private bool IsPointerOverUIObject()
     {
-        PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
+        var eventDataCurrentPosition = new PointerEventData(EventSystem.current);
         eventDataCurrentPosition.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
-        List<RaycastResult> results = new List<RaycastResult>();
+        var results = new List<RaycastResult>();
         EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
         return results.Count > 0;
     }

@@ -22,12 +22,14 @@ public class BuildState : State
         base.OnStateEnter();
         EventBus.RaiseEvent<IBuildEvent>(h => h.OnBuild());
         _inputHandler.OnMouseUpAction += OnMouseUp;
+        _inputHandler.OnMouseDownAction += OnMouseDown;
     }
 
     public override void OnStateExit()
     {
         base.OnStateExit();
         _inputHandler.OnMouseUpAction -= OnMouseUp;
+        _inputHandler.OnMouseDownAction -= OnMouseDown;
     }
 
     public void Initialize(BuildingContractor buildGameObject)
@@ -35,46 +37,46 @@ public class BuildState : State
         _buildingContractor = buildGameObject;
     }
 
-    public override void MouseDrag()
+    public override void Tick()
     {
-        if (_currentBuildingConstractor == null)
+        if (_currentBuildingConstractor != null)
         {
-            var hit = _inputHandler.GetHitPoint(_idLayerBuild);
-            if (hit.collider == null)
-            {
-                return;
-            }
-
-            var buildingContractor = hit.collider.GetComponent<BuildingContractor>();
-            if (buildingContractor == false)
-            {
-                return;
-            }
-
-            if (_buildingContractor == buildingContractor)
-            {
-                _currentBuildingConstractor = buildingContractor;
-            }
+            SetPosition();
         }
-
-        SetPosition();
     }
 
     private void OnMouseUp()
     {
         _currentBuildingConstractor = null;
     }
+    private void OnMouseDown()
+    {
+        var hit = _inputHandler.GetHitPoint(_idLayerBuild);
+        if (hit.collider == null)
+        {
+            return;
+        }
+
+        var buildingContractor = hit.collider.GetComponent<BuildingContractor>();
+        if (buildingContractor == false)
+        {
+            return;
+        }
+
+        if (_buildingContractor == buildingContractor)
+        {
+            _currentBuildingConstractor = buildingContractor;
+        }
+    }
 
     private void SetPosition()
     {
-        if (_currentBuildingConstractor == null) return;
         var hit = _inputHandler.GetHitPoint(_idLayerEarth);
         var pos = hit.point;
         if (pos == Vector3.zero)
         {
             return;
         }
-
         _currentBuildingConstractor.transform.position = pos;
     }
 }
