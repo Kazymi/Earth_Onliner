@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: -6900986559703710043}
   - component: {fileID: 7053219011028846661}
   - component: {fileID: 6360420400753905513}
+  - component: {fileID: -5570743962202875810}
   m_Layer: 6
   m_Name: MainHouse
   m_TagString: Untagged
@@ -164,6 +165,20 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 0, z: 0.03}
   m_TimeToStationary: 0.5
+--- !u!114 &-5570743962202875810
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3053800224073307662}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5247e44fd8297f4894f50502238dbcd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 0
+  isMine: 0
 --- !u!1001 &3220000542609218204
 PrefabInstance:
   m_ObjectHideFlags: 0

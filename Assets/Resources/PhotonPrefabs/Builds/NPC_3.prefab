@@ -210,6 +210,8 @@ GameObject:
   - component: {fileID: 4757465189744879235}
   - component: {fileID: 4757465189616918980}
   - component: {fileID: 4757465189616918983}
+  - component: {fileID: -3976717688401486459}
+  - component: {fileID: -6355653773071178713}
   m_Layer: 0
   m_Name: NPC_3
   m_TagString: Untagged
@@ -241,7 +243,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4757465189744596463}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f7ba8aed6e2ccc4429420ef14384dd70, type: 3}
   m_Name: 
@@ -268,6 +270,33 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &-3976717688401486459
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4757465189744596463}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5247e44fd8297f4894f50502238dbcd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 0
+  isMine: 0
+--- !u!65 &-6355653773071178713
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4757465189744596463}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.1127381, y: 1.3654268, z: 1.3670397}
+  m_Center: {x: -0.02328682, y: 0.6538186, z: -0.05549252}
 --- !u!1 &4757465189744597855
 GameObject:
   m_ObjectHideFlags: 0
