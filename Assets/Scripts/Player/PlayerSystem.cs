@@ -47,6 +47,7 @@ public class PlayerSystem : MonoBehaviour
     private void Update()
     {
         _stateMachine.Tick();
+        // TODO: should be handled by InputHandler
         if (Input.GetMouseButton(0))
         {
             _stateMachine.MouseDrag();

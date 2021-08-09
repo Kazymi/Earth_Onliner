@@ -47,6 +47,7 @@ public class GameMenu : MonoBehaviour, IChangingAmountResources
         buildButton.gameObject.SetActive(unlocked);
     }
 
+    // TODO: can simplify by passing the amount of resources to add
     public void ChangingAmountResources(TypeResource typeResource)
     {
         _changingResources[typeResource]?.Invoke();

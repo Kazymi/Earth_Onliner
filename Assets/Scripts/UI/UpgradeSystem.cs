@@ -15,9 +15,9 @@
 
     public bool IsUnlockUpgrade()
     {
-        return _playerResources.CheckAvailability(TypeResource.Gold, _upgrade.NeedGold) != false &&
-               _playerResources.CheckAvailability(TypeResource.Iron, _upgrade.NeedIron) != false &&
-               _playerResources.CheckAvailability(TypeResource.Wood, _upgrade.NeedWood) != false;
+        return _playerResources.CheckAvailability(TypeResource.Gold, _upgrade.NeedGold) &&
+               _playerResources.CheckAvailability(TypeResource.Iron, _upgrade.NeedIron) &&
+               _playerResources.CheckAvailability(TypeResource.Wood, _upgrade.NeedWood);
     }
 
     public void Upgrade()
