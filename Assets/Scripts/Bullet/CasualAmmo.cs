@@ -16,7 +16,12 @@ public class CasualAmmo : MonoBehaviour,IAmmo
 
     private void OnTriggerEnter(Collider other)
     {
-       ParentFactory.Destroy(gameObject);
+        var damageable = other.GetComponent<IDamageable>();
+        if (damageable != null)
+        {
+            damageable.TakeDamage(damage);
+        }
+        ParentFactory.Destroy(gameObject);
     }
 
     public Factory ParentFactory { get; set; }

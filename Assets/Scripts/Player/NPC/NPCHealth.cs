@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NPCHealth : MonoBehaviour,IDamageDealer
+public class NPCHealth : MonoBehaviour,IDamageable
 {
     [SerializeField] private float health;
     [SerializeField] private bool isMine;

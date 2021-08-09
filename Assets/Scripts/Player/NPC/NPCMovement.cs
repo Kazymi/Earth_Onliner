@@ -24,6 +24,15 @@ public class NPCMovement : MonoBehaviour
         {
             _agent.SetDestination(_target.position);
         }
+        else
+        {
+            StartCoroutine(ClosestTarget(_builders.GetEnemyBuildersPosition()));
+        }
+    }
+
+    public void SetNewTarget(Transform target)
+    {
+        _target = target;
     }
 
     IEnumerator ClosestTarget(List<Transform> targets)
@@ -34,7 +43,7 @@ public class NPCMovement : MonoBehaviour
             yield return null;
             _agent.enabled = true;
         }
-        yield return new WaitForSeconds(1f);
+
         float tmpDist = float.MaxValue;
         for (int i = 0; i < targets.Count; i++)
         {
@@ -44,6 +53,7 @@ public class NPCMovement : MonoBehaviour
                 {
                     yield return null;
                 }
+
                 if (_agent.pathStatus != NavMeshPathStatus.PathInvalid)
                 {
                     float pathDistance = 0;
