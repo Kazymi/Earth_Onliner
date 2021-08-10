@@ -33,6 +33,7 @@ public class GeneratorResourceUpgrader : MonoBehaviour, Upgrader
 
     public void UpgradeCompleted()
     {
+        // TODO: 
         if (resourceGenerateUpgrade[CurrentLvl].NewGold != new ResourceGenerate())
             generatorResource.AddResource(resourceGenerateUpgrade[CurrentLvl].NewGold);
         if (resourceGenerateUpgrade[CurrentLvl].NewIron != new ResourceGenerate())

@@ -13,6 +13,8 @@ public class Radar : MonoBehaviour
 
     private float _currentCooldown;
 
+    // TODO: introduce some manager class for buildings, so you can get closest specified one
+    // TODO: as the result no need to check for building every frame, might only check if that building still exists and if not get new one
     private void Update()
     {
         if (_currentCooldown != 0)
@@ -29,7 +31,7 @@ public class Radar : MonoBehaviour
         for (int i = 0; i != enemies.Length; i++)
         {
             var damageable = enemies[i].GetComponent<IDamageable>();
-            if(enemies[i].transform == transform) continue;
+            if (enemies[i].transform == transform) continue;
             if (damageable != null)
             {
                 if (damageable.IsMine == false)

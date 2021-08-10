@@ -52,6 +52,7 @@ public class Movenment : MonoBehaviour, IBuildEvent
         var direction = _inputHandler.MoveDirection();
         if (direction == Vector2.zero) return;
         _moveDir = new Vector3(direction.x, 0, direction.y).normalized;
+        // TODO: use state machine
         if (_isBuild)
         {
             _currentSpeed = speedBuild;
@@ -61,6 +62,7 @@ public class Movenment : MonoBehaviour, IBuildEvent
             _currentSpeed = speed + _currentZoom;
         }
 
+        // TODO: controls are inverted
         _moveDir *= _currentSpeed;
         _characterController.Move(_moveDir * Time.deltaTime);
         var newPos = transform.position;

@@ -10,7 +10,6 @@ public class InputHandler : MonoBehaviour, IBuildEvent
     [SerializeField] private bool mobile;
     [SerializeField] private int edgesPercent;
 
-
     private bool _isBuild;
     private Camera _mainCamera;
     private Vector3 _currentPosition;
@@ -27,7 +26,7 @@ public class InputHandler : MonoBehaviour, IBuildEvent
         add => _onMouseDownAction += value;
         remove => _onMouseDownAction -= value;
     }
-    
+
     public event Action OnMouseAction
     {
         add => _onMouseAction += value;
@@ -103,6 +102,8 @@ public class InputHandler : MonoBehaviour, IBuildEvent
                 _currentPosition = Input.mousePosition;
                 var newPos = _currentPosition - _lastPosition;
                 newPos = newPos.normalized;
+                // TODO: input handler should not know about the state of the game. It's only purpose to provide info
+                
                 if (_isBuild)
                 {
                     _returnValue = Vector3.zero;
@@ -165,7 +166,7 @@ public class InputHandler : MonoBehaviour, IBuildEvent
 
         return false;
     }
-    
+
     private bool IsPointerOverUIObject()
     {
         var eventDataCurrentPosition = new PointerEventData(EventSystem.current);

@@ -30,6 +30,7 @@ public class GeneratorResource : MonoBehaviour
 
     private void Update()
     {
+        // TODO: use brackets even on one liner
         if (_photonView.ViewID == 0) return;
         foreach (var resourceGenerate in resourceGenerates)
         {
