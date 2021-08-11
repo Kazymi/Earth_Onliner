@@ -30,7 +30,10 @@ public class GeneratorResource : MonoBehaviour
 
     private void Update()
     {
-        if (_photonView.ViewID == 0) return;
+        if (_photonView.ViewID == 0)
+        {
+            return;
+        }
         foreach (var resourceGenerate in resourceGenerates)
         {
             resourceGenerate.GenerateTimer -= Time.deltaTime;

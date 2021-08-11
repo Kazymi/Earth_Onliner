@@ -7,10 +7,13 @@ public class NPCHealth : MonoBehaviour,IDamageable
 {
     [SerializeField] private float health;
     [SerializeField] private bool isMine;
-    public bool IsMine { get => isMine;
+
+    public bool IsMine
+    {
+        get => isMine;
         set => isMine = value;
     }
-    
+
     private float _currentHealth;
 
     private void Start()
@@ -24,8 +27,17 @@ public class NPCHealth : MonoBehaviour,IDamageable
         if(_currentHealth <= 0) Death();
     }
     
+
     public void Death()
     {
-        Destroy(gameObject);
+      Destroy(gameObject);
+    }
+
+    public void Initialize()
+    {
+        if (isMine)
+        {
+            gameObject.layer = 8;
+        }
     }
 }

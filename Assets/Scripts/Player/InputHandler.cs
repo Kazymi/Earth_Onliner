@@ -1,11 +1,10 @@
 using System;
 using System.Collections.Generic;
 using EventBusSystem;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class InputHandler : MonoBehaviour, IBuildEvent
+public class InputHandler : MonoBehaviour
 {
     [SerializeField] private bool mobile;
     [SerializeField] private int edgesPercent;
@@ -27,7 +26,7 @@ public class InputHandler : MonoBehaviour, IBuildEvent
         add => _onMouseDownAction += value;
         remove => _onMouseDownAction -= value;
     }
-    
+
     public event Action OnMouseAction
     {
         add => _onMouseAction += value;
@@ -48,12 +47,10 @@ public class InputHandler : MonoBehaviour, IBuildEvent
     {
         ServiceLocator.Subscribe<InputHandler>(this);
         _onMouseUpAction += () => _returnValue = Vector3.zero;
-        EventBus.Subscribe(this);
     }
 
     private void OnDisable()
     {
-        EventBus.Unsubscribe(this);
         ServiceLocator.Unsubscribe<InputHandler>();
     }
 
@@ -90,12 +87,13 @@ public class InputHandler : MonoBehaviour, IBuildEvent
         return new PositionBuilding(Vector3.zero, Vector3.zero);
     }
 
-    public Vector2 MoveDirection()
+    public Vector2 MoveDirectionBuild()
     {
         if (IsPointerOverUIObject())
         {
             return new Vector2();
         }
+
         if (mobile)
         {
             if (Input.GetMouseButton(0))
@@ -103,25 +101,10 @@ public class InputHandler : MonoBehaviour, IBuildEvent
                 _currentPosition = Input.mousePosition;
                 var newPos = _currentPosition - _lastPosition;
                 newPos = newPos.normalized;
-                if (_isBuild)
+                _returnValue = Vector3.zero;
+                if (_currentPosition != _lastPosition)
                 {
-                    _returnValue = Vector3.zero;
-                    if (_currentPosition != _lastPosition)
-                    {
-                        _returnValue = new Vector3(newPos.y, -newPos.x, 0);
-                    }
-                }
-                else
-                {
-                    if (CheckEdges(_currentPosition))
-                    {
-                        _returnValue = Vector3.zero;
-                    }
-
-                    if (_currentPosition != _lastPosition)
-                    {
-                        _returnValue = new Vector3(-newPos.y, newPos.x, 0);
-                    }
+                    _returnValue = new Vector3(newPos.y, -newPos.x, 0);
                 }
 
                 _lastPosition = _currentPosition;
@@ -135,14 +118,37 @@ public class InputHandler : MonoBehaviour, IBuildEvent
         return _returnValue;
     }
 
-    public void OnBuild()
+    public Vector2 MoveDirection()
     {
-        _isBuild = true;
-    }
+        if (IsPointerOverUIObject())
+        {
+            return new Vector2();
+        }
 
-    public void OnUpgrade()
-    {
-        _isBuild = false;
+        if (mobile)
+        {
+            if (Input.GetMouseButton(0))
+            {
+                _currentPosition = Input.mousePosition;
+                var newPos = _currentPosition - _lastPosition;
+                newPos = newPos.normalized;
+                if (CheckEdges(_currentPosition))
+                {
+                    _returnValue = Vector3.zero;
+                }
+                if (_currentPosition != _lastPosition)
+                {
+                    _returnValue = new Vector3(-newPos.y, newPos.x, 0);
+                }
+                _lastPosition = _currentPosition;
+            }
+        }
+        else
+        {
+            _returnValue = new Vector2(Input.GetAxisRaw("Vertical"), -Input.GetAxisRaw("Horizontal"));
+        }
+
+        return _returnValue;
     }
 
     private bool CheckEdges(Vector3 mousePosition)
@@ -165,7 +171,7 @@ public class InputHandler : MonoBehaviour, IBuildEvent
 
         return false;
     }
-    
+
     private bool IsPointerOverUIObject()
     {
         var eventDataCurrentPosition = new PointerEventData(EventSystem.current);

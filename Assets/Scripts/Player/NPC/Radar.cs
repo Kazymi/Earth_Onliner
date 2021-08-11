@@ -6,12 +6,17 @@ using UnityEngine;
 
 public class Radar : MonoBehaviour
 {
-    [SerializeField] private NPCMovement npc;
     [SerializeField] private float cooldown;
     [SerializeField] private float radius;
     [SerializeField] private List<Turret> turrets;
 
+    private IMovement _npc;
     private float _currentCooldown;
+
+    private void Start()
+    {
+        _npc = GetComponent<IMovement>() ?? GetComponentInParent<IMovement>();
+    }
 
     private void Update()
     {
@@ -30,19 +35,15 @@ public class Radar : MonoBehaviour
         {
             var damageable = enemies[i].GetComponent<IDamageable>();
             if(enemies[i].transform == transform) continue;
-            if (damageable != null)
+            if (damageable == null) continue;
+            if (damageable.IsMine != false) continue;
+            foreach (var turret in turrets)
             {
-                if (damageable.IsMine == false)
-                {
-                    foreach (var turret in turrets)
-                    {
-                        turret.RotateToTransform(enemies[i].transform);
-                    }
-                    _currentCooldown = cooldown;
-                    npc.SetNewTarget(enemies[i].transform);
-                    return;
-                }
+                turret.RotateToTransform(enemies[i].transform);
             }
+            _currentCooldown = cooldown;
+            _npc?.SetNewTarget(enemies[i].transform);
+            return;
         }
 
         foreach (var turret in turrets)

@@ -49,18 +49,19 @@ public class Movenment : MonoBehaviour, IBuildEvent
 
     private void Move()
     {
-        var direction = _inputHandler.MoveDirection();
-        if (direction == Vector2.zero) return;
-        _moveDir = new Vector3(direction.x, 0, direction.y).normalized;
+        var direction = Vector2.zero;
         if (_isBuild)
         {
             _currentSpeed = speedBuild;
+            direction = _inputHandler.MoveDirectionBuild();
         }
         else
         {
+            direction = _inputHandler.MoveDirection();
             _currentSpeed = speed + _currentZoom;
         }
-
+        if (direction == Vector2.zero) return;
+        _moveDir = new Vector3(direction.x, 0, direction.y).normalized;
         _moveDir *= _currentSpeed;
         _characterController.Move(_moveDir * Time.deltaTime);
         var newPos = transform.position;

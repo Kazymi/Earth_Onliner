@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Serialization;
-
+[RequireComponent(typeof(BuildingContractor))]
 public class GeneratorResourceUpgrader : MonoBehaviour, Upgrader
 {
     [SerializeField] private GeneratorResource generatorResource;
@@ -34,11 +34,19 @@ public class GeneratorResourceUpgrader : MonoBehaviour, Upgrader
     public void UpgradeCompleted()
     {
         if (resourceGenerateUpgrade[CurrentLvl].NewGold != new ResourceGenerate())
+        {
             generatorResource.AddResource(resourceGenerateUpgrade[CurrentLvl].NewGold);
+        }
+
         if (resourceGenerateUpgrade[CurrentLvl].NewIron != new ResourceGenerate())
+        {
             generatorResource.AddResource(resourceGenerateUpgrade[CurrentLvl].NewIron);
+        }
+
         if (resourceGenerateUpgrade[CurrentLvl].NewWood != new ResourceGenerate())
+        {
             generatorResource.AddResource(resourceGenerateUpgrade[CurrentLvl].NewWood);
+        }
         CurrentLvl++;
         _upgradeSystemMenu.CloseCanvas();
     }

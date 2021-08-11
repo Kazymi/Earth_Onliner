@@ -53,8 +53,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b4d00ab3b6d52f44952fe6236910881, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radiusBuilding: 40.69
+  radiusBuilding: 32.5
+  buildingType: 0
   resourcesForBuilding: 2
+  _health: {fileID: -691581840808961608}
 --- !u!114 &-5273142172150698372
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -124,8 +126,8 @@ MonoBehaviour:
   - newGold:
       generatingResource:
         typeResource: 2
-        amount: 0
-      generationTime: 0
+        amount: 1
+      generationTime: 2
     newWood:
       generatingResource:
         typeResource: 0
@@ -139,8 +141,8 @@ MonoBehaviour:
   - newGold:
       generatingResource:
         typeResource: 2
-        amount: 0
-      generationTime: 0
+        amount: 1
+      generationTime: 1
     newWood:
       generatingResource:
         typeResource: 0
@@ -175,7 +177,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3053800224073307662}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f5247e44fd8297f4894f50502238dbcd, type: 3}
   m_Name: 

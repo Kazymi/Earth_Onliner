@@ -30,10 +30,15 @@
             var hit = _inputHandler.GetHitPoint(_idLayer);
             if(hit.collider == null || _inputHandler.MoveVector != Vector3.zero) return;
             var upgrader = hit.collider.GetComponent<Upgrader>();
-            if (upgrader == null)
+            if (upgrader != null)
             {
-                return;
+                upgrader.OnMouseDownAction();
             }
-            upgrader.OnMouseDownAction();
+
+            var spawnArmy = hit.collider.GetComponent<ArmySpawner>();
+            if (spawnArmy)
+            {
+                spawnArmy.OnClick();
+            }
         }
     }

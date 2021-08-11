@@ -109,6 +109,7 @@ public class Builder : MonoBehaviour
     private bool CheckPosition()
     {
         var returnValue = true;
+        var faundResources = false;
         var allFindGameObject =
             Physics.OverlapBox(_newBuild.transform.position,
                 new Vector3(_newBuild.RadiusBuilding, _newBuild.RadiusBuilding, _newBuild.RadiusBuilding));
@@ -126,7 +127,6 @@ public class Builder : MonoBehaviour
                     break;
                 }
             }
-
             if (resource)
             {
                 if (resource.BuildingResources == BuildingResource.Water)
@@ -137,16 +137,17 @@ public class Builder : MonoBehaviour
 
                 if (resource.BuildingResources == _newBuild.Resource)
                 {
-                    returnValue = true;
+                    faundResources = true;
+                    break;
                 }
-            }
-
-            if (_newBuild.Resource == BuildingResource.Nothing)
-            {
-                returnValue = true;
             }
         }
 
+        if (_newBuild.Resource == BuildingResource.Nothing)
+        {
+            faundResources = true;
+        }
+        returnValue = faundResources && returnValue;
         return returnValue;
     }
 }
