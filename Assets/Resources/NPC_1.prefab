@@ -29,6 +29,7 @@ MonoBehaviour:
   radius: 25
   turrets:
   - {fileID: 1560011509631008188}
+  _npc: {fileID: -2203401421628954937}
 --- !u!114 &7856441536076177942
 MonoBehaviour:
   m_ObjectHideFlags: 0

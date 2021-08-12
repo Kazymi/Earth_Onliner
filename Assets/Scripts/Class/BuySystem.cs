@@ -1,4 +1,6 @@
-﻿public class BuySystem
+﻿using UnityEngine;
+
+public class BuySystem
 {
     private BuyConfiguration _buyConfiguration;
     private Builder _builder;
@@ -17,6 +19,7 @@
     {
         if (IsUnlockedBuy())
         {
+            Debug.Log(_buyConfiguration.BuildingConfiguration +"             "+_buyConfiguration+ "       "+_builder);
             _builder.NewBuild(_buyConfiguration.BuildingConfiguration,_buyConfiguration);
             _systemShopMenu.CloseShop();
         }

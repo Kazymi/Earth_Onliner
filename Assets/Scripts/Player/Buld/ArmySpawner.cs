@@ -3,13 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using Photon.Pun;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(BuildingContractor))]
 public class ArmySpawner : MonoBehaviour
 {
     [SerializeField] private List<NPCConfiguration> npcConfigurations;
     [SerializeField] private float timer;
-    [SerializeField] private Transform spawnPoint;
+    [SerializeField] private List<Transform> spawnPoints;
     private SpawnArmySystemMenu _spawnArmySystemMenu;
     private ArmySpawnConfiguration _armySpawnConfiguration;
     private ArmySystem _armySystem;
@@ -77,6 +78,7 @@ public class ArmySpawner : MonoBehaviour
         _currentTimer = timer;
         if (IsHaveNPC())
         {
+            var spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Count)];
             var newGameObject = PhotonNetwork.Instantiate(_currentNPCConfig.NPCGameObject.name, spawnPoint.position, spawnPoint.rotation);
             newGameObject.GetComponent<PhotonView>()
                 .RPC(RPCEvents.SpawnNPC.ToString(), RpcTarget.All, PhotonNetwork.LocalPlayer.UserId);

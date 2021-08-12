@@ -33,6 +33,7 @@ public class ArmyUpgrader : MonoBehaviour,Upgrader
     public void UpgradeCompleted()
     {
         armyGenerator.UpdateState(armyUpgrades[CurrentLvl]);
+        _upgradeSystemMenu.CloseCanvas();
         CurrentLvl++;
     }
 }

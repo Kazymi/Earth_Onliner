@@ -12,7 +12,7 @@ public class Turret : MonoBehaviour
     private float _currentTimer;
     private Transform lookAtTransform;
     private AmmoManager _ammoManager;
-
+    private bool _isMine;
     private void Start()
     {
         _ammoManager = ServiceLocator.GetService<AmmoManager>();
@@ -23,6 +23,10 @@ public class Turret : MonoBehaviour
         lookAtTransform = position;
     }
 
+    public void Activated(bool isMine)
+    {
+        _isMine = isMine;
+    }
     private void Update()
     {
         if (lookAtTransform != null)
@@ -42,6 +46,14 @@ public class Turret : MonoBehaviour
             var newAmmo = _ammoManager.GetAmmoByTurretType(turretConfiguration);
             newAmmo.transform.position = startPositionAmmo.position;
             newAmmo.transform.rotation = startPositionAmmo.rotation;
+            if (_isMine)
+            {
+                newAmmo.gameObject.layer = 8;
+            }
+            else
+            {
+                newAmmo.gameObject.layer = 9;
+            }
         }
     }
 }

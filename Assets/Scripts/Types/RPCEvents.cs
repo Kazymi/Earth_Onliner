@@ -2,5 +2,6 @@
     public enum RPCEvents
     {
         BuildNewBuilding,
-        SpawnNPC
+        SpawnNPC,
+        Death,
     }

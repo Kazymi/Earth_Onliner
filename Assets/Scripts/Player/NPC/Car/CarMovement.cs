@@ -4,7 +4,7 @@ using Photon.Pun;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class CarMovement : MonoBehaviour, IMovement,INPC
+public class CarMovement : MonoBehaviour, IMovement
 {
     [SerializeField] private Transform target;
     private Builders _builders;

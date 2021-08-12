@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f972fd4173519ef4885e4b92dea2d034, type: 3}
+  m_Name: DefenceTower 1
+  m_EditorClassIdentifier: 
+  buildingGameObject: {fileID: 3053800224073307662, guid: 1585d9b26f665b54abeb252591e44e22, type: 3}
+  maxAmount: 3
+  amountInFactory: 0

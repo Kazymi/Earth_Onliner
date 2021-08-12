@@ -254,7 +254,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 180
-  m_StoppingDistance: 0
+  m_StoppingDistance: 8
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -276,9 +276,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 1000
   isMine: 0
-  friendlyLayerMask:
-    serializedVersion: 2
-    m_Bits: 256
 --- !u!65 &-6355653773071178713
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -305,9 +302,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  friendlyLayer:
-    serializedVersion: 2
-    m_Bits: 256
 --- !u!114 &5567524332035184587
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -324,6 +318,7 @@ MonoBehaviour:
   radius: 34
   turrets:
   - {fileID: 4724160355330634995}
+  _npc: {fileID: -202918476480165520}
 --- !u!114 &-3466731274635421221
 MonoBehaviour:
   m_ObjectHideFlags: 0

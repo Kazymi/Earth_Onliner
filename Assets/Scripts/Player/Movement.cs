@@ -3,7 +3,7 @@ using EventBusSystem;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-public class Movenment : MonoBehaviour, IBuildEvent
+public class Movement : MonoBehaviour, IBuildEvent
 {
     [SerializeField] private float maxZ;
     [SerializeField] private float minZ;

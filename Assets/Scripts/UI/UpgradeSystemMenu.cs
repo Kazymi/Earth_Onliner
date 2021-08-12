@@ -18,17 +18,16 @@ public class UpgradeSystemMenu : MonoBehaviour, IChangingAmountResources
 
     private UpgradeSystem _upgradeSystem;
 
-    public void NewUpgrade(UpgradePrice upgrade, Upgrader upgrader,string description)
+    public void NewUpgrade(UpgradePrice upgrade, Upgrader upgrader, string description)
     {
-        if (_upgradeSystem != null)
-            upgradeButton.onClick.RemoveListener(_upgradeSystem.Upgrade);
+        upgradeButton.onClick.RemoveAllListeners();
         upgradeCanvas.enabled = true;
         _upgradeSystem = new UpgradeSystem(upgrade, upgrader);
-        UpdateState(upgrade,description);
+        UpdateState(upgrade, description);
         upgradeButton.onClick.AddListener(_upgradeSystem.Upgrade);
     }
 
-    private void UpdateState(UpgradePrice upgrade,string description)
+    private void UpdateState(UpgradePrice upgrade, string description)
     {
         priceWood.text = upgrade.NeedWood.ToString();
         priceGold.text = upgrade.NeedGold.ToString();
@@ -58,8 +57,8 @@ public class UpgradeSystemMenu : MonoBehaviour, IChangingAmountResources
     {
         upgradeCanvas.enabled = false;
     }
-    
-    public void ChangingAmountResources(TypeResource typeResource,int amount)
+
+    public void ChangingAmountResources(TypeResource typeResource, int amount)
     {
         if (_upgradeSystem != null)
         {

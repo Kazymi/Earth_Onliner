@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Serialization;
 
-public class FighterMovement : MonoBehaviour,IMovement,INPC
+public class FighterMovement : MonoBehaviour,IMovement
 {
     [SerializeField] private Transform target;
     [SerializeField] private Transform fighterGameObject;

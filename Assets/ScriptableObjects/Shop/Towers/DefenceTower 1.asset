@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b22cbe30d06960a418d4fb3a0373e462, type: 3}
+  m_Name: DefenceTower 1
+  m_EditorClassIdentifier: 
+  buildingConfiguration: {fileID: 11400000, guid: 0f3ceeea1bd8f234b92b89388c0c9029, type: 2}
+  needWood: 100
+  needGold: 20
+  needIron: 10
+  description: "\u0410\u0432\u0442\u043E\u043C\u0430\u0442\u0438\u0447\u0435\u0441\u043A\u0430\u044F
+    \u0442\u0443\u0440\u0435\u043B\u044C"
+  icon: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}

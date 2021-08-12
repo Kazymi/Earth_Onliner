@@ -1,22 +1,15 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
-public class Radar : MonoBehaviour
+public class BuildingRadar : MonoBehaviour
 {
+    [SerializeField] private BuildingContractor buildingContractor;
+    [SerializeField] private List<Turret> turrets;
     [SerializeField] private float cooldown;
     [SerializeField] private float radius;
-    [SerializeField] private List<Turret> turrets;
 
-    private IMovement _npc;
     private float _currentCooldown;
-
-    private void Start()
-    {
-        _npc = GetComponent<IMovement>() ?? GetComponentInParent<IMovement>();
-    }
 
     private void Update()
     {
@@ -27,6 +20,7 @@ public class Radar : MonoBehaviour
             {
                 _currentCooldown = 0;
             }
+
             return;
         }
 
@@ -34,15 +28,23 @@ public class Radar : MonoBehaviour
         for (int i = 0; i != enemies.Length; i++)
         {
             var damageable = enemies[i].GetComponent<IDamageable>();
-            if(enemies[i].transform == transform) continue;
-            if (damageable == null) continue;
-            if (damageable.IsMine != false) continue;
+            if (enemies[i].transform == transform
+                || damageable == null)
+            {
+                continue;
+            }
+
+            if (damageable.IsMine == buildingContractor.IsMine)
+            {
+                continue;
+            }
+
             foreach (var turret in turrets)
             {
                 turret.RotateToTransform(enemies[i].transform);
             }
+
             _currentCooldown = cooldown;
-            _npc?.SetNewTarget(enemies[i].transform);
             return;
         }
 
@@ -50,6 +52,7 @@ public class Radar : MonoBehaviour
         {
             turret.RotateToTransform(null);
         }
+
         _currentCooldown = cooldown;
     }
 }

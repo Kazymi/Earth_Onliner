@@ -68,6 +68,10 @@ public class InputHandler : MonoBehaviour
 
     public RaycastHit GetHitPoint(LayerMask layerMask)
     {
+        if (IsPointerOverUIObject())
+        {
+            return new RaycastHit();
+        }
         var ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out RaycastHit raycastHit, Mathf.Infinity, layerMask))
         {

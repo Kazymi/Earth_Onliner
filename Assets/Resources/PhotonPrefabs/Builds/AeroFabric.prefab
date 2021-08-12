@@ -113,12 +113,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3053800224073307662}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f5247e44fd8297f4894f50502238dbcd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 10000
+  health: 500
   isMine: 0
 --- !u!114 &5743026631729267129
 MonoBehaviour:
@@ -152,7 +152,7 @@ MonoBehaviour:
   - npcConfiguration: {fileID: 11400000, guid: b6cdfdcc96be7524abbbca535eff1268, type: 2}
     timer: 10
     amount: 1
-  - npcConfiguration: {fileID: 11400000, guid: b6cdfdcc96be7524abbbca535eff1268, type: 2}
+  - npcConfiguration: {fileID: 11400000, guid: d465a7058927d5f46956246f651bbd1f, type: 2}
     timer: 2
     amount: 1
   armyGenerator: {fileID: 5743026631729267129}

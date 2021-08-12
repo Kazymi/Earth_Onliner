@@ -334,7 +334,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 180
-  m_StoppingDistance: 25
+  m_StoppingDistance: 8
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -385,6 +385,7 @@ MonoBehaviour:
   radius: 15
   turrets:
   - {fileID: 2691771212542420698}
+  _npc: {fileID: 7250875734193643292}
 --- !u!114 &7267514303605053251
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -803,7 +804,7 @@ Transform:
   m_LocalScale: {x: -4.188551, y: -4.188551, z: -4.188551}
   m_Children: []
   m_Father: {fileID: 4470071913201808794}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &4470071913203135930
 MeshFilter:
@@ -882,9 +883,9 @@ Transform:
   m_LocalPosition: {x: -0, y: 1.62, z: -0.28}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
-  - {fileID: 8856201289139600143}
   - {fileID: 4470071913201808792}
   - {fileID: 4470071913201808798}
+  - {fileID: 8856201289139600143}
   m_Father: {fileID: 4470071912903453159}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -932,7 +933,7 @@ Transform:
   m_LocalScale: {x: -4.188551, y: -4.188551, z: -4.188551}
   m_Children: []
   m_Father: {fileID: 4470071913201808794}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &4470071913203135928
 MeshFilter:
@@ -1006,10 +1007,10 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5619331512548540793}
-  m_LocalRotation: {x: -0.50000006, y: 0.5, z: 0.5, w: 0.50000006}
-  m_LocalPosition: {x: -0.026524924, y: 0.047862053, z: 0.007645279}
-  m_LocalScale: {x: -4.1885505, y: -4.1885505, z: -4.1885505}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.0265, y: 0.1421, z: 0.3458}
+  m_LocalScale: {x: -4.18855, y: -4.1885505, z: -4.18855}
   m_Children: []
   m_Father: {fileID: 4470071913201808794}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

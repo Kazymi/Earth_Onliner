@@ -13,7 +13,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3.5332894, y: 1, z: 13.127488}
   m_Center: {x: -0.087083995, y: 0, z: -1.1352859}
---- !u!114 &1118131910067301200
+--- !u!114 &4475325680581247740
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -22,10 +22,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 19277805019740452}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5247e44fd8297f4894f50502238dbcd, type: 3}
+  m_Script: {fileID: 11500000, guid: 86d17ab05a7d9334d86579eb8f7c62ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
+  helicopter: {fileID: 6093038134521633886}
+  health: 50
   isMine: 0
 --- !u!114 &4688727377175465882
 MonoBehaviour:
@@ -44,6 +45,7 @@ MonoBehaviour:
   turrets:
   - {fileID: 5197070282516922008}
   - {fileID: 7993216353639948033}
+  _npc: {fileID: 5198147643262233958}
 --- !u!1 &149238901885950240
 GameObject:
   m_ObjectHideFlags: 0
@@ -357,7 +359,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 2.74
-  m_Speed: 50
+  m_Speed: 20
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120

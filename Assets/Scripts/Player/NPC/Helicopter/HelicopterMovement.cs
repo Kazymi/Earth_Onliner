@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.AI;
 
 [RequireComponent(typeof(NavMeshAgent))]
-public class HelicopterMovement : MonoBehaviour, IMovement,INPC
+public class HelicopterMovement : MonoBehaviour, IMovement
 {
     [SerializeField] private Transform target;
     [SerializeField] private Transform helicopterGameObject;

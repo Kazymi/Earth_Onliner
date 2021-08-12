@@ -12,35 +12,27 @@ public class Builders
 
     public void NewBuilding(GameObject building, bool isMine, BuildingType buildingType)
     {
-        // if (isMine)
-        // {
-        //     if (_mainGameObject.ContainsKey(buildingType))
-        //     {
-        //         _mainGameObject[buildingType].Add(building.transform);
-        //         return;
-        //     }
-        //     _mainGameObject.Add(buildingType, new List<Transform>());
-        //     _mainGameObject[buildingType].Add(building.transform);
-        // }
-        //
-        // else
-        // {
-        //     if (_enemyGameObject.ContainsKey(buildingType))
-        //     {
-        //         _enemyGameObject[buildingType].Add(building.transform);
-        //         return;
-        //     }
-        //     _enemyGameObject.Add(buildingType, new List<Transform>());
-        //     _enemyGameObject[buildingType].Add(building.transform);
-        // }
-        
-        if (_enemyGameObject.ContainsKey(buildingType))
+        if (isMine)
         {
-            _enemyGameObject[buildingType].Add(building.transform);
-            return;
+            if (_mainGameObject.ContainsKey(buildingType))
+            {
+                _mainGameObject[buildingType].Add(building.transform);
+                return;
+            }
+            _mainGameObject.Add(buildingType, new List<Transform>());
+            _mainGameObject[buildingType].Add(building.transform);
         }
-        _enemyGameObject.Add(buildingType, new List<Transform>());
-        _enemyGameObject[buildingType].Add(building.transform);
+        
+        else
+        {
+            if (_enemyGameObject.ContainsKey(buildingType))
+            {
+                _enemyGameObject[buildingType].Add(building.transform);
+                return;
+            }
+            _enemyGameObject.Add(buildingType, new List<Transform>());
+            _enemyGameObject[buildingType].Add(building.transform);
+        }
     }
 
     public Transform GetPositionEnemyBuildersByType(BuildingType buildingType, Vector3 pos)
@@ -48,7 +40,10 @@ public class Builders
         var findBuildings = new List<Transform>();
         foreach (var build in _enemyGameObject[buildingType])
         {
-            findBuildings.Add(build);
+            if (build != null)
+            {
+                findBuildings.Add(build);
+            }
         }
 
         if (findBuildings.Count == 0)
@@ -56,19 +51,27 @@ public class Builders
             return null;
         }
 
+        _enemyGameObject[buildingType] = findBuildings;
         return Nearest(pos, findBuildings);
     }
 
     public Transform GetPositionEnemyBuilding(Vector3 pos)
     {
         var findBuildings = new List<Transform>();
+        var newBuildings = new Dictionary<BuildingType, List<Transform>>();
         foreach (var builds in _enemyGameObject)
         {
+            newBuildings.Add(builds.Key,new List<Transform>());
             foreach (var build in builds.Value)
             {
-                findBuildings.Add(build);
+                if (build != null)
+                {
+                    newBuildings[builds.Key].Add(build);
+                    findBuildings.Add(build);
+                }
             }
         }
+        _enemyGameObject = newBuildings;
 
         if (findBuildings.Count == 0)
         {
