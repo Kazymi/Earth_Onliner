@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,6 +9,14 @@ public class BuildingRadar : MonoBehaviour
     [SerializeField] private float radius;
 
     private float _currentCooldown;
+
+    private void Start()
+    {
+        if (buildingContractor.PhotonView.ViewID == 0)
+        {
+            Destroy(this);
+        }
+    }
 
     private void Update()
     {
@@ -41,7 +48,7 @@ public class BuildingRadar : MonoBehaviour
 
             foreach (var turret in turrets)
             {
-                turret.RotateToTransform(enemies[i].transform);
+                turret.RotateToTransform(damageable.TargetTransform);
             }
 
             _currentCooldown = cooldown;

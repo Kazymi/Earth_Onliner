@@ -1,8 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class Turret : MonoBehaviour
 {
@@ -21,11 +17,6 @@ public class Turret : MonoBehaviour
     public void RotateToTransform(Transform position)
     {
         lookAtTransform = position;
-    }
-
-    public void Activated(bool isMine)
-    {
-        _isMine = isMine;
     }
     private void Update()
     {
@@ -48,11 +39,11 @@ public class Turret : MonoBehaviour
             newAmmo.transform.rotation = startPositionAmmo.rotation;
             if (_isMine)
             {
-                newAmmo.gameObject.layer = 8;
+                newAmmo.gameObject.layer = LayerMask.NameToLayer(LayerType.Friendly.ToString());
             }
             else
             {
-                newAmmo.gameObject.layer = 9;
+                newAmmo.gameObject.layer = LayerMask.NameToLayer(LayerType.Enemy.ToString());
             }
         }
     }

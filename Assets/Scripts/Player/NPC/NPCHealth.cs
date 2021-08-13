@@ -1,15 +1,13 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using Photon.Pun;
 using UnityEngine;
 
-public class NPCHealth : MonoBehaviour,IDamageable
+public class NPCHealth : MonoBehaviourPunCallbacks, IDamageable
 {
     [SerializeField] private float health;
     [SerializeField] private bool isMine;
-    
+    [SerializeField] private Transform target;
     private PhotonView _photonView;
+
     public bool IsMine
     {
         get => isMine;
@@ -17,11 +15,20 @@ public class NPCHealth : MonoBehaviour,IDamageable
     }
 
     private float _currentHealth;
+    public Transform TargetTransform { get => target; set => target = value; }
 
     private void Start()
     {
         _photonView = GetComponent<PhotonView>();
         _currentHealth = health;
+        if (TargetTransform == null)
+        {
+            TargetTransform = transform;
+        }
+        if (_photonView.ViewID == 0)
+        {
+            Destroy(this);
+        }
     }
 
     public void TakeDamage(float damage)
@@ -29,26 +36,26 @@ public class NPCHealth : MonoBehaviour,IDamageable
         _currentHealth -= damage;
         if (_currentHealth <= 0)
         {
-            _photonView.RPC(RPCEvents.Death.ToString(),RpcTarget.All);
+            _photonView.RPC(RPCEvents.Death.ToString(), RpcTarget.All);
         }
     }
-    
+
 
     [PunRPC]
     public void Death()
     {
-       Destroy(gameObject);
+        Destroy(gameObject);
     }
 
     public void Initialize()
     {
         if (isMine)
         {
-            gameObject.layer = 8;
+            gameObject.layer = LayerMask.NameToLayer(LayerType.Friendly.ToString());
         }
         else
         {
-            gameObject.layer = 9;
+            gameObject.layer = LayerMask.NameToLayer(LayerType.Enemy.ToString());
         }
     }
 }

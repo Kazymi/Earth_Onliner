@@ -1,7 +1,4 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public class NPCRadar : MonoBehaviour
@@ -74,10 +71,10 @@ public class NPCRadar : MonoBehaviour
             }
             foreach (var turret in turrets)
             {
-                turret.RotateToTransform(enemies[i].transform);
+                turret.RotateToTransform(damageable.TargetTransform);
             }
             _currentCooldown = cooldown;
-            _npcMovement?.SetNewTarget(enemies[i].transform);
+            _npcMovement?.SetNewTarget(damageable.TargetTransform);
             return;
         }
 

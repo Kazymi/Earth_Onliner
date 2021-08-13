@@ -1,7 +1,4 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using Photon.Pun;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -12,7 +9,6 @@ public class HelicopterMovement : MonoBehaviour, IMovement
     [SerializeField] private Transform helicopterGameObject;
     [SerializeField] private Vector3 turnFlyingHelicopter;
     [SerializeField] private float rotateSpeed;
-    [SerializeField] private LayerMask friendlyLayer;
     private Builders _builders;
     private NavMeshAgent _agent;
     private Transform _target;
@@ -58,30 +54,24 @@ public class HelicopterMovement : MonoBehaviour, IMovement
 
     IEnumerator ClosestTarget(Transform targets)
     {
-        if (targets == null)
-        {
-            _target = target;
-            yield break;
-        }
-
         while (_agent.isOnNavMesh == false)
         {
             _agent.enabled = false;
             yield return null;
             _agent.enabled = true;
         }
-
+        if (targets == null)
+        {
+            _target = target;
+            yield break;
+        }
         _target = targets;
     }
 
 
     public void Initialize(bool isMine)
     {
-        if (isMine)
-        {
-            gameObject.layer = friendlyLayer;
-        }
-        else
+        if (isMine == false)
         {
             Destroy(this);
         }

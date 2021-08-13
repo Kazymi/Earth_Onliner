@@ -1126,7 +1126,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78b8d9ca56170044580aadedd2dbfe43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  turretConfiguration: {fileID: 11400000, guid: 95df52a4301168149956a300676864cd, type: 2}
+  turretConfiguration: {fileID: 11400000, guid: 19eb61c970732ba42bcb380ce93cc5e7, type: 2}
   startPositionAmmo: {fileID: 6985155487797047904}
 --- !u!1001 &4757465189929835672
 PrefabInstance:

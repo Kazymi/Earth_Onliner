@@ -1,33 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!65 &2898715547932331881
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 19277805019740452}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 3.5332894, y: 1, z: 13.127488}
-  m_Center: {x: -0.087083995, y: 0, z: -1.1352859}
---- !u!114 &4475325680581247740
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 19277805019740452}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86d17ab05a7d9334d86579eb8f7c62ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  helicopter: {fileID: 6093038134521633886}
-  health: 50
-  isMine: 0
 --- !u!114 &4688727377175465882
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -123,7 +95,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78b8d9ca56170044580aadedd2dbfe43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  turretConfiguration: {fileID: 11400000, guid: 93e5a67cc5f9c584c8249b65a3789847, type: 2}
+  turretConfiguration: {fileID: 11400000, guid: 19eb61c970732ba42bcb380ce93cc5e7, type: 2}
   startPositionAmmo: {fileID: 4712295443844317895}
 --- !u!1 &1665739111255076675
 GameObject:
@@ -200,7 +172,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78b8d9ca56170044580aadedd2dbfe43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  turretConfiguration: {fileID: 11400000, guid: 93e5a67cc5f9c584c8249b65a3789847, type: 2}
+  turretConfiguration: {fileID: 11400000, guid: 19eb61c970732ba42bcb380ce93cc5e7, type: 2}
   startPositionAmmo: {fileID: 5916432645738825063}
 --- !u!1 &4511456668840327493
 GameObject:
@@ -327,6 +299,8 @@ GameObject:
   - component: {fileID: -6031669229733765718}
   - component: {fileID: 2510938355164066422}
   - component: {fileID: 5198147643262233958}
+  - component: {fileID: 6831721198619179517}
+  - component: {fileID: 8308672272052597207}
   m_Layer: 0
   m_Name: NPC_4
   m_TagString: Untagged
@@ -357,7 +331,7 @@ NavMeshAgent:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6093038134521633886}
   m_Enabled: 1
-  m_AgentTypeID: 0
+  m_AgentTypeID: -334000983
   m_Radius: 2.74
   m_Speed: 20
   m_Acceleration: 8
@@ -390,9 +364,6 @@ MonoBehaviour:
   rotateSpeed: 3
   speedDuringBattle: 50
   toRotateValue: 40
-  friendlyLayer:
-    serializedVersion: 2
-    m_Bits: 256
 --- !u!114 &-6031669229733765718
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -444,6 +415,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1dc3e84ead656414fb024518c6178493, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6831721198619179517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6093038134521633886}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5247e44fd8297f4894f50502238dbcd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 150
+  isMine: 0
+  target: {fileID: 19277805020226820}
+--- !u!65 &8308672272052597207
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6093038134521633886}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3.5332894, y: 6.9049983, z: 16.263515}
+  m_Center: {x: -0.08708397, y: 19.817642, z: 0.43272552}
 --- !u!1 &6160573123841865669
 GameObject:
   m_ObjectHideFlags: 0

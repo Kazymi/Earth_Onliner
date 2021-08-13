@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a17b903274a12904fbd0909281d622ee, type: 3}
   m_Name: Tower_2
   m_EditorClassIdentifier: 
-  ammoGameObject: {fileID: 152888, guid: 5624ee9da9d10514ea7b808e83979c85, type: 3}
+  ammoGameObject: {fileID: 6076346199555416928, guid: 069ef06f63c9cf8438d0123e31968dcc, type: 3}
   fireRate: 0.5

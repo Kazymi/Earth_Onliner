@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f972fd4173519ef4885e4b92dea2d034, type: 3}
   m_Name: DefenceTower 3
   m_EditorClassIdentifier: 
-  buildingGameObject: {fileID: 3053800224073307662, guid: 8da64535c7c06214d98b2f5121e22fbb, type: 3}
+  buildingGameObject: {fileID: 3053800224073307662, guid: 1585d9b26f665b54abeb252591e44e22, type: 3}
   maxAmount: 3
   amountInFactory: 0

@@ -1,18 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!65 &6532939997779597740
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2859571293201336296}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 2.9935615, y: 3.7637818, z: 10.323441}
-  m_Center: {x: -0.21071099, y: 1.8252757, z: 0.19718084}
 --- !u!114 &1507417890129874403
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30,21 +17,6 @@ MonoBehaviour:
   turrets:
   - {fileID: 1560011509631008188}
   _npc: {fileID: -2203401421628954937}
---- !u!114 &7856441536076177942
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2859571293201336296}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86d17ab05a7d9334d86579eb8f7c62ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  helicopter: {fileID: 6093038134521633886}
-  health: 150
-  isMine: 0
 --- !u!1 &4085967496874870722
 GameObject:
   m_ObjectHideFlags: 0
@@ -314,7 +286,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78b8d9ca56170044580aadedd2dbfe43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  turretConfiguration: {fileID: 11400000, guid: 93e5a67cc5f9c584c8249b65a3789847, type: 2}
+  turretConfiguration: {fileID: 11400000, guid: b20759c638c2f6b40842b4ff04b439f0, type: 2}
   startPositionAmmo: {fileID: 532418266085249151}
 --- !u!1 &6093038134521633886
 GameObject:
@@ -330,6 +302,8 @@ GameObject:
   - component: {fileID: -317981794235666747}
   - component: {fileID: -6294998998890371521}
   - component: {fileID: -2203401421628954937}
+  - component: {fileID: 6128076864934204660}
+  - component: {fileID: 1677285148373627762}
   m_Layer: 0
   m_Name: NPC_1
   m_TagString: Untagged
@@ -360,7 +334,7 @@ NavMeshAgent:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6093038134521633886}
   m_Enabled: 1
-  m_AgentTypeID: 0
+  m_AgentTypeID: -334000983
   m_Radius: 2.74
   m_Speed: 7
   m_Acceleration: 8
@@ -390,9 +364,6 @@ MonoBehaviour:
   helicopterGameObject: {fileID: 1293770216152331771}
   turnFlyingHelicopter: {x: 25.167, y: 0, z: 0}
   rotateSpeed: 3
-  friendlyLayer:
-    serializedVersion: 2
-    m_Bits: 256
 --- !u!114 &-317981794235666747
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -444,6 +415,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1dc3e84ead656414fb024518c6178493, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!65 &6128076864934204660
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6093038134521633886}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 4.35339, y: 4.3031325, z: 10.312942}
+  m_Center: {x: 0.15384932, y: 8.94711, z: -0.31712508}
+--- !u!114 &1677285148373627762
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6093038134521633886}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5247e44fd8297f4894f50502238dbcd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 150
+  isMine: 0
+  target: {fileID: 1293770216152331771}
 --- !u!1001 &6093038134522863329
 PrefabInstance:
   m_ObjectHideFlags: 0

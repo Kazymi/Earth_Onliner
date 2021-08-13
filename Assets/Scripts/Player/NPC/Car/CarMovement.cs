@@ -1,6 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
-using Photon.Pun;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -55,12 +53,7 @@ public class CarMovement : MonoBehaviour, IMovement
 
     public void Initialize(bool isMine)
     {
-        if (isMine)
-        {
-            gameObject.layer = 0;
-            
-        }
-        else
+        if (isMine == false)
         {
             Destroy(this);
         }

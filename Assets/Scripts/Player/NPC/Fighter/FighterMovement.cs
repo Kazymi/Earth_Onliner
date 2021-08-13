@@ -1,9 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
-using Photon.Pun;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.Serialization;
 
 public class FighterMovement : MonoBehaviour,IMovement
 {
@@ -14,8 +11,7 @@ public class FighterMovement : MonoBehaviour,IMovement
     [SerializeField] private float rotateSpeed;
     [SerializeField] private float speedDuringBattle;
     [SerializeField] private float toRotateValue = 40f;
-    [SerializeField] private LayerMask friendlyLayer;
-    
+
     private Builders _builders;
     private NavMeshAgent _agent;
     private Transform _target;
@@ -79,11 +75,7 @@ public class FighterMovement : MonoBehaviour,IMovement
 
     public void Initialize(bool isMine)
     {
-        if (isMine)
-        {
-            gameObject.layer = friendlyLayer;
-        }
-        else
+        if (isMine == false)
         {
             Destroy(this);
         }

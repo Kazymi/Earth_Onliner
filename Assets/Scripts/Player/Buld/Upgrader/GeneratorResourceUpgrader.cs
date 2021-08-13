@@ -1,8 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
-using UnityEngine.Serialization;
+
 [RequireComponent(typeof(BuildingContractor))]
 public class GeneratorResourceUpgrader : MonoBehaviour, Upgrader
 {

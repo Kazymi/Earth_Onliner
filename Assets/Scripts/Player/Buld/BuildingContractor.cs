@@ -1,11 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using Photon.Pun;
 using UnityEngine;
-using UnityEngine.AI;
-using UnityEngine.Experimental.AI;
 
+[RequireComponent(typeof(PhotonView))]
 public class BuildingContractor : MonoBehaviour
 {
     [SerializeField] private float radiusBuilding;
@@ -14,16 +10,23 @@ public class BuildingContractor : MonoBehaviour
     [SerializeField] private NPCHealth _health;
     
     private bool _isMine;
-
+    private PhotonView _photonView;
+    
     public bool IsMine => _isMine;
+    public PhotonView PhotonView => _photonView;
     public void BuildComplete(bool isMine)
     {
         _isMine = isMine;
         _health.IsMine = isMine;
-        ServiceLocator.GetService<Builders>().NewBuilding(gameObject,isMine,buildingType);
     }
     public BuildingResource Resource => resourcesForBuilding;
     public float RadiusBuilding => radiusBuilding;
+
+    private void Start()
+    {
+        ServiceLocator.GetService<Builders>().NewBuilding(gameObject,_isMine,buildingType);
+        _photonView = GetComponent<PhotonView>();
+    }
 
     private void OnDrawGizmos()
     {

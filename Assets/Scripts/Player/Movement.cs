@@ -1,7 +1,5 @@
-using System;
 using EventBusSystem;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class Movement : MonoBehaviour, IBuildEvent
 {
