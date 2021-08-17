@@ -7,8 +7,8 @@ public class BuildState : State
     private LayerMask _idLayerEarth;
     private InputHandler _inputHandler;
 
-    private BuildingContractor _buildingContractor;
-    private BuildingContractor _currentBuildingConstractor;
+    private NewBuilding _buildingContractor;
+    private NewBuilding _currentBuildingConstractor;
     private CameraMovementChecker _cameraMovementChecker;
 
     public BuildState(InputHandler inputHandler, LayerMask layerMask, LayerMask earthLayerMask,CameraMovementChecker cameraMovementChecker)
@@ -33,7 +33,7 @@ public class BuildState : State
         _inputHandler.OnMouseDownAction -= OnMouseDown;
     }
 
-    public void Initialize(BuildingContractor buildGameObject)
+    public void Initialize(NewBuilding buildGameObject)
     {
         _buildingContractor = buildGameObject;
     }
@@ -59,7 +59,7 @@ public class BuildState : State
             return;
         }
 
-        var buildingContractor = hit.collider.GetComponent<BuildingContractor>();
+        var buildingContractor = hit.collider.GetComponent<NewBuilding>();
         if (buildingContractor == false)
         {
             return;

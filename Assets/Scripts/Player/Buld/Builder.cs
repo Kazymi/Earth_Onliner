@@ -1,22 +1,21 @@
-using System.Collections.Generic;
 using Photon.Pun;
 using UnityEngine;
 
 public class Builder : MonoBehaviour
 {
     private InputHandler _inputHandler;
-    private BuildingContractor _newBuild;
+    private NewBuilding _newBuild;
     private BuildSystemMenu _buildSystemMenu;
     private Earth _earth;
     private string _currentBuildName;
     private BuildingConfiguration _currentBuildingConfiguration;
     private BuyConfiguration _buyConfiguration;
     private BuildingManager _buildingManager;
-    private Dictionary<BuildingConfiguration, int> _housesBuilt = new Dictionary<BuildingConfiguration, int>();
     private PlayerResources _playerResources;
     private PlayerSystem _playerSystem;
     private BuildSystem _buildSystem;
-   
+    private BuiltHouses _builtHouses;
+
     private void OnEnable()
     {
         ServiceLocator.Subscribe<Builder>(this);
@@ -36,37 +35,20 @@ public class Builder : MonoBehaviour
         _playerSystem = ServiceLocator.GetService<PlayerSystem>();
         _buildSystem = ServiceLocator.GetService<BuildSystem>();
         _earth = ServiceLocator.GetService<Earth>();
+        _builtHouses = ServiceLocator.GetService<BuiltHouses>();
     }
 
     public void StopBuild()
     {
-        Destroy(_newBuild.gameObject);
+        _buildingManager.GetFactoryByName(_currentBuildName).Destroy(_newBuild.gameObject);
         _newBuild = null;
         _playerSystem.BuildComplete();
         _buildSystemMenu.ActivateCanvas(false);
     }
-    public bool IsUnlockBuilding(BuildingConfiguration buildingConfiguration)
-    {
-        if (_housesBuilt.ContainsKey(buildingConfiguration) == false)
-        {
-            return true;
-        }
-
-        if (_housesBuilt[buildingConfiguration] >= buildingConfiguration.MaxAmount)
-        {
-            return false;
-        }
-
-        return true;
-    }
 
     public void NewBuild(BuildingConfiguration buildingConfiguration, BuyConfiguration buyConfiguration)
     {
-        if (_housesBuilt.ContainsKey(buildingConfiguration) == false)
-        {
-            _housesBuilt.Add(buildingConfiguration, 0);
-        }
-
+        _builtHouses.NewBuild(buyConfiguration.BuildingConfiguration);
         _buyConfiguration = buyConfiguration;
         _inputHandler.PositionSelection = true;
         if (_newBuild != null)
@@ -76,16 +58,16 @@ public class Builder : MonoBehaviour
 
         _currentBuildingConfiguration = buildingConfiguration;
         _currentBuildName = buildingConfiguration.BuildingGameObject.name;
-        _newBuild = _buildingManager.GetBuildingByName(_currentBuildName).GetComponent<BuildingContractor>();
+        _newBuild = _buildingManager.GetBuildingByName(_currentBuildName).GetComponent<NewBuilding>();
         _newBuild.transform.position = _inputHandler.GetStartBuildPosition().Position;
         _playerSystem.StartBuild(_newBuild);
         _buildSystemMenu.ActivateCanvas(true);
-        _buildSystem.Initialize(_newBuild.transform,this);
+        _buildSystem.Initialize(_newBuild.transform, this);
     }
 
     public void SetPositionBuild()
     {
-        if (CheckPosition() == false)
+        if (_newBuild.CheckPosition() == false)
         {
             return;
         }
@@ -97,70 +79,25 @@ public class Builder : MonoBehaviour
             newBuildTransform.localRotation,
             PhotonNetwork.LocalPlayer.UserId);
         _inputHandler.PositionSelection = false;
-        Destroy(_newBuild.gameObject);
+        _buildingManager.GetFactoryByName(_currentBuildName).Destroy(_newBuild.gameObject);
         _newBuild = null;
         _playerResources.RemoveResource(TypeResource.Gold, _buyConfiguration.NeedGold);
         _playerResources.RemoveResource(TypeResource.Iron, _buyConfiguration.NeedIron);
         _playerResources.RemoveResource(TypeResource.Wood, _buyConfiguration.NeedWood);
         _playerSystem.BuildComplete();
         _buildSystemMenu.ActivateCanvas(false);
-        _housesBuilt[_currentBuildingConfiguration]++;
+        _builtHouses.AddBuilding(_currentBuildingConfiguration);
     }
 
     private void Update()
     {
         if (_newBuild != null)
         {
-            _buildSystemMenu.UnlockBuildButton(CheckPosition());
+            _buildSystemMenu.UnlockBuildButton(_newBuild.CheckPosition());
         }
         else
         {
             _buildSystemMenu.UnlockBuildButton(false);
         }
-    }
-
-    private bool CheckPosition()
-    {
-        var returnValue = true;
-        var faundResources = false;
-        var allFindGameObject =
-            Physics.OverlapBox(_newBuild.transform.position,
-                new Vector3(_newBuild.RadiusBuilding, _newBuild.RadiusBuilding, _newBuild.RadiusBuilding));
-
-        foreach (var findGameObject in allFindGameObject)
-        {
-            var building = findGameObject.GetComponent<BuildingContractor>();
-            var resource = findGameObject.GetComponent<ResourceForConstruction>();
-
-            if (building)
-            {
-                if (building != _newBuild)
-                {
-                    returnValue = false;
-                    break;
-                }
-            }
-            if (resource)
-            {
-                if (resource.BuildingResources == BuildingResource.Water)
-                {
-                    returnValue = false;
-                    break;
-                }
-
-                if (resource.BuildingResources == _newBuild.Resource)
-                {
-                    faundResources = true;
-                    break;
-                }
-            }
-        }
-
-        if (_newBuild.Resource == BuildingResource.Nothing)
-        {
-            faundResources = true;
-        }
-        returnValue = faundResources && returnValue;
-        return returnValue;
     }
 }

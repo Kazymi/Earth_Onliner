@@ -7,6 +7,7 @@ public class GameInstaller : MonoBehaviour
     private CameraMovementChecker _cameraMovementChecker;
     private SpawnArmySystem _spawnArmySystem;
     private BuildSystem _buildSystem;
+    private BuiltHouses _builtHouses;
     
     
     private void Awake()
@@ -16,7 +17,9 @@ public class GameInstaller : MonoBehaviour
         _playerResources = new PlayerResources();
         _spawnArmySystem = new SpawnArmySystem();
         _cameraMovementChecker = new CameraMovementChecker();
+        _builtHouses = new BuiltHouses();
         
+        ServiceLocator.Subscribe<BuiltHouses>(_builtHouses);
         ServiceLocator.Subscribe<BuildSystem>(_buildSystem);
         ServiceLocator.Subscribe<CameraMovementChecker>(_cameraMovementChecker);
         ServiceLocator.Subscribe<SpawnArmySystem>(_spawnArmySystem);
