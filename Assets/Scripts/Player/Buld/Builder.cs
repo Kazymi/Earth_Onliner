@@ -6,16 +6,17 @@ public class Builder : MonoBehaviour
 {
     private InputHandler _inputHandler;
     private BuildingContractor _newBuild;
-    private GameMenu _gameMenu;
+    private BuildSystemMenu _buildSystemMenu;
     private Earth _earth;
-    private PhotonView _photonView;
     private string _currentBuildName;
+    private BuildingConfiguration _currentBuildingConfiguration;
     private BuyConfiguration _buyConfiguration;
     private BuildingManager _buildingManager;
     private Dictionary<BuildingConfiguration, int> _housesBuilt = new Dictionary<BuildingConfiguration, int>();
     private PlayerResources _playerResources;
     private PlayerSystem _playerSystem;
-
+    private BuildSystem _buildSystem;
+   
     private void OnEnable()
     {
         ServiceLocator.Subscribe<Builder>(this);
@@ -28,14 +29,22 @@ public class Builder : MonoBehaviour
 
     private void Start()
     {
+        _buildSystemMenu = ServiceLocator.GetService<BuildSystemMenu>();
         _playerResources = ServiceLocator.GetService<PlayerResources>();
         _buildingManager = ServiceLocator.GetService<BuildingManager>();
         _inputHandler = ServiceLocator.GetService<InputHandler>();
         _playerSystem = ServiceLocator.GetService<PlayerSystem>();
-        _gameMenu = ServiceLocator.GetService<GameMenu>();
+        _buildSystem = ServiceLocator.GetService<BuildSystem>();
         _earth = ServiceLocator.GetService<Earth>();
     }
 
+    public void StopBuild()
+    {
+        Destroy(_newBuild.gameObject);
+        _newBuild = null;
+        _playerSystem.BuildComplete();
+        _buildSystemMenu.ActivateCanvas(false);
+    }
     public bool IsUnlockBuilding(BuildingConfiguration buildingConfiguration)
     {
         if (_housesBuilt.ContainsKey(buildingConfiguration) == false)
@@ -59,17 +68,19 @@ public class Builder : MonoBehaviour
         }
 
         _buyConfiguration = buyConfiguration;
-        _housesBuilt[buildingConfiguration]++;
         _inputHandler.PositionSelection = true;
         if (_newBuild != null)
         {
             _buildingManager.GetFactoryByName(_currentBuildName).Destroy(_newBuild.gameObject);
         }
 
+        _currentBuildingConfiguration = buildingConfiguration;
         _currentBuildName = buildingConfiguration.BuildingGameObject.name;
         _newBuild = _buildingManager.GetBuildingByName(_currentBuildName).GetComponent<BuildingContractor>();
         _newBuild.transform.position = _inputHandler.GetStartBuildPosition().Position;
         _playerSystem.StartBuild(_newBuild);
+        _buildSystemMenu.ActivateCanvas(true);
+        _buildSystem.Initialize(_newBuild.transform,this);
     }
 
     public void SetPositionBuild()
@@ -92,17 +103,19 @@ public class Builder : MonoBehaviour
         _playerResources.RemoveResource(TypeResource.Iron, _buyConfiguration.NeedIron);
         _playerResources.RemoveResource(TypeResource.Wood, _buyConfiguration.NeedWood);
         _playerSystem.BuildComplete();
+        _buildSystemMenu.ActivateCanvas(false);
+        _housesBuilt[_currentBuildingConfiguration]++;
     }
 
     private void Update()
     {
         if (_newBuild != null)
         {
-            _gameMenu.BuildButtonSetState(CheckPosition());
+            _buildSystemMenu.UnlockBuildButton(CheckPosition());
         }
         else
         {
-            _gameMenu.BuildButtonSetState(false);
+            _buildSystemMenu.UnlockBuildButton(false);
         }
     }
 
