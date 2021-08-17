@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class NPCHealth : MonoBehaviourPunCallbacks, IDamageable
 {
-    [SerializeField] private bool Dead;
     [SerializeField] private GameObject deadGameObject;
     [SerializeField] private float health;
     [SerializeField] private bool isMine;
@@ -12,19 +11,21 @@ public class NPCHealth : MonoBehaviourPunCallbacks, IDamageable
     
     private PhotonView _photonView;
     private DeadNPCManager _deadNpcManager;
+    private event Action _npcDeath;
     public bool IsMine
     {
         get => isMine;
         set => isMine = value;
     }
+    
+    public event  Action NPCDeath
+    {
+        add => _npcDeath += value;
+        remove => _npcDeath -= value;
+    }
 
     private float _currentHealth;
     public Transform TargetTransform { get => target; set => target = value; }
-
-    private void Update()
-    {
-        if(Dead) Death();
-    }
 
     private void Start()
     {
@@ -50,6 +51,7 @@ public class NPCHealth : MonoBehaviourPunCallbacks, IDamageable
         {
             Debug.Log("TakeDamage");
             _photonView.RPC(RPCEvents.Death.ToString(), RpcTarget.All);
+            _npcDeath?.Invoke();
         }
     }
 

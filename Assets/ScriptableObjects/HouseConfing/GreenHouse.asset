@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f972fd4173519ef4885e4b92dea2d034, type: 3}
   m_Name: GreenHouse
   m_EditorClassIdentifier: 
-  buildingGameObject: {fileID: 3053800224073307662, guid: 45decdde244a7c142b76322d13d60b0a, type: 3}
+  buildingGameObject: {fileID: 3053800224073307662, guid: 90e5b0328e470bd458689009044f2db0, type: 3}
   maxAmount: 3
   amountInFactory: 0

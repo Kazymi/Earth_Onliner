@@ -19,6 +19,12 @@ public class Builders
             }
             _mainGameObject.Add(buildingType, new List<Transform>());
             _mainGameObject[buildingType].Add(building.transform);
+            if (buildingType == BuildingType.MainHouse)
+            {
+                var gameManager = ServiceLocator.GetService<GameManager>();
+                var health = building.GetComponent<NPCHealth>();
+                health.NPCDeath += gameManager.MainHouseDestroy;
+            }
         }
         
         else

@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f972fd4173519ef4885e4b92dea2d034, type: 3}
   m_Name: MainHouse
   m_EditorClassIdentifier: 
-  buildingGameObject: {fileID: 3053800224073307662, guid: 5f4e84c1071c97d49b61d8322e729cf8, type: 3}
+  buildingGameObject: {fileID: 3053800224073307662, guid: 80e78df4d44cfbe409b94acc3e9efcd4, type: 3}
   maxAmount: 1
   amountInFactory: 0

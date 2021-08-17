@@ -8,10 +8,8 @@ using UnityEngine.SceneManagement;
 [RequireComponent(typeof(PhotonView))]
 public class GameManager : MonoBehaviourPunCallbacks, IOnEventCallback
 {
-    [SerializeField] private int needToFindKeys = 3;
-
     private bool _gameFinished;
-
+    private PhotonView _photonView;
     public override void OnEnable()
     {
         ServiceLocator.Subscribe<GameManager>(this);
@@ -24,6 +22,14 @@ public class GameManager : MonoBehaviourPunCallbacks, IOnEventCallback
         PhotonNetwork.RemoveCallbackTarget(this);
     }
 
+    public void MainHouseDestroy()
+    {
+        object[] content = new object[]{_photonView.Controller.NickName};
+        RaiseEventOptions raiseEventOptions = new RaiseEventOptions {Receivers = ReceiverGroup.All};
+        PhotonNetwork.RaiseEvent((int) EventType.FinishGame, content, raiseEventOptions,
+            SendOptions.SendReliable);
+    }
+    
     public void OnEvent(EventData photonEvent)
     {
         if (_gameFinished)
