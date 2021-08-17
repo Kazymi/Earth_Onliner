@@ -22,7 +22,7 @@ public class PlayerSystem : MonoBehaviour
     {
         var inputHandler = ServiceLocator.GetService<InputHandler>();
         var emptyState = new EmptyState();
-        _buildState = new BuildState(inputHandler,buildMask,earthMask);
+        _buildState = new BuildState(inputHandler,buildMask,earthMask,ServiceLocator.GetService<CameraMovementChecker>());
         _upgradeState = new UpgradeState(inputHandler,buildMask);
 
         _stateMachine = new StateMachine(emptyState);

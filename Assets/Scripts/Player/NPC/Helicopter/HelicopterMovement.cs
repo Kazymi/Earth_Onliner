@@ -26,7 +26,11 @@ public class HelicopterMovement : MonoBehaviour, IMovement
         {
             if (Vector3.Distance(transform.position, _target.position) < 25f)
             {
-                _agent.ResetPath();
+                if (_agent.enabled)
+                {
+                    _agent.ResetPath();
+                    _agent.enabled = false;
+                }
                 var lookDir = _target.position - transform.position;
                 lookDir.y = 0;
                 transform.rotation = Quaternion.LookRotation(lookDir);
@@ -36,6 +40,10 @@ public class HelicopterMovement : MonoBehaviour, IMovement
             }
             else
             {
+                if (_agent.enabled == false)
+                {
+                    _agent.enabled = true;
+                }
                 helicopterGameObject.transform.localRotation = Quaternion.Lerp(helicopterGameObject.localRotation,
                     Quaternion.Euler(turnFlyingHelicopter), rotateSpeed * Time.deltaTime);
                 _agent.SetDestination(_target.position);

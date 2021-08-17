@@ -28,14 +28,14 @@ public class LauncherMenu : MonoBehaviour
     {
         createRoomButton.onClick.AddListener(CreateRoom);
         leaveRoomButton.onClick.AddListener(launcher.LeaveRoom);
-        startGameRoomButton.onClick.AddListener(launcher.StartGame);
+        startGameRoomButton.onClick.AddListener(StartGame);
     }
 
     private void OnDisable()
     {
         createRoomButton.onClick.RemoveListener(CreateRoom);
         leaveRoomButton.onClick.RemoveListener(launcher.LeaveRoom);
-        startGameRoomButton.onClick.RemoveListener(launcher.StartGame);
+        startGameRoomButton.onClick.RemoveListener(StartGame);
     }
 
     private void CreateRoom()
@@ -74,5 +74,11 @@ public class LauncherMenu : MonoBehaviour
     public void OnRoomLeft()
     {
         menuManager.OpenMenu(titleMenu);
+    }
+
+    private void StartGame()
+    {
+        launcher.StartGame();
+        startGameRoomButton.interactable = false;
     }
 }

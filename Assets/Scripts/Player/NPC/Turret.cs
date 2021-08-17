@@ -28,6 +28,10 @@ public class Turret : MonoBehaviour
         }
     }
 
+    public void Initialize(bool isMine)
+    {
+        _isMine = isMine;
+    }
     private void Fire()
     {
         _currentTimer -= Time.deltaTime;

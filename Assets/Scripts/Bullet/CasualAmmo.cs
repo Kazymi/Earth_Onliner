@@ -1,7 +1,8 @@
+using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider),typeof(Rigidbody))]
-public class CasualAmmo : MonoBehaviour,IAmmo
+public class CasualAmmo : MonoBehaviour,IFactoryInitialize
 {
     [SerializeField] private float flySpeed;
     [SerializeField] private float damage;
@@ -18,8 +19,20 @@ public class CasualAmmo : MonoBehaviour,IAmmo
         {
             damageable.TakeDamage(damage);
         }
+        StopAllCoroutines();
         ParentFactory.Destroy(gameObject);
     }
 
     public Factory ParentFactory { get; set; }
+    
+    public void Initialize()
+    {
+        StartCoroutine(Destroy());
+    }
+
+    private IEnumerator Destroy()
+    {
+        yield return new WaitForSeconds(10f);
+        ParentFactory.Destroy(gameObject);
+    }
 }

@@ -2,4 +2,5 @@
 {
     Enemy,
     Friendly,
+    Earth
 }

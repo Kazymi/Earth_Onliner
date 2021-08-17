@@ -21,7 +21,6 @@ public class NPC : MonoBehaviour
         if (_health != null)
         {
             _health.IsMine = _isMine;
-            _health.Initialize();
         }
     }
 

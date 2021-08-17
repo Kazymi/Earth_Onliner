@@ -9,16 +9,17 @@ public class InputHandler : MonoBehaviour
     [SerializeField] private int edgesPercent;
 
 
-    private bool _isBuild;
+    private Vector3 _previousPosition;
+    private Vector3 _targetPosition;
     private Camera _mainCamera;
-    private Vector3 _currentPosition;
-    private Vector3 _lastPosition;
-    private Vector3 _moveAxis;
     private Vector3 _returnValue;
 
     private event Action _onMouseDownAction;
     private event Action _onMouseUpAction;
     private event Action _onMouseAction;
+
+    private Vector3 NormalizedMousePosition =>
+        new Vector3(Input.mousePosition.x / Screen.width, Input.mousePosition.y / Screen.height, 0);
 
     public event Action OnMouseDownAction
     {
@@ -45,7 +46,7 @@ public class InputHandler : MonoBehaviour
     private void OnEnable()
     {
         ServiceLocator.Subscribe<InputHandler>(this);
-        _onMouseUpAction += () => _returnValue = Vector3.zero;
+        _onMouseDownAction += () => _previousPosition = NormalizedMousePosition;
     }
 
     private void OnDisable()
@@ -58,11 +59,39 @@ public class InputHandler : MonoBehaviour
         _mainCamera = Camera.main;
     }
 
+    public Vector3 MoveDirection()
+    {
+        var delta = _previousPosition - NormalizedMousePosition;
+        if (IsPointerOverUIObject() == false)
+        {
+            _previousPosition = NormalizedMousePosition;
+            delta = new Vector3(delta.y, 0, -delta.x);
+            return delta;
+        }
+        else
+        {
+            delta = Vector3.zero;
+            return delta;
+        }
+    }
+    
     private void Update()
     {
         ZoomAxis = Input.GetAxis("Mouse ScrollWheel");
-        if (Input.GetMouseButtonUp(0)) _onMouseUpAction?.Invoke();
-        if (Input.GetMouseButtonDown(0)) _onMouseDownAction?.Invoke();
+        if (Input.GetMouseButtonUp(0))
+        {
+            _onMouseUpAction?.Invoke();
+        }
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            _onMouseDownAction?.Invoke();
+        }
+
+        if (Input.GetMouseButton(0))
+        {
+            _onMouseAction?.Invoke();
+        }
     }
 
     public RaycastHit GetHitPoint(LayerMask layerMask)
@@ -71,8 +100,24 @@ public class InputHandler : MonoBehaviour
         {
             return new RaycastHit();
         }
+
         var ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out RaycastHit raycastHit, Mathf.Infinity, layerMask))
+        {
+            return raycastHit;
+        }
+        else return new RaycastHit();
+    }
+    
+    public RaycastHit GetHitPoint()
+    {
+        if (IsPointerOverUIObject())
+        {
+            return new RaycastHit();
+        }
+
+        var ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(ray, out RaycastHit raycastHit, Mathf.Infinity))
         {
             return raycastHit;
         }
@@ -90,72 +135,17 @@ public class InputHandler : MonoBehaviour
         return new PositionBuilding(Vector3.zero, Vector3.zero);
     }
 
-    public Vector2 MoveDirectionBuild()
+    public Vector3 MoveDirectionAroundEdges()
     {
-        if (IsPointerOverUIObject())
-        {
-            return new Vector2();
-        }
-
-        if (mobile)
-        {
-            if (Input.GetMouseButton(0))
-            {
-                _currentPosition = Input.mousePosition;
-                var newPos = _currentPosition - _lastPosition;
-                newPos = newPos.normalized;
-                _returnValue = Vector3.zero;
-                if (_currentPosition != _lastPosition)
-                {
-                    _returnValue = new Vector3(newPos.y, -newPos.x, 0);
-                }
-
-                _lastPosition = _currentPosition;
-            }
-        }
-        else
-        {
-            _returnValue = new Vector2(Input.GetAxisRaw("Vertical"), -Input.GetAxisRaw("Horizontal"));
-        }
-
-        return _returnValue;
+        var returnValue = Input.mousePosition - new Vector3(Screen.width / 2f, Screen.height / 2f, 0);
+        _previousPosition = NormalizedMousePosition;
+        returnValue = new Vector3(-returnValue.y, 0, returnValue.x);
+        return returnValue.normalized;
     }
 
-    public Vector2 MoveDirection()
+    public bool CheckEdges()
     {
-        if (IsPointerOverUIObject())
-        {
-            return new Vector2();
-        }
-
-        if (mobile)
-        {
-            if (Input.GetMouseButton(0))
-            {
-                _currentPosition = Input.mousePosition;
-                var newPos = _currentPosition - _lastPosition;
-                newPos = newPos.normalized;
-                if (CheckEdges(_currentPosition))
-                {
-                    _returnValue = Vector3.zero;
-                }
-                if (_currentPosition != _lastPosition)
-                {
-                    _returnValue = new Vector3(-newPos.y, newPos.x, 0);
-                }
-                _lastPosition = _currentPosition;
-            }
-        }
-        else
-        {
-            _returnValue = new Vector2(Input.GetAxisRaw("Vertical"), -Input.GetAxisRaw("Horizontal"));
-        }
-
-        return _returnValue;
-    }
-
-    private bool CheckEdges(Vector3 mousePosition)
-    {
+        var mousePosition = Input.mousePosition;
         var wight = Screen.width;
         var height = Screen.height;
         var percentWightMin = (wight / 100) * edgesPercent;

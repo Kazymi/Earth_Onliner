@@ -1,6 +1,7 @@
+using System.Collections;
 using UnityEngine;
 
-public class Explosion : MonoBehaviour, IAmmo
+public class Explosion : MonoBehaviour,IFactoryInitialize
 {
     [SerializeField] private float destroyTimer;
     [SerializeField] private GameObject explosionEffectGameObject;
@@ -9,7 +10,8 @@ public class Explosion : MonoBehaviour, IAmmo
     public void Initialize(float radius, float damage)
     {
         explosionEffectGameObject.SetActive(true);
-        Explositon(radius,damage);
+        _currentTimer = destroyTimer;
+        Burst(radius, damage);
     }
 
     private void Update()
@@ -19,22 +21,49 @@ public class Explosion : MonoBehaviour, IAmmo
             explosionEffectGameObject.SetActive(false);
             ParentFactory.Destroy(gameObject);
         }
+
         _currentTimer -= Time.deltaTime;
     }
 
-    private void Explositon(float radius, float damage)
+    private void Burst(float radius, float damage)
     {
-        _currentTimer = destroyTimer;
-        var findGameObjects = Physics.OverlapSphere(transform.position, radius,LayerMask.NameToLayer(LayerType.Friendly.ToString()));
+        var findGameObjects = Physics.OverlapSphere(transform.position, radius);
         foreach (var findGameObject in findGameObjects)
         {
             var health = findGameObject.GetComponent<IDamageable>();
+            var npc = findGameObject.GetComponent<NPC>();
+            var building = findGameObject.GetComponent<BuildingContractor>();
             if (health != null)
             {
-                health.TakeDamage(damage);
+                if (npc)
+                {
+                    if (npc.IsMine == false)
+                    {
+                        health.TakeDamage(damage);
+                    }
+                }
+
+                if (building)
+                {
+                    if (building.IsMine == false)
+                    {
+                        health.TakeDamage(damage);
+                    }
+                }
             }
         }
     }
 
     public Factory ParentFactory { get; set; }
+
+    public void Initialize()
+    {
+        StartCoroutine(Destroy());
+    }
+
+    private IEnumerator Destroy()
+    {
+        yield return new WaitForSeconds(10f);
+        ParentFactory.Destroy(gameObject);
+    }
 }

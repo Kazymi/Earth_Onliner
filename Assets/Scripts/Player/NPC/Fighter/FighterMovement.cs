@@ -29,7 +29,11 @@ public class FighterMovement : MonoBehaviour,IMovement
         {
             if (Vector3.Distance(transform.position, _target.position) < toRotateValue)
             {
-                _agent.ResetPath();
+                if (_agent.enabled)
+                {
+                    _agent.ResetPath();
+                    _agent.enabled = false;
+                }
                 var lookDir = _target.position - transform.position;
                 lookDir.y = 0;
                 transform.rotation = Quaternion.LookRotation(lookDir);
@@ -39,6 +43,10 @@ public class FighterMovement : MonoBehaviour,IMovement
             }
             else
             {
+                if (_agent.enabled == false)
+                {
+                    _agent.enabled = true;
+                }
                 fighterGameObject.transform.localRotation = Quaternion.Lerp(fighterGameObject.localRotation,
                     Quaternion.Euler(turnFlyingFighter), rotateSpeed * Time.deltaTime);
                 _agent.SetDestination(_target.position);

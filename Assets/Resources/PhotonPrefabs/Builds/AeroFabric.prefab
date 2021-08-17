@@ -120,6 +120,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5247e44fd8297f4894f50502238dbcd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Dead: 0
+  deadGameObject: {fileID: 0}
   health: 500
   isMine: 0
   target: {fileID: 0}

@@ -16,6 +16,11 @@ public class BuildingRadar : MonoBehaviour
         {
             Destroy(this);
         }
+
+        foreach (var turret in turrets)
+        {
+            turret.Initialize(buildingContractor.IsMine);
+        }
     }
 
     private void Update()

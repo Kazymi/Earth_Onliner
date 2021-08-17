@@ -9,9 +9,11 @@ public class BuildState : State
 
     private BuildingContractor _buildingContractor;
     private BuildingContractor _currentBuildingConstractor;
+    private CameraMovementChecker _cameraMovementChecker;
 
-    public BuildState(InputHandler inputHandler, LayerMask layerMask, LayerMask earthLayerMask)
+    public BuildState(InputHandler inputHandler, LayerMask layerMask, LayerMask earthLayerMask,CameraMovementChecker cameraMovementChecker)
     {
+        _cameraMovementChecker = cameraMovementChecker;
         _inputHandler = inputHandler;
         _idLayerBuild = layerMask;
         _idLayerEarth = earthLayerMask;
@@ -20,7 +22,6 @@ public class BuildState : State
     public override void OnStateEnter()
     {
         base.OnStateEnter();
-        EventBus.RaiseEvent<IBuildEvent>(h => h.OnBuild());
         _inputHandler.OnMouseUpAction += OnMouseUp;
         _inputHandler.OnMouseDownAction += OnMouseDown;
     }
@@ -48,6 +49,7 @@ public class BuildState : State
     private void OnMouseUp()
     {
         _currentBuildingConstractor = null;
+        _cameraMovementChecker.IsBuild = false;
     }
     private void OnMouseDown()
     {
@@ -66,6 +68,7 @@ public class BuildState : State
         if (_buildingContractor == buildingContractor)
         {
             _currentBuildingConstractor = buildingContractor;
+            _cameraMovementChecker.IsBuild = true;
         }
     }
 

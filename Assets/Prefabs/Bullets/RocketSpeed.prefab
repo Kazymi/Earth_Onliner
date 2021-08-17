@@ -4865,8 +4865,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   flySpeed: 120
   turretConfiguration: {fileID: 11400000, guid: 8b194dc5da81c614c81379c060749006, type: 2}
-  radiusExplosion: 12
-  damage: 50
+  radiusExplosion: 24
+  damage: 55
 --- !u!65 &100244427016648165
 BoxCollider:
   m_ObjectHideFlags: 0

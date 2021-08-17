@@ -29,10 +29,11 @@ public class AmmoManager : MonoBehaviour
    public GameObject GetAmmoByTurretType(TurretConfiguration turretConfiguration)
    {
     var returnValue = _turretsFactories[turretConfiguration].Create();
-    var ammo =returnValue.GetComponent<IAmmo>();
-    if (ammo != null)
+    var factoryInitialize =returnValue.GetComponent<IFactoryInitialize>();
+    if (factoryInitialize != null)
     {
-       ammo.ParentFactory = _turretsFactories[turretConfiguration];
+       factoryInitialize.ParentFactory = _turretsFactories[turretConfiguration];
+       factoryInitialize.Initialize();
     }
     return returnValue;
    }

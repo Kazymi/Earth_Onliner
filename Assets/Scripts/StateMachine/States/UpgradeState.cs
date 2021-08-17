@@ -9,14 +9,11 @@
 
         public override void OnStateEnter()
         {
-            EventBus.RaiseEvent<IBuildEvent>(h => h.OnUpgrade());
-            Debug.Log("Subscribe");
             _inputHandler.OnMouseDownAction += OnMouseDown;
         }
 
         public override void OnStateExit()
         {
-            Debug.Log("unsubscribe");
             _inputHandler.OnMouseDownAction -= OnMouseDown;
         }
 
@@ -27,7 +24,7 @@
         }
         private void OnMouseDown()
         {
-            var hit = _inputHandler.GetHitPoint(_idLayer);
+            var hit = _inputHandler.GetHitPoint();
             if(hit.collider == null || _inputHandler.MoveVector != Vector3.zero) return;
             var upgrader = hit.collider.GetComponent<Upgrader>();
             if (upgrader != null)

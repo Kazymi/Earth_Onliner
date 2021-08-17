@@ -81,8 +81,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.6736021, y: 0.9137632, z: 1.666105}
-  m_Center: {x: -0.040164154, y: -0.043119412, z: 0.012880167}
+  m_Size: {x: 1.840699, y: 2.316393, z: 1.666105}
+  m_Center: {x: -0.12371242, y: 0.6581952, z: 0.012880167}
 --- !u!114 &8702274564719977238
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -194,7 +194,7 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 1
-  m_Extents: {x: 0.86, y: 0.5, z: 0.855}
+  m_Extents: {x: 0.725, y: 0.445, z: 0.855}
   m_MoveThreshold: 0.1
   m_Carve: 0
   m_CarveOnlyStationary: 1
@@ -212,6 +212,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5247e44fd8297f4894f50502238dbcd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Dead: 0
+  deadGameObject: {fileID: 0}
   health: 500
   isMine: 0
   target: {fileID: 0}

@@ -19,6 +19,10 @@ public class NPCRadar : MonoBehaviour
         }
         _npcMovement = _npc.Movement;
         _damageable = _npc.Health;
+        foreach (var turret in turrets)
+        {
+            turret.Initialize(_npc.IsMine);
+        }
     }
 
     private void Update()
