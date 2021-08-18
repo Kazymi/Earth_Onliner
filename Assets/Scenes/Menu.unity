@@ -269,6 +269,7 @@ GameObject:
   - component: {fileID: 115574820}
   - component: {fileID: 115574819}
   - component: {fileID: 115574818}
+  - component: {fileID: 115574817}
   m_Layer: 0
   m_Name: ErrorMenu
   m_TagString: Untagged
@@ -276,6 +277,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &115574817
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 115574816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67f867f05d404fb6b12e5a21b36cf633, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainMenuCanvasType: 4
 --- !u!114 &115574818
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -707,7 +721,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 613306745}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
         m_MethodName: OpenMenu
         m_Mode: 2
@@ -1305,6 +1319,71 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 527412674}
   m_CullTransparentMesh: 0
+--- !u!1 &556186460
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 556186462}
+  - component: {fileID: 556186461}
+  - component: {fileID: 556186463}
+  m_Layer: 0
+  m_Name: GameInstallers
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &556186461
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 556186460}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 755ea3dc0ff948b59f6fea72b2f85d4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainMenuCanvasList:
+  - {fileID: 710691963}
+  - {fileID: 1209705596}
+  - {fileID: 1888586379}
+  - {fileID: 1341728569}
+  - {fileID: 115574817}
+  - {fileID: 842730223}
+  launcher: {fileID: 613306746}
+--- !u!4 &556186462
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 556186460}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 732.7832, y: 695.48663, z: -1347.7874}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &556186463
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 556186460}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c46733d616cd4781b8a796e0e3ebe69f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  launcherMenu: {fileID: 613306748}
 --- !u!1 &572175655
 GameObject:
   m_ObjectHideFlags: 0
@@ -1490,9 +1569,9 @@ GameObject:
   m_Component:
   - component: {fileID: 613306747}
   - component: {fileID: 613306746}
-  - component: {fileID: 613306745}
   - component: {fileID: 613306744}
   - component: {fileID: 613306748}
+  - component: {fileID: 613306745}
   m_Layer: 0
   m_Name: Canvases
   m_TagString: Untagged
@@ -1522,16 +1601,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 613306743}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 87c82d4176ee77d4893c5ceb77a4bb6a, type: 3}
+  m_Script: {fileID: 11500000, guid: 0cafe215955641a98b2f26e643289a43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  menus:
-  - {fileID: 710691966}
-  - {fileID: 1209705599}
-  - {fileID: 1888586382}
-  - {fileID: 1341728572}
-  - {fileID: 115574820}
-  - {fileID: 842730226}
+  toListRoomPanelButton: {fileID: 1324654640}
+  toCreateRoomPanelButton: {fileID: 477066598}
+  toTitlePanelButtons:
+  - {fileID: 451307852}
+  - {fileID: 640940191}
+  - {fileID: 1839944161}
+  exitGameButton: {fileID: 1131524896}
 --- !u!114 &613306746
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1587,12 +1666,6 @@ MonoBehaviour:
   createRoomButton: {fileID: 513533392}
   leaveRoomButton: {fileID: 451307852}
   startGameRoomButton: {fileID: 740400224}
-  menuManager: {fileID: 613306745}
-  titleMenu: {fileID: 1209705599}
-  loadMenu: {fileID: 710691966}
-  errorMenu: {fileID: 115574820}
-  roomMenu: {fileID: 1341728572}
-  launcher: {fileID: 613306746}
 --- !u!1 &623686130
 GameObject:
   m_ObjectHideFlags: 0
@@ -1810,7 +1883,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 613306745}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
         m_MethodName: OpenMenu
         m_Mode: 2
@@ -2107,6 +2180,7 @@ GameObject:
   - component: {fileID: 710691966}
   - component: {fileID: 710691965}
   - component: {fileID: 710691964}
+  - component: {fileID: 710691963}
   m_Layer: 0
   m_Name: Load
   m_TagString: Untagged
@@ -2114,6 +2188,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &710691963
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710691962}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67f867f05d404fb6b12e5a21b36cf633, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainMenuCanvasType: 0
 --- !u!114 &710691964
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2630,6 +2717,7 @@ GameObject:
   - component: {fileID: 842730226}
   - component: {fileID: 842730225}
   - component: {fileID: 842730224}
+  - component: {fileID: 842730223}
   m_Layer: 0
   m_Name: FindRoom
   m_TagString: Untagged
@@ -2637,6 +2725,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &842730223
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 842730222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67f867f05d404fb6b12e5a21b36cf633, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainMenuCanvasType: 5
 --- !u!114 &842730224
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3653,6 +3754,7 @@ GameObject:
   - component: {fileID: 1209705599}
   - component: {fileID: 1209705598}
   - component: {fileID: 1209705597}
+  - component: {fileID: 1209705596}
   m_Layer: 0
   m_Name: Title
   m_TagString: Untagged
@@ -3680,6 +3782,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1209705596
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1209705594}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67f867f05d404fb6b12e5a21b36cf633, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainMenuCanvasType: 1
 --- !u!114 &1209705597
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4010,7 +4125,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 613306745}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
         m_MethodName: OpenMenu
         m_Mode: 2
@@ -4072,6 +4187,7 @@ GameObject:
   - component: {fileID: 1341728572}
   - component: {fileID: 1341728571}
   - component: {fileID: 1341728570}
+  - component: {fileID: 1341728569}
   m_Layer: 0
   m_Name: RoomMenu
   m_TagString: Untagged
@@ -4079,6 +4195,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &1341728569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1341728568}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67f867f05d404fb6b12e5a21b36cf633, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainMenuCanvasType: 3
 --- !u!114 &1341728570
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4711,7 +4840,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 613306745}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
         m_MethodName: OpenMenu
         m_Mode: 2
@@ -4907,6 +5036,7 @@ GameObject:
   - component: {fileID: 1888586382}
   - component: {fileID: 1888586381}
   - component: {fileID: 1888586380}
+  - component: {fileID: 1888586379}
   m_Layer: 0
   m_Name: Create
   m_TagString: Untagged
@@ -4914,6 +5044,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &1888586379
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1888586378}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67f867f05d404fb6b12e5a21b36cf633, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainMenuCanvasType: 2
 --- !u!114 &1888586380
 MonoBehaviour:
   m_ObjectHideFlags: 0

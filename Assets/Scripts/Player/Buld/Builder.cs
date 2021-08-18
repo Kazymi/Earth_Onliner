@@ -16,16 +16,6 @@ public class Builder : MonoBehaviour
     private BuildSystem _buildSystem;
     private BuiltHouses _builtHouses;
 
-    private void OnEnable()
-    {
-        ServiceLocator.Subscribe<Builder>(this);
-    }
-
-    private void OnDisable()
-    {
-        ServiceLocator.Unsubscribe<Builder>();
-    }
-
     private void Start()
     {
         _buildSystemMenu = ServiceLocator.GetService<BuildSystemMenu>();

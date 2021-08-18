@@ -7,16 +7,6 @@ public class BuildingManager : MonoBehaviour
 
     private Dictionary<string, Factory> _factories = new Dictionary<string, Factory>();
 
-    private void OnEnable()
-    {
-        ServiceLocator.Subscribe<BuildingManager>(this);
-    }
-
-    private void OnDisable()
-    {
-        ServiceLocator.Unsubscribe<BuildingManager>();
-    }
-
     private void Start()
     {
         foreach (var building in builders)

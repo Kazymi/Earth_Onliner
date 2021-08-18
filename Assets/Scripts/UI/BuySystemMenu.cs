@@ -19,7 +19,6 @@ public class BuySystemMenu : MonoBehaviour, IChangingAmountResources
     public void Initialize(ShopSystemMenu systemMenu, BuyConfiguration buyConfiguration)
     {
         _buyConfiguration = buyConfiguration;
-        // TODO: create in installer and register in locator
         _buySystem = new BuySystem(_buyConfiguration, systemMenu);
         goldText.text = _buyConfiguration.NeedGold.ToString();
         ironText.text = _buyConfiguration.NeedIron.ToString();

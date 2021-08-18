@@ -8,16 +8,6 @@ public class PlayerSystem : MonoBehaviour
     private BuildState _buildState;
     private UpgradeState _upgradeState;
 
-    private void OnEnable()
-    {
-        ServiceLocator.Subscribe<PlayerSystem>(this);
-    }
-
-    private void OnDisable()
-    {
-        ServiceLocator.Unsubscribe<PlayerSystem>();
-    }
-
     private void Start()
     {
         var inputHandler = ServiceLocator.GetService<InputHandler>();

@@ -7,16 +7,6 @@ public class ArmySystem : MonoBehaviour
     private Dictionary<NPCConfiguration, ArmyPanel> _armyPanels;
     private Dictionary<NPCConfiguration, int> _amountArmy;
     public Dictionary<NPCConfiguration, int> AmountArmy => _amountArmy;
-    
-    private void OnEnable()
-    {
-        ServiceLocator.Subscribe<ArmySystem>(this);
-    }
-
-    private void OnDisable()
-    {
-        ServiceLocator.Unsubscribe<ArmySystem>();
-    }
 
     public void Initialize(Transform armyTransform, ArmyPanel armyPanel)
     {

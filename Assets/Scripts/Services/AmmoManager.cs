@@ -7,16 +7,6 @@ public class AmmoManager : MonoBehaviour
    [SerializeField] private int amountAmmo = 15;
    private Dictionary<TurretConfiguration, Factory> _turretsFactories;
 
-   private void OnEnable()
-   {
-      ServiceLocator.Subscribe<AmmoManager>(this);
-   }
-
-   private void OnDisable()
-   {
-      ServiceLocator.Unsubscribe<AmmoManager>();
-   }
-
    private void Start()
    {
       _turretsFactories = new Dictionary<TurretConfiguration, Factory>();

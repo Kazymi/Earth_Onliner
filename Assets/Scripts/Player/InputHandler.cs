@@ -5,7 +5,6 @@ using UnityEngine.EventSystems;
 
 public class InputHandler : MonoBehaviour
 {
-    [SerializeField] private bool mobile;
     [SerializeField] private int edgesPercent;
 
 
@@ -42,20 +41,10 @@ public class InputHandler : MonoBehaviour
     public bool PositionSelection { set; get; }
     public float ZoomAxis { get; private set; }
     public Vector3 MoveVector => _returnValue;
-
-    private void OnEnable()
-    {
-        ServiceLocator.Subscribe<InputHandler>(this);
-        _onMouseDownAction += () => _previousPosition = NormalizedMousePosition;
-    }
-
-    private void OnDisable()
-    {
-        ServiceLocator.Unsubscribe<InputHandler>();
-    }
-
+    
     private void Start()
     {
+        _onMouseDownAction += () => _previousPosition = NormalizedMousePosition;
         _mainCamera = Camera.main;
     }
 

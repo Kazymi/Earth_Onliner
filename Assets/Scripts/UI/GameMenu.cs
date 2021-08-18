@@ -39,7 +39,6 @@ public class GameMenu : MonoBehaviour, IChangingAmountResources, IOnEventCallbac
 
     private void OnEnable()
     {
-        ServiceLocator.Subscribe<GameMenu>(this);
         EventBus.Subscribe(this);
 
         PhotonNetwork.AddCallbackTarget(this);
@@ -50,7 +49,6 @@ public class GameMenu : MonoBehaviour, IChangingAmountResources, IOnEventCallbac
 
     private void OnDisable()
     {
-        ServiceLocator.Unsubscribe<GameMenu>();
         EventBus.Unsubscribe(this);
 
         PhotonNetwork.RemoveCallbackTarget(this);

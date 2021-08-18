@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,29 +13,31 @@ public class LauncherMenu : MonoBehaviour
     [SerializeField] private Button leaveRoomButton;
     [SerializeField] private Button startGameRoomButton;
 
-    [SerializeField] private MenuManager menuManager;
-    [SerializeField] private Canvas titleMenu;
-    [SerializeField] private Canvas loadMenu;
-    [SerializeField] private Canvas errorMenu;
-    [SerializeField] private Canvas roomMenu;
-    [SerializeField] private Launcher launcher;
+    private MainMenuSystem _menuManager;
+    private LauncherSystem _launcherSystem;
 
-    private void Awake()
+    private void Start()
     {
-        launcher.Initialize(this);
+        _menuManager = ServiceLocator.GetService<MainMenuSystem>();
+        _launcherSystem = ServiceLocator.GetService<LauncherSystem>();
+        leaveRoomButton.onClick.AddListener(_launcherSystem.LeaveRoom);
     }
 
     private void OnEnable()
     {
         createRoomButton.onClick.AddListener(CreateRoom);
-        leaveRoomButton.onClick.AddListener(launcher.LeaveRoom);
         startGameRoomButton.onClick.AddListener(StartGame);
+        if (_launcherSystem == null)
+        {
+            return;
+        }
+        leaveRoomButton.onClick.AddListener(_launcherSystem.LeaveRoom);
     }
 
     private void OnDisable()
     {
         createRoomButton.onClick.RemoveListener(CreateRoom);
-        leaveRoomButton.onClick.RemoveListener(launcher.LeaveRoom);
+        leaveRoomButton.onClick.RemoveListener(_launcherSystem.LeaveRoom);
         startGameRoomButton.onClick.RemoveListener(StartGame);
     }
 
@@ -44,18 +47,17 @@ public class LauncherMenu : MonoBehaviour
         {
             return;
         }
-        launcher.CreateRoom(roomNameInputField.text);
-        Load();
+        _launcherSystem.CreateRoom(roomNameInputField.text);
     }
 
     public void OnJoinedLobby()
     {
-        menuManager.OpenMenu(titleMenu);
+        _menuManager.OpenMenu(MainMenuCanvasType.Title);
     }
 
     public void OnJoinedRoom(string nameRoom)
     {
-        menuManager.OpenMenu(roomMenu);
+        _menuManager.OpenMenu(MainMenuCanvasType.RoomMenu);
         roomNameText.text = nameRoom;
     }
 
@@ -63,22 +65,17 @@ public class LauncherMenu : MonoBehaviour
     {
         errorText.text = "Room Creation Failed: " + nameError;
         Debug.LogError("Room Creation Failed: " + nameError);
-        menuManager.OpenMenu(errorMenu);
-    }
-
-    public void Load()
-    {
-        menuManager.OpenMenu(loadMenu);
+        _menuManager.OpenMenu(MainMenuCanvasType.ErrorMenu);
     }
 
     public void OnRoomLeft()
     {
-        menuManager.OpenMenu(titleMenu);
+        _menuManager.OpenMenu(MainMenuCanvasType.Title);
     }
 
     private void StartGame()
     {
-        launcher.StartGame();
+        _launcherSystem.StartGame();
         startGameRoomButton.interactable = false;
     }
 }

@@ -22,7 +22,6 @@ public class SpawnArmySystemMenu : MonoBehaviour
 
     private void OnEnable()
     {
-        ServiceLocator.Subscribe<SpawnArmySystemMenu>(this);
         autoSpawnButton.onClick.AddListener(AutoSpawn);
         spawnButton.onClick.AddListener(Spawn);
         closeButton.onClick.AddListener(Close);
@@ -30,7 +29,6 @@ public class SpawnArmySystemMenu : MonoBehaviour
 
     private void OnDisable()
     {
-        ServiceLocator.Unsubscribe<SpawnArmySystemMenu>();
         autoSpawnButton.onClick.RemoveListener(AutoSpawn);
         spawnButton.onClick.RemoveListener(Spawn);
         closeButton.onClick.RemoveListener(Close);

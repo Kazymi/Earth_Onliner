@@ -13,7 +13,6 @@ public class GameManager : MonoBehaviourPunCallbacks, IOnEventCallback
     private PhotonView _photonView;
     public override void OnEnable()
     {
-        ServiceLocator.Subscribe<GameManager>(this);
         PhotonNetwork.AddCallbackTarget(this);
     }
 
@@ -24,7 +23,6 @@ public class GameManager : MonoBehaviourPunCallbacks, IOnEventCallback
 
     public override void OnDisable()
     {
-        ServiceLocator.Unsubscribe<GameManager>();
         PhotonNetwork.RemoveCallbackTarget(this);
     }
 

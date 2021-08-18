@@ -6,12 +6,12 @@ public class RoomListItem : MonoBehaviour
 {
     [SerializeField] TMP_Text text;
 
-    private Launcher _launcher;
+    private LauncherSystem _launcher;
     private RoomInfo _info;
 
     private void Start()
     {
-        _launcher = ServiceLocator.GetService<Launcher>();
+        _launcher = ServiceLocator.GetService<LauncherSystem>();
     }
 
     public void SetUp(RoomInfo _info)

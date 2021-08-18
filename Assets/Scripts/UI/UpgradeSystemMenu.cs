@@ -37,7 +37,6 @@ public class UpgradeSystemMenu : MonoBehaviour, IChangingAmountResources
         if (_upgradeSystem != null)
             upgradeButton.onClick.AddListener(_upgradeSystem.Upgrade);
         closeCanvasButton.onClick.AddListener(() => upgradeCanvas.enabled = false);
-        ServiceLocator.Subscribe<UpgradeSystemMenu>(this);
         EventBus.Subscribe(this);
     }
 
@@ -46,7 +45,6 @@ public class UpgradeSystemMenu : MonoBehaviour, IChangingAmountResources
         if (_upgradeSystem != null)
             upgradeButton.onClick.RemoveListener(_upgradeSystem.Upgrade);
         closeCanvasButton.onClick.RemoveListener(() => upgradeCanvas.enabled = false);
-        ServiceLocator.Unsubscribe<UpgradeSystemMenu>();
         EventBus.Unsubscribe(this);
     }
 

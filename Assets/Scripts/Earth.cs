@@ -4,16 +4,6 @@ using UnityEngine;
 
 public class Earth : MonoBehaviour
 {
-    private void OnEnable()
-    {
-        ServiceLocator.Subscribe<Earth>(this);
-    }
-
-    private void OnDisable()
-    {
-        ServiceLocator.Unsubscribe<Earth>();
-    }
-
     [PunRPC]
     public void BuildNewBuilding(string nameBuilding, Vector3 localPos, Quaternion rotation, string namePlayer)
     {

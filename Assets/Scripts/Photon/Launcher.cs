@@ -13,26 +13,10 @@ public class Launcher : MonoBehaviourPunCallbacks
     
     private LauncherMenu _launcherMenu;
 
-    public override void OnEnable()
-    {
-        base.OnEnable();
-        ServiceLocator.Subscribe<Launcher>(this);
-    }
-
-    public override void OnDisable()
-    {
-        base.OnDisable();
-        ServiceLocator.Unsubscribe<Launcher>();
-    }
-
     private void Start()
     {
+        _launcherMenu = ServiceLocator.GetService<LauncherMenu>();
         PhotonNetwork.ConnectUsingSettings();
-    }
-
-    public void Initialize(LauncherMenu launcherMenu)
-    {
-        _launcherMenu = launcherMenu;
     }
 
     public override void OnConnectedToMaster()
@@ -46,11 +30,7 @@ public class Launcher : MonoBehaviourPunCallbacks
     {
         _launcherMenu.OnJoinedLobby();
     }
-
-    public void CreateRoom(string nameRoom)
-    {
-        PhotonNetwork.CreateRoom(nameRoom);
-    }
+    
 
     public override void OnJoinedRoom()
     {
@@ -78,23 +58,6 @@ public class Launcher : MonoBehaviourPunCallbacks
     public override void OnCreateRoomFailed(short returnCode, string message)
     {
         _launcherMenu.OnJoinedRoomError(message);
-    }
-
-    public void StartGame()
-    {
-        PhotonNetwork.LoadLevel(1);
-    }
-
-    public void LeaveRoom()
-    {
-        PhotonNetwork.LeaveRoom();
-        _launcherMenu.Load();
-    }
-
-    public void JoinRoom(RoomInfo info)
-    {
-        PhotonNetwork.JoinRoom(info.Name);
-        _launcherMenu.Load();
     }
 
     public override void OnLeftRoom()

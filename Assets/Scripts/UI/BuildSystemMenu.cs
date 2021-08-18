@@ -12,7 +12,6 @@ public class BuildSystemMenu : MonoBehaviour
     private BuildSystem _buildSystem;
     private void OnEnable()
     {
-        ServiceLocator.Subscribe<BuildSystemMenu>(this);
         if (_buildSystem == null)
         {
             return;
@@ -23,7 +22,6 @@ public class BuildSystemMenu : MonoBehaviour
 
     private void OnDisable()
     {
-        ServiceLocator.Unsubscribe<BuildSystemMenu>();
         rotateButton.onClick.RemoveListener(_buildSystem.Rotate);
         exitButton.onClick.RemoveListener(_buildSystem.Exit);
     }

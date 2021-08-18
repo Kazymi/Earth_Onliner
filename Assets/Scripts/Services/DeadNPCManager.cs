@@ -8,16 +8,7 @@ public class DeadNPCManager : MonoBehaviour
     [SerializeField] private List<GameObject> deadNpcGameObjects;
     [SerializeField] private int amount;
     private Dictionary<string, Factory> _factories = new Dictionary<string, Factory>();
-
-    private void OnEnable()
-    {
-        ServiceLocator.Subscribe<DeadNPCManager>(this);
-    }
-
-    private void OnDisable()
-    {
-        ServiceLocator.Unsubscribe<DeadNPCManager>();
-    }
+    
 
     private void Start()
     {
