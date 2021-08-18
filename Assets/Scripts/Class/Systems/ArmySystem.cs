@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
+// TODO: as many other services can be implemented as simple c# script
 public class ArmySystem : MonoBehaviour
 {
     [SerializeField] private List<NPCConfiguration> npcConfigurations;
@@ -14,7 +15,7 @@ public class ArmySystem : MonoBehaviour
         _amountArmy = new Dictionary<NPCConfiguration, int>();
         foreach (var npc in npcConfigurations)
         {
-            _amountArmy.Add(npc,0);
+            _amountArmy.Add(npc, 0);
             var newGameObject = Instantiate(armyPanel, armyTransform);
             _armyPanels.Add(npc, newGameObject);
             newGameObject.Initialize(npc.NameNpcInArmy);
@@ -32,12 +33,12 @@ public class ArmySystem : MonoBehaviour
         _amountArmy[npcConfiguration] -= amount;
         UpdateState(npcConfiguration);
     }
-    
-    public bool Compare(NPCConfiguration npcConfiguration,int amount)
+
+    public bool Compare(NPCConfiguration npcConfiguration, int amount)
     {
         return _amountArmy[npcConfiguration] >= amount;
     }
-    
+
     private void UpdateState(NPCConfiguration npcConfiguration)
     {
         _armyPanels[npcConfiguration].UpdateState(_amountArmy[npcConfiguration]);

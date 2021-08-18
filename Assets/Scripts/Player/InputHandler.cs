@@ -5,26 +5,24 @@ using UnityEngine.EventSystems;
 
 public class InputHandler : MonoBehaviour
 {
+    public event Action OnMouseDownAction;
+
     [SerializeField] private int edgesPercent;
 
-
     private Vector3 _previousPosition;
+    // TODO: remove unused
     private Vector3 _targetPosition;
     private Camera _mainCamera;
     private Vector3 _returnValue;
 
-    private event Action _onMouseDownAction;
+    // TODO: just make event public
     private event Action _onMouseUpAction;
+
+    // TODO: continues action should not use events, it should be polled
     private event Action _onMouseAction;
 
     private Vector3 NormalizedMousePosition =>
         new Vector3(Input.mousePosition.x / Screen.width, Input.mousePosition.y / Screen.height, 0);
-
-    public event Action OnMouseDownAction
-    {
-        add => _onMouseDownAction += value;
-        remove => _onMouseDownAction -= value;
-    }
 
     public event Action OnMouseAction
     {
@@ -41,10 +39,10 @@ public class InputHandler : MonoBehaviour
     public bool PositionSelection { set; get; }
     public float ZoomAxis { get; private set; }
     public Vector3 MoveVector => _returnValue;
-    
+
     private void Start()
     {
-        _onMouseDownAction += () => _previousPosition = NormalizedMousePosition;
+        OnMouseDownAction += () => _previousPosition = NormalizedMousePosition;
         _mainCamera = Camera.main;
     }
 
@@ -63,7 +61,7 @@ public class InputHandler : MonoBehaviour
             return delta;
         }
     }
-    
+
     private void Update()
     {
         ZoomAxis = Input.GetAxis("Mouse ScrollWheel");
@@ -74,7 +72,7 @@ public class InputHandler : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-            _onMouseDownAction?.Invoke();
+            OnMouseDownAction?.Invoke();
         }
 
         if (Input.GetMouseButton(0))
@@ -97,7 +95,7 @@ public class InputHandler : MonoBehaviour
         }
         else return new RaycastHit();
     }
-    
+
     public RaycastHit GetHitPoint()
     {
         if (IsPointerOverUIObject())
@@ -110,7 +108,8 @@ public class InputHandler : MonoBehaviour
         {
             return raycastHit;
         }
-        else return new RaycastHit();
+
+        return new RaycastHit();
     }
 
     public PositionBuilding GetStartBuildPosition()
@@ -141,7 +140,6 @@ public class InputHandler : MonoBehaviour
         var percentHeightMin = (height / 100) * edgesPercent;
         var percentWightMax = wight - percentWightMin;
         var percentHeightMax = height - percentHeightMin;
-
 
         if (percentHeightMax > mousePosition.y
             && percentHeightMin < mousePosition.y

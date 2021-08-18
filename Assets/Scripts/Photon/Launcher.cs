@@ -10,7 +10,7 @@ public class Launcher : MonoBehaviourPunCallbacks
     [SerializeField] Transform playerListContent;
     [SerializeField] GameObject playerListItemPrefab;
     [SerializeField] GameObject startGameButton;
-    
+
     private LauncherMenu _launcherMenu;
 
     private void Start()
@@ -19,6 +19,7 @@ public class Launcher : MonoBehaviourPunCallbacks
         PhotonNetwork.ConnectUsingSettings();
     }
 
+    // TODO: might be a good idea to invoke signals on photon events
     public override void OnConnectedToMaster()
     {
         Debug.Log("Connected to Master");
@@ -30,7 +31,6 @@ public class Launcher : MonoBehaviourPunCallbacks
     {
         _launcherMenu.OnJoinedLobby();
     }
-    
 
     public override void OnJoinedRoom()
     {
