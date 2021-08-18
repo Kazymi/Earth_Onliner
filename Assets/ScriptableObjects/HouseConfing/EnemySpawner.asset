@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f972fd4173519ef4885e4b92dea2d034, type: 3}
   m_Name: EnemySpawner
   m_EditorClassIdentifier: 
-  buildingGameObject: {fileID: 3053800224073307662, guid: aa9ef966444fa114d8a077b771cf0606, type: 3}
+  buildingGameObject: {fileID: 3053800224073307662, guid: e81b0522022523c4e9ac2f8814ca2f24, type: 3}
   maxAmount: 1
   amountInFactory: 0

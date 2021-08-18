@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f972fd4173519ef4885e4b92dea2d034, type: 3}
   m_Name: Aero
   m_EditorClassIdentifier: 
-  buildingGameObject: {fileID: 3053800224073307662, guid: ce299c5521f64724f995ac0563b65f5c, type: 3}
+  buildingGameObject: {fileID: 3053800224073307662, guid: cc7199cfc3782d74798b10f24886e926, type: 3}
   maxAmount: 2
   amountInFactory: 0

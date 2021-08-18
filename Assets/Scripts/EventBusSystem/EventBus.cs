@@ -11,8 +11,8 @@ namespace EventBusSystem
         
         public static void Subscribe(IGlobalSubscriber subscriber)
         {
-            List<Type> subscriberTypes = EventBusHelper.GetSubscriberTypes(subscriber);
-            foreach (Type t in subscriberTypes)
+            var subscriberTypes = EventBusHelper.GetSubscriberTypes(subscriber);
+            foreach (var t in subscriberTypes)
             {
                 if (!s_Subscribers.ContainsKey(t))
                 {
@@ -24,8 +24,8 @@ namespace EventBusSystem
         
         public static void Unsubscribe(IGlobalSubscriber subscriber)
         {
-            List<Type> subscriberTypes = EventBusHelper.GetSubscriberTypes(subscriber);
-            foreach (Type t in subscriberTypes)
+            var subscriberTypes = EventBusHelper.GetSubscriberTypes(subscriber);
+            foreach (var t in subscriberTypes)
             {
                 if (s_Subscribers.ContainsKey(t))
                     s_Subscribers[t].Remove(subscriber);

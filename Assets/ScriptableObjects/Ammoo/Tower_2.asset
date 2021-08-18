@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Tower_2
   m_EditorClassIdentifier: 
   ammoGameObject: {fileID: 6076346199555416928, guid: 069ef06f63c9cf8438d0123e31968dcc, type: 3}
-  fireRate: 0.5
+  fireRate: 0.3

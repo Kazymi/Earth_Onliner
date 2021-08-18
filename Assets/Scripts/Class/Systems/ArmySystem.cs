@@ -6,9 +6,6 @@ public class ArmySystem : MonoBehaviour
     [SerializeField] private List<NPCConfiguration> npcConfigurations;
     private Dictionary<NPCConfiguration, ArmyPanel> _armyPanels;
     private Dictionary<NPCConfiguration, int> _amountArmy;
-    
-    public Dictionary<NPCConfiguration, ArmyPanel> ArmyPanels => _armyPanels;
-
     public Dictionary<NPCConfiguration, int> AmountArmy => _amountArmy;
     
     private void OnEnable()

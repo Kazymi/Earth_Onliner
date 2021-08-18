@@ -81,6 +81,7 @@ public class HelicopterMovement : MonoBehaviour, IMovement
     {
         if (isMine == false)
         {
+            Destroy(GetComponent<NavMeshAgent>());
             Destroy(this);
         }
     }

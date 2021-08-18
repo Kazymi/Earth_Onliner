@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using ExitGames.Client.Photon;
 using Photon.Pun;
@@ -16,6 +17,11 @@ public class GameManager : MonoBehaviourPunCallbacks, IOnEventCallback
         PhotonNetwork.AddCallbackTarget(this);
     }
 
+    private void Awake()
+    {
+        _photonView = GetComponent<PhotonView>();
+    }
+
     public override void OnDisable()
     {
         ServiceLocator.Unsubscribe<GameManager>();
@@ -24,7 +30,7 @@ public class GameManager : MonoBehaviourPunCallbacks, IOnEventCallback
 
     public void MainHouseDestroy()
     {
-        object[] content = new object[]{_photonView.Controller.NickName};
+        var content = new object[]{_photonView.Controller.NickName};
         RaiseEventOptions raiseEventOptions = new RaiseEventOptions {Receivers = ReceiverGroup.All};
         PhotonNetwork.RaiseEvent((int) EventType.FinishGame, content, raiseEventOptions,
             SendOptions.SendReliable);

@@ -427,7 +427,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5247e44fd8297f4894f50502238dbcd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Dead: 0
   deadGameObject: {fileID: 1940402267846110, guid: acc5ce05f96f98343a9455bc8e5f1c2b, type: 3}
   health: 50
   isMine: 0

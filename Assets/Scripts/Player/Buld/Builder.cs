@@ -38,6 +38,18 @@ public class Builder : MonoBehaviour
         _builtHouses = ServiceLocator.GetService<BuiltHouses>();
     }
 
+    private void Update()
+    {
+        if (_newBuild != null)
+        {
+            _buildSystemMenu.UnlockBuildButton(_newBuild.CheckPosition());
+        }
+        else
+        {
+            _buildSystemMenu.UnlockBuildButton(false);
+        }
+    }
+    
     public void StopBuild()
     {
         _buildingManager.GetFactoryByName(_currentBuildName).Destroy(_newBuild.gameObject);
@@ -87,17 +99,5 @@ public class Builder : MonoBehaviour
         _playerSystem.BuildComplete();
         _buildSystemMenu.ActivateCanvas(false);
         _builtHouses.AddBuilding(_currentBuildingConfiguration);
-    }
-
-    private void Update()
-    {
-        if (_newBuild != null)
-        {
-            _buildSystemMenu.UnlockBuildButton(_newBuild.CheckPosition());
-        }
-        else
-        {
-            _buildSystemMenu.UnlockBuildButton(false);
-        }
     }
 }

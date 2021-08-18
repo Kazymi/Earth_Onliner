@@ -55,6 +55,7 @@ public class CarMovement : MonoBehaviour, IMovement
     {
         if (isMine == false)
         {
+            Destroy(GetComponent<NavMeshAgent>());
             Destroy(this);
         }
     }

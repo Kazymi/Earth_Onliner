@@ -17,6 +17,7 @@ public class GeneratorResourceUpgrader : MonoBehaviour, Upgrader
         {
             Destroy(this);
         }
+
         _upgradeSystemMenu = ServiceLocator.GetService<UpgradeSystemMenu>();
         CurrentLvl = 0;
     }
@@ -45,6 +46,7 @@ public class GeneratorResourceUpgrader : MonoBehaviour, Upgrader
         {
             generatorResource.AddResource(resourceGenerateUpgrade[CurrentLvl].NewWood);
         }
+
         CurrentLvl++;
         _upgradeSystemMenu.CloseCanvas();
     }

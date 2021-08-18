@@ -10,13 +10,13 @@ GameObject:
   m_Component:
   - component: {fileID: 3053800224073307661}
   - component: {fileID: 3053800224073307660}
-  - component: {fileID: 8702274564719977238}
   - component: {fileID: -5273142172150698372}
   - component: {fileID: 6360420400753905513}
   - component: {fileID: -5570743962202875810}
   - component: {fileID: -151313132699183233}
   - component: {fileID: -7227896049596378923}
   - component: {fileID: -3134904216945608754}
+  - component: {fileID: 8787555250360938780}
   m_Layer: 6
   m_Name: CarFabric
   m_TagString: Untagged
@@ -52,22 +52,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 5.2, y: 1, z: 5.41}
   m_Center: {x: 0.0112730665, y: 0, z: 0.11655681}
---- !u!114 &8702274564719977238
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3053800224073307662}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8b4d00ab3b6d52f44952fe6236910881, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  radiusBuilding: 34.9
-  buildingType: 0
-  resourcesForBuilding: 0
-  _health: {fileID: -5570743962202875810}
 --- !u!114 &-5273142172150698372
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -119,7 +103,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5247e44fd8297f4894f50502238dbcd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Dead: 0
   deadGameObject: {fileID: 0}
   health: 500
   isMine: 0
@@ -176,6 +159,20 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
   m_UseLocal: 0
+--- !u!114 &8787555250360938780
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3053800224073307662}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7a382b6a9df968439be5902c2ea9dd6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _health: {fileID: -5570743962202875810}
+  buildingType: 3
 --- !u!1001 &8834998969945727250
 PrefabInstance:
   m_ObjectHideFlags: 0

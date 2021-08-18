@@ -9,6 +9,7 @@ public class ArmySpawner : MonoBehaviour
     [SerializeField] private List<NPCConfiguration> npcConfigurations;
     [SerializeField] private float timer;
     [SerializeField] private List<Transform> spawnPoints;
+    
     private SpawnArmySystemMenu _spawnArmySystemMenu;
     private ArmySpawnConfiguration _armySpawnConfiguration;
     private ArmySystem _armySystem;

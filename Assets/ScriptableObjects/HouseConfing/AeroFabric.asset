@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f972fd4173519ef4885e4b92dea2d034, type: 3}
   m_Name: AeroFabric
   m_EditorClassIdentifier: 
-  buildingGameObject: {fileID: 3053800224073307662, guid: b4297c9aefebe854bb8620d8c086bda5, type: 3}
+  buildingGameObject: {fileID: 3053800224073307662, guid: e1d8e07cada342e448199f7e6ef3149b, type: 3}
   maxAmount: 2
   amountInFactory: 0

@@ -40,14 +40,12 @@ GameObject:
   m_Component:
   - component: {fileID: 3053800224073307661}
   - component: {fileID: 3053800224073307660}
-  - component: {fileID: 8702274564719977238}
   - component: {fileID: -5273142172150698372}
-  - component: {fileID: -6900986559703710043}
-  - component: {fileID: 7011447494256752107}
   - component: {fileID: 7420132254283946892}
   - component: {fileID: -4130610250435812204}
   - component: {fileID: 3752374320751734002}
   - component: {fileID: 1029874918333129030}
+  - component: {fileID: 4223486227576678436}
   m_Layer: 6
   m_Name: DefenceTower 2
   m_TagString: Untagged
@@ -83,22 +81,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.840699, y: 2.316393, z: 1.666105}
   m_Center: {x: -0.12371242, y: 0.6581952, z: 0.012880167}
---- !u!114 &8702274564719977238
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3053800224073307662}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8b4d00ab3b6d52f44952fe6236910881, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  radiusBuilding: 12.15
-  buildingType: 0
-  resourcesForBuilding: 0
-  _health: {fileID: -4130610250435812204}
 --- !u!114 &-5273142172150698372
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -122,68 +104,6 @@ MonoBehaviour:
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &-6900986559703710043
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3053800224073307662}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 92a63a5e66008ff49b0a76ec5d8e470e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  resourceGenerates:
-  - generatingResource:
-      typeResource: 0
-      amount: 2
-    generationTime: 1
---- !u!114 &7011447494256752107
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3053800224073307662}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d75b36cfbb95264eb35b2e89eba5446, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  generatorResource: {fileID: -6900986559703710043}
-  resourceGenerateUpgrade:
-  - newGold:
-      generatingResource:
-        typeResource: 2
-        amount: 0
-      generationTime: 0
-    newWood:
-      generatingResource:
-        typeResource: 0
-        amount: 4
-      generationTime: 1
-    newIron:
-      generatingResource:
-        typeResource: 1
-        amount: 0
-      generationTime: 0
-  - newGold:
-      generatingResource:
-        typeResource: 2
-        amount: 0
-      generationTime: 0
-    newWood:
-      generatingResource:
-        typeResource: 0
-        amount: 10
-      generationTime: 1
-    newIron:
-      generatingResource:
-        typeResource: 1
-        amount: 0
-      generationTime: 0
-  priceConfiguration: {fileID: 11400000, guid: 7ba441923aaca524e928bf3494f02566, type: 2}
 --- !u!208 &7420132254283946892
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -212,7 +132,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5247e44fd8297f4894f50502238dbcd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Dead: 0
   deadGameObject: {fileID: 0}
   health: 500
   isMine: 0
@@ -229,7 +148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5569ad2278cbee14886df8b82e92d363, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buildingContractor: {fileID: 8702274564719977238}
+  buildingContractor: {fileID: 4223486227576678436}
   turrets:
   - {fileID: 599515366950301973}
   cooldown: 1
@@ -250,6 +169,20 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
   m_UseLocal: 0
+--- !u!114 &4223486227576678436
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3053800224073307662}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7a382b6a9df968439be5902c2ea9dd6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _health: {fileID: -4130610250435812204}
+  buildingType: 2
 --- !u!114 &599515366950301973
 MonoBehaviour:
   m_ObjectHideFlags: 0

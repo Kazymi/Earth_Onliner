@@ -1,3 +1,4 @@
+using System;
 using Photon.Pun;
 using UnityEngine;
 
@@ -18,9 +19,15 @@ public class BuildingContractor : MonoBehaviour
         _health.IsMine = isMine;
     }
 
+    private void Awake()
+    {
+        _photonView = GetComponent<PhotonView>();
+    }
+
     private void Start()
     {
-        ServiceLocator.GetService<Builders>().NewBuilding(gameObject,_isMine,buildingType);
-        _photonView = GetComponent<PhotonView>();
+        var builders = ServiceLocator.GetService<Builders>();
+        Debug.Log(builders);
+        builders.NewBuilding(gameObject,_isMine,buildingType);
     }
 }

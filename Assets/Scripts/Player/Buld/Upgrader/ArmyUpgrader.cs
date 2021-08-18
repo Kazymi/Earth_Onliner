@@ -10,6 +10,8 @@ public class ArmyUpgrader : MonoBehaviour,Upgrader
     
     private UpgradeSystemMenu _upgradeSystemMenu;
 
+    public int CurrentLvl { get; set; }
+    
     private void Start()
     {
         if (GetComponent<BuildingContractor>().IsMine == false)
@@ -18,8 +20,6 @@ public class ArmyUpgrader : MonoBehaviour,Upgrader
         }
         _upgradeSystemMenu = ServiceLocator.GetService<UpgradeSystemMenu>();
     }
-
-    public int CurrentLvl { get; set; }
     public void OnMouseDownAction()
     {
         if (CurrentLvl <= priceConfiguration.Prices.Count - 1)

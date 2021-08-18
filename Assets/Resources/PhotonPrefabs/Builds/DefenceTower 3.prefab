@@ -204,12 +204,12 @@ GameObject:
   m_Component:
   - component: {fileID: 3053800224073307661}
   - component: {fileID: 3053800224073307660}
-  - component: {fileID: 8702274564719977238}
   - component: {fileID: -5273142172150698372}
   - component: {fileID: 7420132254283946892}
   - component: {fileID: -4130610250435812204}
   - component: {fileID: 5959126509146232026}
   - component: {fileID: -6437938894195600797}
+  - component: {fileID: 5320187483334862199}
   m_Layer: 6
   m_Name: DefenceTower 3
   m_TagString: Untagged
@@ -245,22 +245,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2, y: 1.9911807, z: 2}
   m_Center: {x: 0, y: 0.59559023, z: 0}
---- !u!114 &8702274564719977238
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3053800224073307662}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8b4d00ab3b6d52f44952fe6236910881, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  radiusBuilding: 20.5
-  buildingType: 0
-  resourcesForBuilding: 0
-  _health: {fileID: -4130610250435812204}
 --- !u!114 &-5273142172150698372
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -312,7 +296,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5247e44fd8297f4894f50502238dbcd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Dead: 0
   deadGameObject: {fileID: 0}
   health: 500
   isMine: 0
@@ -329,7 +312,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5569ad2278cbee14886df8b82e92d363, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buildingContractor: {fileID: 8702274564719977238}
+  buildingContractor: {fileID: 5320187483334862199}
   turrets:
   - {fileID: 5646087817634173014}
   cooldown: 2
@@ -350,6 +333,20 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
   m_UseLocal: 0
+--- !u!114 &5320187483334862199
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3053800224073307662}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7a382b6a9df968439be5902c2ea9dd6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _health: {fileID: -4130610250435812204}
+  buildingType: 2
 --- !u!1 &6618259951062370949
 GameObject:
   m_ObjectHideFlags: 0

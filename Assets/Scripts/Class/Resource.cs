@@ -8,7 +8,6 @@ public class Resource
     [SerializeField] private int amount;
 
     public TypeResource TypeResource => typeResource;
-
     public int Amount
     {
         get => amount;

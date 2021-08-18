@@ -17,6 +17,7 @@ public class Builders
                 _mainGameObject[buildingType].Add(building.transform);
                 return;
             }
+
             _mainGameObject.Add(buildingType, new List<Transform>());
             _mainGameObject[buildingType].Add(building.transform);
             if (buildingType == BuildingType.MainHouse)
@@ -26,7 +27,7 @@ public class Builders
                 health.NPCDeath += gameManager.MainHouseDestroy;
             }
         }
-        
+
         else
         {
             if (_enemyGameObject.ContainsKey(buildingType))
@@ -34,6 +35,7 @@ public class Builders
                 _enemyGameObject[buildingType].Add(building.transform);
                 return;
             }
+
             _enemyGameObject.Add(buildingType, new List<Transform>());
             _enemyGameObject[buildingType].Add(building.transform);
         }
@@ -65,7 +67,7 @@ public class Builders
         var newBuildings = new Dictionary<BuildingType, List<Transform>>();
         foreach (var builds in _enemyGameObject)
         {
-            newBuildings.Add(builds.Key,new List<Transform>());
+            newBuildings.Add(builds.Key, new List<Transform>());
             foreach (var build in builds.Value)
             {
                 if (build != null)
@@ -75,6 +77,7 @@ public class Builders
                 }
             }
         }
+
         _enemyGameObject = newBuildings;
 
         if (findBuildings.Count == 0)

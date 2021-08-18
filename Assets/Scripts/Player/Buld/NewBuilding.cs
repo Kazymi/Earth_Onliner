@@ -5,7 +5,6 @@ using UnityEngine;
 public class NewBuilding : MonoBehaviour
 {
     [SerializeField] private float radiusBuilding;
-    [SerializeField] private BuildingType buildingType;
     [SerializeField] private BuildingResource resourcesForBuilding;
 
     public BuildingResource Resource => resourcesForBuilding;
@@ -27,7 +26,7 @@ public class NewBuilding : MonoBehaviour
 
         foreach (var findGameObject in allFindGameObject)
         {
-            var building = findGameObject.GetComponent<NewBuilding>();
+            var building = findGameObject.GetComponent<BuildingContractor>();
             var resource = findGameObject.GetComponent<ResourceForConstruction>();
 
             if (building)

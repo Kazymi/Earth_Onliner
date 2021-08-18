@@ -1,12 +1,15 @@
 using System.Collections.Generic;
+using DG.Tweening;
 using EventBusSystem;
+using ExitGames.Client.Photon;
 using Photon.Pun;
+using Photon.Realtime;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class GameMenu : MonoBehaviour, IChangingAmountResources
+public class GameMenu : MonoBehaviour, IChangingAmountResources, IOnEventCallback
 {
     [SerializeField] private TMP_Text woodText;
     [SerializeField] private TMP_Text ironText;
@@ -15,7 +18,9 @@ public class GameMenu : MonoBehaviour, IChangingAmountResources
     [SerializeField] private Button exitGameButton;
     [SerializeField] private Button disconnectGameButton;
     [SerializeField] private Button returnToGameButton;
+    [SerializeField] private TMP_Text finishGameText;
 
+    private bool _gameFinished;
     private Dictionary<TypeResource, TMP_Text> _changingResources;
 
     private void Start()
@@ -36,7 +41,8 @@ public class GameMenu : MonoBehaviour, IChangingAmountResources
     {
         ServiceLocator.Subscribe<GameMenu>(this);
         EventBus.Subscribe(this);
-        
+
+        PhotonNetwork.AddCallbackTarget(this);
         disconnectGameButton.onClick.AddListener(Disconnect);
         returnToGameButton.onClick.AddListener(() => OpenCanvas(false));
         exitGameButton.onClick.AddListener(() => OpenCanvas(true));
@@ -46,7 +52,8 @@ public class GameMenu : MonoBehaviour, IChangingAmountResources
     {
         ServiceLocator.Unsubscribe<GameMenu>();
         EventBus.Unsubscribe(this);
-        
+
+        PhotonNetwork.RemoveCallbackTarget(this);
         disconnectGameButton.onClick.RemoveAllListeners();
         returnToGameButton.onClick.RemoveAllListeners();
         exitGameButton.onClick.RemoveAllListeners();
@@ -67,5 +74,25 @@ public class GameMenu : MonoBehaviour, IChangingAmountResources
     {
         exitGameCanvas.enabled = opened;
         exitGameButton.interactable = !opened;
+    }
+
+    public void OnEvent(EventData photonEvent)
+    {
+        if (_gameFinished)
+        {
+            return;
+        }
+
+        var eventCode = photonEvent.Code;
+
+        if (eventCode != (int) EventType.FinishGame)
+        {
+            return;
+        }
+
+        object[] data = (object[])photonEvent.CustomData;
+        _gameFinished = true;
+        finishGameText.transform.DOScale(2, 3);
+        finishGameText.text = (string) data[0] +" WIN";
     }
 }

@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3053800224073307661}
-  - component: {fileID: 8702274564719977238}
   - component: {fileID: -5273142172150698372}
   - component: {fileID: -6900986559703710043}
   - component: {fileID: 3357297114981919963}
@@ -17,6 +16,7 @@ GameObject:
   - component: {fileID: 8463606132237077311}
   - component: {fileID: -691581840808961608}
   - component: {fileID: -1699111853789871313}
+  - component: {fileID: 3830496283747792775}
   m_Layer: 6
   m_Name: BlueHouse
   m_TagString: Untagged
@@ -42,22 +42,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8702274564719977238
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3053800224073307662}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8b4d00ab3b6d52f44952fe6236910881, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  radiusBuilding: 32.5
-  buildingType: 0
-  resourcesForBuilding: 2
-  _health: {fileID: -691581840808961608}
 --- !u!114 &-5273142172150698372
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -76,7 +60,8 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   observableSearch: 2
-  ObservedComponents: []
+  ObservedComponents:
+  - {fileID: -1699111853789871313}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -183,8 +168,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5247e44fd8297f4894f50502238dbcd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  deadGameObject: {fileID: 0}
   health: 500
   isMine: 0
+  target: {fileID: 0}
 --- !u!114 &-1699111853789871313
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -201,6 +188,20 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
   m_UseLocal: 1
+--- !u!114 &3830496283747792775
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3053800224073307662}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7a382b6a9df968439be5902c2ea9dd6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _health: {fileID: -691581840808961608}
+  buildingType: 1
 --- !u!1001 &3457372117507924333
 PrefabInstance:
   m_ObjectHideFlags: 0

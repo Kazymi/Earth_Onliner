@@ -12,6 +12,9 @@ public class NPCHealth : MonoBehaviourPunCallbacks, IDamageable
     private PhotonView _photonView;
     private DeadNPCManager _deadNpcManager;
     private event Action _npcDeath;
+    private float _currentHealth;
+    public Transform TargetTransform { get => target; set => target = value; }
+
     public bool IsMine
     {
         get => isMine;
@@ -23,10 +26,6 @@ public class NPCHealth : MonoBehaviourPunCallbacks, IDamageable
         add => _npcDeath += value;
         remove => _npcDeath -= value;
     }
-
-    private float _currentHealth;
-    public Transform TargetTransform { get => target; set => target = value; }
-
     private void Start()
     {
         _deadNpcManager = ServiceLocator.GetService<DeadNPCManager>();
@@ -49,9 +48,7 @@ public class NPCHealth : MonoBehaviourPunCallbacks, IDamageable
         _currentHealth -= damage;
         if (_currentHealth <= 0)
         {
-            Debug.Log("TakeDamage");
             _photonView.RPC(RPCEvents.Death.ToString(), RpcTarget.All);
-            _npcDeath?.Invoke();
         }
     }
 
@@ -64,6 +61,7 @@ public class NPCHealth : MonoBehaviourPunCallbacks, IDamageable
             _deadNpcManager.SpawnDeadNPC(target,deadGameObject.name);
         }
         Destroy(gameObject);
+        _npcDeath?.Invoke();
     }
 
     public void Initialize()
