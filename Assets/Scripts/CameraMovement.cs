@@ -55,7 +55,7 @@ public class CameraMovement : MonoBehaviour
     private void Move()
     {
         var delta = _cameraMovementChecker.GetMoveDirection();
-        _targetPosition += delta * sensitivity * Time.deltaTime;
+        _targetPosition += delta * sensitivity;
     }
     
     private void Zoom()
