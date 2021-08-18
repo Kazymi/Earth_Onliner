@@ -136,6 +136,21 @@ MonoBehaviour:
         typeResource: 1
         amount: 0
       generationTime: 0
+  - newGold:
+      generatingResource:
+        typeResource: 2
+        amount: 0
+      generationTime: 0
+    newWood:
+      generatingResource:
+        typeResource: 0
+        amount: 25
+      generationTime: 1
+    newIron:
+      generatingResource:
+        typeResource: 1
+        amount: 0
+      generationTime: 0
   priceConfiguration: {fileID: 11400000, guid: 7ba441923aaca524e928bf3494f02566, type: 2}
 --- !u!208 &7420132254283946892
 NavMeshObstacle:

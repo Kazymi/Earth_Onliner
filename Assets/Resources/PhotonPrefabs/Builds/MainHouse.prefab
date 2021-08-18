@@ -90,15 +90,15 @@ MonoBehaviour:
   resourceGenerates:
   - generatingResource:
       typeResource: 2
-      amount: 1000
+      amount: 1
     generationTime: 2
   - generatingResource:
       typeResource: 0
-      amount: 1000
+      amount: 0
     generationTime: 2
   - generatingResource:
       typeResource: 1
-      amount: 1000
+      amount: 0
     generationTime: 2
 --- !u!114 &7053219011028846661
 MonoBehaviour:
@@ -133,6 +133,21 @@ MonoBehaviour:
       generatingResource:
         typeResource: 2
         amount: 2
+      generationTime: 1
+    newWood:
+      generatingResource:
+        typeResource: 0
+        amount: 0
+      generationTime: 0
+    newIron:
+      generatingResource:
+        typeResource: 1
+        amount: 0
+      generationTime: 0
+  - newGold:
+      generatingResource:
+        typeResource: 2
+        amount: 5
       generationTime: 1
     newWood:
       generatingResource:

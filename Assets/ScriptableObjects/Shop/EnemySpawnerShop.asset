@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: EnemySpawnerShop
   m_EditorClassIdentifier: 
   buildingConfiguration: {fileID: 11400000, guid: ecdbc730725bc594a8c66b37c1008210, type: 2}
-  needWood: 0
-  needGold: 0
-  needIron: 0
+  needWood: 50
+  needGold: 50
+  needIron: 25
   description: "\u0412\u043E\u0435\u043D\u043D\u0430\u044F \u0444\u0430\u0431\u0440\u0438\u043A\u0430"
   icon: {fileID: 21300000, guid: 4bd8b052a163aed4993dfaa6cefd303f, type: 3}
