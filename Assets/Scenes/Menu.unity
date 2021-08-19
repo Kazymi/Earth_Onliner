@@ -269,7 +269,6 @@ GameObject:
   - component: {fileID: 115574820}
   - component: {fileID: 115574819}
   - component: {fileID: 115574818}
-  - component: {fileID: 115574817}
   - component: {fileID: 115574822}
   m_Layer: 0
   m_Name: ErrorMenu
@@ -278,19 +277,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &115574817
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 115574816}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67f867f05d404fb6b12e5a21b36cf633, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mainMenuCanvasType: 4
 --- !u!114 &115574818
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -384,6 +370,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d8f5355025b97149908c46abb5829c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainMenuCanvasType: 4
   errorText: {fileID: 1414290306}
   toTitleButton: {fileID: 640940191}
 --- !u!1 &293511810
@@ -1344,7 +1331,6 @@ GameObject:
   m_Component:
   - component: {fileID: 556186462}
   - component: {fileID: 556186461}
-  - component: {fileID: 556186463}
   m_Layer: 0
   m_Name: GameInstallers
   m_TagString: Untagged
@@ -1366,11 +1352,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainMenuCanvasList:
   - {fileID: 710691963}
-  - {fileID: 1209705596}
-  - {fileID: 1888586379}
-  - {fileID: 1341728569}
-  - {fileID: 115574817}
-  - {fileID: 842730223}
+  - {fileID: 1209705601}
+  - {fileID: 1888586384}
+  - {fileID: 1341728574}
+  - {fileID: 115574822}
+  - {fileID: 842730228}
   launcher: {fileID: 1832125229}
   roomListContent: {fileID: 513197373}
   roomListItemPrefab: {fileID: 5590041413162275129, guid: 5d2125c99c1303c4ebb51e5c075ce81d, type: 3}
@@ -1388,19 +1374,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &556186463
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 556186460}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c46733d616cd4781b8a796e0e3ebe69f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  launcherMenu: {fileID: 613306748}
 --- !u!1 &572175655
 GameObject:
   m_ObjectHideFlags: 0
@@ -1585,7 +1558,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 613306747}
-  - component: {fileID: 613306748}
   m_Layer: 0
   m_Name: Canvases
   m_TagString: Untagged
@@ -1613,18 +1585,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &613306748
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 613306743}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 78281ba08980fba4c855b4fdf16e4a14, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &623686130
 GameObject:
   m_ObjectHideFlags: 0
@@ -2156,7 +2116,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 710691962}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67f867f05d404fb6b12e5a21b36cf633, type: 3}
+  m_Script: {fileID: 11500000, guid: b645a733eabaf814caab5a37885b60d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   mainMenuCanvasType: 0
@@ -2676,7 +2636,6 @@ GameObject:
   - component: {fileID: 842730226}
   - component: {fileID: 842730225}
   - component: {fileID: 842730224}
-  - component: {fileID: 842730223}
   - component: {fileID: 842730228}
   m_Layer: 0
   m_Name: FindRoom
@@ -2685,19 +2644,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &842730223
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 842730222}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67f867f05d404fb6b12e5a21b36cf633, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mainMenuCanvasType: 5
 --- !u!114 &842730224
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2791,6 +2737,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44fb9ca457cd21d46b1b5fd64dafb00c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainMenuCanvasType: 5
   toTitleButton: {fileID: 1839944161}
 --- !u!1 &844539212
 GameObject:
@@ -3727,8 +3674,6 @@ GameObject:
   - component: {fileID: 1209705599}
   - component: {fileID: 1209705598}
   - component: {fileID: 1209705597}
-  - component: {fileID: 1209705596}
-  - component: {fileID: 1209705600}
   - component: {fileID: 1209705601}
   m_Layer: 0
   m_Name: Title
@@ -3757,19 +3702,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &1209705596
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1209705594}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67f867f05d404fb6b12e5a21b36cf633, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mainMenuCanvasType: 1
 --- !u!114 &1209705597
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3831,19 +3763,6 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
---- !u!114 &1209705600
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1209705594}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cded24cfa1036de4fb6b647c2fedfd7a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  usernameInput: {fileID: 572175657}
 --- !u!114 &1209705601
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3856,9 +3775,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cafe215955641a98b2f26e643289a43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainMenuCanvasType: 1
   toListRoomPanelButton: {fileID: 1324654640}
   toCreateRoomPanelButton: {fileID: 477066598}
   exitGameButton: {fileID: 1131524896}
+  usernameInput: {fileID: 572175657}
 --- !u!1 &1238932395
 GameObject:
   m_ObjectHideFlags: 0
@@ -4190,7 +4111,6 @@ GameObject:
   - component: {fileID: 1341728572}
   - component: {fileID: 1341728571}
   - component: {fileID: 1341728570}
-  - component: {fileID: 1341728569}
   - component: {fileID: 1341728574}
   m_Layer: 0
   m_Name: RoomMenu
@@ -4199,19 +4119,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1341728569
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1341728568}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67f867f05d404fb6b12e5a21b36cf633, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mainMenuCanvasType: 3
 --- !u!114 &1341728570
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4302,9 +4209,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1341728568}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 15fad91aec7f5124e8e8463f808ae116, type: 3}
+  m_Script: {fileID: 11500000, guid: c1d91239561c6484aab4e897ebd17a72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainMenuCanvasType: 3
   startGameButton: {fileID: 740400224}
   leaveRoomButton: {fileID: 451307852}
   roomNameText: {fileID: 738420261}
@@ -5100,7 +5008,6 @@ GameObject:
   - component: {fileID: 1888586382}
   - component: {fileID: 1888586381}
   - component: {fileID: 1888586380}
-  - component: {fileID: 1888586379}
   - component: {fileID: 1888586384}
   m_Layer: 0
   m_Name: Create
@@ -5109,19 +5016,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1888586379
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1888586378}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67f867f05d404fb6b12e5a21b36cf633, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mainMenuCanvasType: 2
 --- !u!114 &1888586380
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5215,6 +5109,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74e0a42e90e06a54286ba0a87576f1cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainMenuCanvasType: 2
   createGameButton: {fileID: 513533392}
   roomNameInputField: {fileID: 527412676}
 --- !u!1 &1917619822

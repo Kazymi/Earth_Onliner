@@ -5,14 +5,12 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class RoomCreateMenu : MonoBehaviour
+public class RoomCreateMenu : MainMenuCanvas
 {
     [SerializeField] private Button createGameButton;
     [SerializeField] TMP_InputField roomNameInputField;
 
     private LauncherSystem _launcherSystem;
-
-
     private void OnEnable()
     {
         createGameButton.onClick.AddListener(CreateRoom);

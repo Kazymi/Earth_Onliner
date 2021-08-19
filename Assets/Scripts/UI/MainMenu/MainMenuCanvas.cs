@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-    public class MainMenuCanvas : MonoBehaviour
+    public abstract class MainMenuCanvas : MonoBehaviour
     {
         [SerializeField] private MainMenuCanvasType mainMenuCanvasType;
 

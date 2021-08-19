@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ErrorMenu : MonoBehaviour
+public class ErrorMenu : MainMenuCanvas
 {
     [SerializeField] private TMP_Text errorText;
     [SerializeField] private Button toTitleButton;

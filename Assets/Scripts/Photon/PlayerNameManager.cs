@@ -2,23 +2,15 @@
 using TMPro;
 using UnityEngine;
 
-public class PlayerNameManager : MonoBehaviour
+public class PlayerNameSystem
 {
-    [SerializeField] TMP_InputField usernameInput;
 
+    private string _currentNickName;
     private const string _saveName = "Nickname";
 
-    private void OnEnable()
-    {
-        usernameInput.onValueChanged.AddListener(UpdateNickName);
-    }
+    public string CurrentNickName => _currentNickName;
 
-    private void OnDisable()
-    {
-        usernameInput.onValueChanged.RemoveListener(UpdateNickName);
-    }
-
-    private void Start()
+    public PlayerNameSystem()
     {
         var nick = PlayerPrefs.GetString(_saveName);
         if (string.IsNullOrEmpty(nick))
@@ -28,9 +20,9 @@ public class PlayerNameManager : MonoBehaviour
         UpdateNickName(nick);
     }
 
-    private void UpdateNickName(string newText)
+    public void UpdateNickName(string newText)
     {
-        usernameInput.text = newText;
+        _currentNickName = newText;
         PhotonNetwork.NickName = newText;
         PlayerPrefs.SetString(_saveName, newText);
     }

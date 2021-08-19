@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ListRoomMenu : MonoBehaviour
+public class ListRoomMenu : MainMenuCanvas
 {
    [SerializeField] private Button toTitleButton;
 

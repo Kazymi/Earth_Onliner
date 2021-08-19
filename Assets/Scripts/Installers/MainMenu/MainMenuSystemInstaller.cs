@@ -10,6 +10,7 @@
         [SerializeField] private Transform roomListContent;
         [SerializeField] private GameObject roomListItemPrefab;
 
+        private PlayerNameSystem _playerNameSystem;
         private RoomSystem _roomSystem;
         private MainMenuSystem _mainMenuSystem;
         private LauncherSystem _launcherSystem;
@@ -18,7 +19,10 @@
         private void Awake()
         {
             ServiceLocator.Subscribe<Launcher>(launcher);
-         
+
+            _playerNameSystem = new PlayerNameSystem();
+            ServiceLocator.Subscribe<PlayerNameSystem>(_playerNameSystem);
+            
             _listRoomSystem = new ListRoomSystem(roomListContent, roomListItemPrefab);
             ServiceLocator.Subscribe<ListRoomSystem>(_listRoomSystem);
             
