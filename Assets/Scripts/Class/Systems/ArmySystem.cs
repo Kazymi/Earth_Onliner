@@ -16,7 +16,6 @@ public class ArmySystem
             _amountArmy.Add(npc, 0);
             var newGameObject = GameObject.Instantiate(armyPanel, armyTransform);
             _armyPanels.Add(npc, newGameObject);
-            _armyPanels.Add(npc, newGameObject);
             newGameObject.Initialize(npc.NameNpcInArmy);
         }
     }
