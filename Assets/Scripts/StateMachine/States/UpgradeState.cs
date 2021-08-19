@@ -25,7 +25,7 @@
         private void OnMouseDown()
         {
             var hit = _inputHandler.GetHitPoint();
-            if(hit.collider == null || _inputHandler.MoveVector != Vector3.zero) return;
+            if(hit.collider == null) return;
             var upgrader = hit.collider.GetComponent<Upgrader>();
             if (upgrader != null)
             {

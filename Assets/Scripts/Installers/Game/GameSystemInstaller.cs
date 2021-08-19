@@ -6,8 +6,9 @@ using UnityEngine;
 public class GameSystemInstaller : MonoBehaviour
 {
     [SerializeField] private PlayerSystem playerSystem;
-    [SerializeField] private ArmySystem armySystem;
+    [SerializeField] private List<NPCConfiguration> npcConfigurations;
     
+    private ArmySystem _armySystem;
     private BuildSystem _buildSystem;
     private SpawnArmySystem _spawnArmySystem;
 
@@ -15,8 +16,9 @@ public class GameSystemInstaller : MonoBehaviour
     {
         _buildSystem = new BuildSystem();
         _spawnArmySystem = new SpawnArmySystem();
+        _armySystem = new ArmySystem();
         
-        ServiceLocator.Subscribe<ArmySystem>(armySystem);
+        ServiceLocator.Subscribe<ArmySystem>(_armySystem);
         ServiceLocator.Subscribe<SpawnArmySystem>(_spawnArmySystem);
         ServiceLocator.Subscribe<BuildSystem>(_buildSystem);
         ServiceLocator.Subscribe<PlayerSystem>(playerSystem);

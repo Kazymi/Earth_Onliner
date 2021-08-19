@@ -1,90 +1,72 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using System;
+using System.Collections.Generic;
 using Photon.Pun;
 using Photon.Realtime;
 
 public class Launcher : MonoBehaviourPunCallbacks
 {
-    [SerializeField] Transform roomListContent;
-    [SerializeField] GameObject roomListItemPrefab;
-    [SerializeField] Transform playerListContent;
-    [SerializeField] GameObject playerListItemPrefab;
-    [SerializeField] GameObject startGameButton;
+    private Player _newPlayer;
+    private List<RoomInfo> _newRoom;
+    private string _errorText;
+    
+    public event Action OnConnectedToMasterAction;
+    public event Action OnJoinedLobbyAction;
+    public event Action OnJoinedRoomAction;
+    public event Action OnMasterClientSwitchedAction;
+    public event Action OnNewPlayerJoinedRoomAction;
+    public event Action OnRoomListUpdateAction;
+    public event Action OnCreateRoomFailedAction;
+    public event Action OnLeftRoomAction;
 
-    private LauncherMenu _launcherMenu;
-
+    public Player NewPlayer => _newPlayer;
+    public List<RoomInfo> NewRoom => _newRoom;
+    public string ErrorText => _errorText;
+    
     private void Start()
     {
-        _launcherMenu = ServiceLocator.GetService<LauncherMenu>();
         PhotonNetwork.ConnectUsingSettings();
     }
-
-    // TODO: might be a good idea to invoke signals on photon events
+    
     public override void OnConnectedToMaster()
     {
-        Debug.Log("Connected to Master");
-        PhotonNetwork.JoinLobby();
-        PhotonNetwork.AutomaticallySyncScene = true;
+        OnConnectedToMasterAction?.Invoke();
     }
 
     public override void OnJoinedLobby()
     {
-        _launcherMenu.OnJoinedLobby();
+        OnJoinedLobbyAction?.Invoke();
     }
 
     public override void OnJoinedRoom()
     {
-        var players = PhotonNetwork.PlayerList;
-
-        foreach (Transform child in playerListContent)
-        {
-            Destroy(child.gameObject);
-        }
-
-        foreach (var player in players)
-        {
-            Instantiate(playerListItemPrefab, playerListContent).GetComponent<PlayerListItem>().SetUp(player);
-        }
-
-        startGameButton.SetActive(PhotonNetwork.IsMasterClient);
-        _launcherMenu.OnJoinedRoom(PhotonNetwork.CurrentRoom.Name);
+        OnJoinedRoomAction?.Invoke();
     }
 
     public override void OnMasterClientSwitched(Player newMasterClient)
     {
-        startGameButton.SetActive(PhotonNetwork.IsMasterClient);
+       OnMasterClientSwitchedAction?.Invoke();
     }
 
     public override void OnCreateRoomFailed(short returnCode, string message)
     {
-        _launcherMenu.OnJoinedRoomError(message);
+        _errorText = message;
+        OnCreateRoomFailedAction?.Invoke();
     }
 
     public override void OnLeftRoom()
     {
-        _launcherMenu.OnRoomLeft();
+        OnLeftRoomAction?.Invoke();
     }
 
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
     {
-        foreach (Transform trans in roomListContent)
-        {
-            Destroy(trans.gameObject);
-        }
-
-        foreach (var roomInfo in roomList)
-        {
-            if (roomInfo.RemovedFromList)
-            {
-                continue;
-            }
-
-            Instantiate(roomListItemPrefab, roomListContent).GetComponent<RoomListItem>().SetUp(roomInfo);
-        }
+        _newRoom = roomList;
+       OnRoomListUpdateAction?.Invoke();
     }
 
     public override void OnPlayerEnteredRoom(Player newPlayer)
     {
-        Instantiate(playerListItemPrefab, playerListContent).GetComponent<PlayerListItem>().SetUp(newPlayer);
+        _newPlayer = newPlayer;
+        OnNewPlayerJoinedRoomAction?.Invoke(); 
     }
 }

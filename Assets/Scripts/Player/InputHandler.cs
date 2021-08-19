@@ -10,35 +10,17 @@ public class InputHandler : MonoBehaviour
     [SerializeField] private int edgesPercent;
 
     private Vector3 _previousPosition;
-    // TODO: remove unused
-    private Vector3 _targetPosition;
     private Camera _mainCamera;
-    private Vector3 _returnValue;
-
-    // TODO: just make event public
-    private event Action _onMouseUpAction;
-
-    // TODO: continues action should not use events, it should be polled
-    private event Action _onMouseAction;
 
     private Vector3 NormalizedMousePosition =>
         new Vector3(Input.mousePosition.x / Screen.width, Input.mousePosition.y / Screen.height, 0);
 
-    public event Action OnMouseAction
-    {
-        add => _onMouseAction += value;
-        remove => _onMouseAction -= value;
-    }
+    public event Action OnMouseAction;
 
-    public event Action OnMouseUpAction
-    {
-        add => _onMouseUpAction += value;
-        remove => _onMouseUpAction -= value;
-    }
+    public event Action OnMouseUpAction;
 
     public bool PositionSelection { set; get; }
     public float ZoomAxis { get; private set; }
-    public Vector3 MoveVector => _returnValue;
 
     private void Start()
     {
@@ -67,7 +49,7 @@ public class InputHandler : MonoBehaviour
         ZoomAxis = Input.GetAxis("Mouse ScrollWheel");
         if (Input.GetMouseButtonUp(0))
         {
-            _onMouseUpAction?.Invoke();
+            OnMouseUpAction?.Invoke();
         }
 
         if (Input.GetMouseButtonDown(0))
@@ -77,7 +59,7 @@ public class InputHandler : MonoBehaviour
 
         if (Input.GetMouseButton(0))
         {
-            _onMouseAction?.Invoke();
+            OnMouseAction?.Invoke();
         }
     }
 

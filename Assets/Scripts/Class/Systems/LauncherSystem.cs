@@ -8,8 +8,16 @@ public class LauncherSystem
     public LauncherSystem()
     {
         _menuManager = ServiceLocator.GetService<MainMenuSystem>();
+        var laucher = ServiceLocator.GetService<Launcher>();
+
+        laucher.OnConnectedToMasterAction += OnConnectedToMaster;
     }
-    
+
+    private void OnConnectedToMaster()
+    {
+        PhotonNetwork.JoinLobby();
+        PhotonNetwork.AutomaticallySyncScene = true;
+    }
     public void StartGame()
     {
         PhotonNetwork.LoadLevel(1);

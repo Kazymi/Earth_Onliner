@@ -1,8 +1,10 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class ArmySystemMenu : MonoBehaviour
 {
+    [SerializeField] private List<NPCConfiguration> npcConfigurations;
     [SerializeField] private Transform armyTransform;
     [SerializeField] private ArmyPanel armyPanelPrefab;
     [SerializeField] private Button openArmyButton;
@@ -26,7 +28,7 @@ public class ArmySystemMenu : MonoBehaviour
     private void Start()
     {
         _armySystem = ServiceLocator.GetService<ArmySystem>();
-        _armySystem.Initialize(armyTransform, armyPanelPrefab);
+        _armySystem.Initialize(armyTransform, armyPanelPrefab,npcConfigurations);
     }
 
     private void OpenCanvas()

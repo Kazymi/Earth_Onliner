@@ -1,22 +1,21 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-// TODO: as many other services can be implemented as simple c# script
-public class ArmySystem : MonoBehaviour
+public class ArmySystem
 {
-    [SerializeField] private List<NPCConfiguration> npcConfigurations;
     private Dictionary<NPCConfiguration, ArmyPanel> _armyPanels;
     private Dictionary<NPCConfiguration, int> _amountArmy;
     public Dictionary<NPCConfiguration, int> AmountArmy => _amountArmy;
-
-    public void Initialize(Transform armyTransform, ArmyPanel armyPanel)
+    
+    public void Initialize(Transform armyTransform, ArmyPanel armyPanel, List<NPCConfiguration> npcConfigurations)
     {
         _armyPanels = new Dictionary<NPCConfiguration, ArmyPanel>();
         _amountArmy = new Dictionary<NPCConfiguration, int>();
         foreach (var npc in npcConfigurations)
         {
             _amountArmy.Add(npc, 0);
-            var newGameObject = Instantiate(armyPanel, armyTransform);
+            var newGameObject = GameObject.Instantiate(armyPanel, armyTransform);
+            _armyPanels.Add(npc, newGameObject);
             _armyPanels.Add(npc, newGameObject);
             newGameObject.Initialize(npc.NameNpcInArmy);
         }
