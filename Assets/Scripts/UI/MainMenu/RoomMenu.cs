@@ -1,4 +1,5 @@
 using Photon.Pun;
+using Photon.Realtime;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -15,7 +16,6 @@ public class RoomMenu : MainMenuCanvas
     private LauncherSystem _launcherSystem;
     private Launcher _launcher;
     private MainMenuSystem _mainMenuSystem;
-
 
     private void OnEnable()
     {
@@ -73,7 +73,7 @@ public class RoomMenu : MainMenuCanvas
     _roomSystem.NewPlayer(_launcher.NewPlayer,playerListContent,playerListItemPrefab);    
     }
 
-    private void OnMasterClientSwitched()
+    private void OnMasterClientSwitched(Player player)
     {
         startGameButton.gameObject.SetActive(PhotonNetwork.IsMasterClient);
     }

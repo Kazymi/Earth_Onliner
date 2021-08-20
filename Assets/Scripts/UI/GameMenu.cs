@@ -64,6 +64,7 @@ public class GameMenu : MonoBehaviour, IChangingAmountResources, IOnEventCallbac
 
     private void Disconnect()
     {
+        PhotonNetwork.AutomaticallySyncScene = false;
         PhotonNetwork.LeaveRoom();
         SceneManager.LoadScene(0);
     }
@@ -83,7 +84,7 @@ public class GameMenu : MonoBehaviour, IChangingAmountResources, IOnEventCallbac
 
         var eventCode = photonEvent.Code;
 
-        if (eventCode != (int) EventType.FinishGame)
+        if (eventCode != (int)EventType.FinishGame)
         {
             return;
         }
@@ -91,6 +92,6 @@ public class GameMenu : MonoBehaviour, IChangingAmountResources, IOnEventCallbac
         object[] data = (object[])photonEvent.CustomData;
         _gameFinished = true;
         finishGameText.transform.DOScale(2, 3);
-        finishGameText.text = (string) data[0] +" WIN";
+        finishGameText.text = (string)data[0] + " WIN";
     }
 }

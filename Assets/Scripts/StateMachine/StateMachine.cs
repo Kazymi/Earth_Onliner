@@ -15,7 +15,7 @@ public class StateMachine
         if (newindex != -1) SetState(_currentState.Transitions[newindex].StateTo);
         else
             _currentState.Tick();
-        Debug.Log(_currentState);
+        // Debug.Log(_currentState);
     }
 
     public void FixedTick()
