@@ -59,6 +59,7 @@ public class GameManager : MonoBehaviourPunCallbacks, IOnEventCallback
     private IEnumerator Disconnect()
     {
         yield return new WaitForSeconds(7f);
+        PhotonNetwork.AutomaticallySyncScene = false;
         PhotonNetwork.LeaveRoom();
         SceneManager.LoadScene(0);
     }

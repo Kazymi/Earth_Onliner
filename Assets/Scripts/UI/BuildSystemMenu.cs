@@ -12,10 +12,7 @@ public class BuildSystemMenu : MonoBehaviour
     private BuildSystem _buildSystem;
     private void OnEnable()
     {
-        if (_buildSystem == null)
-        {
-            return;
-        }
+        _buildSystem = ServiceLocator.GetService<BuildSystem>();
         rotateButton.onClick.AddListener(_buildSystem.Rotate);
         exitButton.onClick.AddListener(_buildSystem.Exit);
     }
@@ -24,13 +21,6 @@ public class BuildSystemMenu : MonoBehaviour
     {
         rotateButton.onClick.RemoveListener(_buildSystem.Rotate);
         exitButton.onClick.RemoveListener(_buildSystem.Exit);
-    }
-
-    private void Start()
-    {
-        _buildSystem = ServiceLocator.GetService<BuildSystem>();
-        rotateButton.onClick.AddListener(_buildSystem.Rotate);
-        exitButton.onClick.AddListener(_buildSystem.Exit);
     }
 
     public void ActivateCanvas(bool activated)

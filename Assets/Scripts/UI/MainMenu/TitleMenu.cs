@@ -54,7 +54,6 @@ public class TitleMenu : MainMenuCanvas
         _mainMenuSystem.OpenMenu(MainMenuCanvasType.Title);
     }
 
-    // TODO:
     private void ResolveDependencies()
     {
         _playerNameSystem = ServiceLocator.GetService<PlayerNameSystem>();

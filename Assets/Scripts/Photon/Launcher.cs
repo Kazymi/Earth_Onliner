@@ -6,22 +6,14 @@ using Photon.Realtime;
 
 public class Launcher : PunCallbacks
 {
-    private Player _newPlayer;
-    private List<RoomInfo> _newRoom;
-    private string _errorText;
-
     public event Action OnConnectedToMasterAction;
     public event Action OnJoinedLobbyAction;
     public event Action OnJoinedRoomAction;
     public event Action<Player> OnMasterClientSwitchedAction;
-    public event Action OnNewPlayerJoinedRoomAction;
-    public event Action OnRoomListUpdateAction;
-    public event Action OnCreateRoomFailedAction;
+    public event Action<Player> OnNewPlayerJoinedRoomAction;
+    public event Action<List<RoomInfo>> OnRoomListUpdateAction;
+    public event Action<string> OnCreateRoomFailedAction;
     public event Action OnLeftRoomAction;
-
-    public Player NewPlayer => _newPlayer;
-    public List<RoomInfo> NewRoom => _newRoom;
-    public string ErrorText => _errorText;
 
     public Launcher()
     {
@@ -51,8 +43,7 @@ public class Launcher : PunCallbacks
 
     public override void OnCreateRoomFailed(short returnCode, string message)
     {
-        _errorText = message;
-        OnCreateRoomFailedAction?.Invoke();
+        OnCreateRoomFailedAction?.Invoke(message);
     }
 
     public override void OnLeftRoom()
@@ -62,16 +53,12 @@ public class Launcher : PunCallbacks
 
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
     {
-        // TODO:
-        _newRoom = roomList;
-        OnRoomListUpdateAction?.Invoke();
+        OnRoomListUpdateAction?.Invoke(roomList);
     }
 
     public override void OnPlayerEnteredRoom(Player newPlayer)
     {
-        // TODO:
-        _newPlayer = newPlayer;
-        OnNewPlayerJoinedRoomAction?.Invoke();
+        OnNewPlayerJoinedRoomAction?.Invoke(newPlayer);
     }
 
     public void Dispose()

@@ -29,21 +29,12 @@ public class RoomMenu : MainMenuCanvas
 
     private void OnDisable()
     {
-        _launcher.OnJoinedRoomAction -= OnJoinedRoom;
-        _launcher.OnMasterClientSwitchedAction -= OnMasterClientSwitched;
-        _launcher.OnNewPlayerJoinedRoomAction -= OnPlayerEnteredRoom;
-        _launcher.OnLeftRoomAction -= OnPlayerLeaveRoom;
-        _launcher.OnJoinedRoomAction -= OnCreateRoom;
-        leaveRoomButton.onClick.RemoveListener(_launcherSystem.LeaveRoom);
-        startGameButton.onClick.RemoveListener(StartGame);
+        Unsubscribe();
     }
 
     private void Start()
     {
-        _mainMenuSystem = ServiceLocator.GetService<MainMenuSystem>();
-        _roomSystem = ServiceLocator.GetService<RoomSystem>();
-        _launcher = ServiceLocator.GetService<Launcher>();
-        _launcherSystem = ServiceLocator.GetService<LauncherSystem>();
+        ResolveDependencies();
         Subscribe();
     }
 
@@ -53,6 +44,16 @@ public class RoomMenu : MainMenuCanvas
         startGameButton.interactable = false;
     }
 
+    private void Unsubscribe()
+    {
+        _launcher.OnJoinedRoomAction -= OnJoinedRoom;
+        _launcher.OnMasterClientSwitchedAction -= OnMasterClientSwitched;
+        _launcher.OnNewPlayerJoinedRoomAction -= OnPlayerEnteredRoom;
+        _launcher.OnLeftRoomAction -= OnPlayerLeaveRoom;
+        _launcher.OnJoinedRoomAction -= OnCreateRoom;
+        leaveRoomButton.onClick.RemoveListener(_launcherSystem.LeaveRoom);
+        startGameButton.onClick.RemoveListener(StartGame);
+    }
     private void Subscribe()
     {
         _launcher.OnJoinedRoomAction += OnJoinedRoom;
@@ -68,9 +69,9 @@ public class RoomMenu : MainMenuCanvas
     {
        _mainMenuSystem.OpenMenu(MainMenuCanvasType.RoomMenu);
     }
-    private void OnPlayerEnteredRoom()
+    private void OnPlayerEnteredRoom(Player player)
     {
-    _roomSystem.NewPlayer(_launcher.NewPlayer,playerListContent,playerListItemPrefab);    
+    _roomSystem.NewPlayer(player,playerListContent,playerListItemPrefab);    
     }
 
     private void OnMasterClientSwitched(Player player)
@@ -88,5 +89,13 @@ public class RoomMenu : MainMenuCanvas
     private void OnPlayerLeaveRoom()
     {
         _mainMenuSystem.OpenMenu(MainMenuCanvasType.Title);
+    }
+
+    private void ResolveDependencies()
+    {
+        _mainMenuSystem = ServiceLocator.GetService<MainMenuSystem>();
+        _roomSystem = ServiceLocator.GetService<RoomSystem>();
+        _launcher = ServiceLocator.GetService<Launcher>();
+        _launcherSystem = ServiceLocator.GetService<LauncherSystem>();
     }
 }

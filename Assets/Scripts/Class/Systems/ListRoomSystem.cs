@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Photon.Realtime;
 using UnityEngine;
 
 public class ListRoomSystem
@@ -16,15 +17,15 @@ public class ListRoomSystem
         _launcher = ServiceLocator.GetService<Launcher>();
         _launcher.OnRoomListUpdateAction += OnRoomListUpdate;
     }
-    
-    private void OnRoomListUpdate()
+
+    private void OnRoomListUpdate(List<RoomInfo> room)
     {
         foreach (Transform trans in _roomListContent)
         {
             GameObject.Destroy(trans.gameObject);
         }
 
-        foreach (var roomInfo in _launcher.NewRoom)
+        foreach (var roomInfo in room)
         {
             if (roomInfo.RemovedFromList)
             {

@@ -40,7 +40,6 @@ public class GameMenu : MonoBehaviour, IChangingAmountResources, IOnEventCallbac
     private void OnEnable()
     {
         EventBus.Subscribe(this);
-
         PhotonNetwork.AddCallbackTarget(this);
         disconnectGameButton.onClick.AddListener(Disconnect);
         returnToGameButton.onClick.AddListener(() => OpenCanvas(false));

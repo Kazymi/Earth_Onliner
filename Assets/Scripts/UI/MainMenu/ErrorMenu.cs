@@ -41,9 +41,8 @@ public class ErrorMenu : MainMenuCanvas
         _launcher.OnCreateRoomFailedAction += OnCreateRoomFailed;
     }
 
-    private void OnCreateRoomFailed()
+    private void OnCreateRoomFailed(string errorText)
     {
         _mainMenuSystem.OpenMenu(MainMenuCanvasType.ErrorMenu);
-        errorText.text = _launcher.ErrorText;
     }
 }
